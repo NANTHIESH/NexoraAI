@@ -4,6 +4,9 @@ All data is **synthetic** and produced by `python -m scripts.generate_data` (see
 
 Demo company: Nexora Software Ltd, 15 people, 3 external clients (Brightwave Retail, Pulse Fitness, Northgate Logistics), 4 projects (ShopFlow Web, FitTrack Mobile, LogiDash, plus the internal project Internal Tools, which has no client).
 
+## Real-world input: bank profile
+`data/reference/bank_profile.json` is built once by `python -m scripts.profile_bank --src <trans.asc>` from the public PKDD'99 (Berka) Czech bank dataset (about 637,000 outgoing transactions). It stores only aggregate statistics: 99 amount quantiles (as ratios to the median, so the currency does not matter) and the day-of-month pattern of payments. The generator uses it for the small background categories (Travel, Office, Reimbursements, Meals): amounts and payment days follow the real shape, scaled to plausible EUR values for a 15-person company. No Berka row is copied; the profile is committed, so generating data needs no download. The Berka dataset is not used for the planted errors, which stay fully synthetic.
+
 ## employees.csv (15 rows)
 | column | meaning |
 |---|---|

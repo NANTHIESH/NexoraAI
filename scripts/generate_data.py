@@ -22,7 +22,7 @@ from typing import Any
 
 from faker import Faker
 
-from nexora.config import load_config
+from nexora.config import PROJECT_ROOT, load_config
 
 # --------------------------------------------------------------------------------------
 # Demo-company specification (data, not configuration)
@@ -143,6 +143,33 @@ def label(d: date) -> str:
 def last_day(d: date) -> date:
     """Last calendar day of the month containing ``d``."""
     return date(d.year, d.month, calendar.monthrange(d.year, d.month)[1])
+
+
+class BankShape:
+    """Realistic amount and day-of-month shapes learned from a real bank dataset.
+
+    Built from data/reference/bank_profile.json (see scripts/profile_bank.py). Only
+    aggregate statistics are used; the amount scale per category comes from this module.
+    """
+
+    RATIO_RANGE = (0.2, 6.0)  # keep the central bulk, drop tiny fees and rare huge outliers
+
+    def __init__(self, path: Path = PROJECT_ROOT / "data" / "reference" / "bank_profile.json") -> None:
+        if not path.exists():
+            raise FileNotFoundError(
+                f"{path} is missing. Run: python -m scripts.profile_bank --src <path to trans.asc>")
+        profile = json.loads(path.read_text(encoding="utf-8"))
+        lo, hi = self.RATIO_RANGE
+        self.ratios = [r for r in profile["amount_ratio_quantiles"] if lo <= r <= hi]
+        self.day_weights = profile["day_of_month_weights"]
+
+    def amount(self, rng: random.Random, typical: int, low: int, high: int) -> int:
+        """Cents: ``typical`` scaled by a real-world amount ratio, clipped to [low, high]."""
+        return max(low, min(high, round(typical * rng.choice(self.ratios))))
+
+    def day(self, rng: random.Random) -> int:
+        """Day of month (1-27) drawn from the real payment-day pattern."""
+        return rng.choices(range(1, 28), weights=self.day_weights)[0]
 
 
 def sub_rng(seed: int, name: str) -> random.Random:
@@ -361,7 +388,8 @@ def add_income(book: TxnBook, seed: int, months: list[date], end: date) -> None:
             book.add(paid, f"INV-{invoice_no:04d} {kind}", "Income", client, amount)
 
 
-def add_overheads(book: TxnBook, seed: int, months: list[date], employees: list[dict[str, Any]]) -> None:
+def add_overheads(book: TxnBook, seed: int, months: list[date], employees: list[dict[str, Any]],
+                  shape: BankShape) -> None:
     """Payroll, rent, insurance, taxes and the variable cost lines."""
     rng = sub_rng(seed, "overheads")
     gross_total = sum(e["gross_monthly_salary"] for e in employees)
@@ -389,21 +417,21 @@ def add_overheads(book: TxnBook, seed: int, months: list[date], employees: list[
                      rng.choice(("Dell", "Apple Store", "Amazon Business")),
                      -rng.randrange(90_000, 240_001, 5_000))
         for _ in range(rng.randint(2, 4)):
-            book.add(first.replace(day=rng.randint(1, 27)), "TRAVEL", "Travel",
+            book.add(first.replace(day=shape.day(rng)), "TRAVEL", "Travel",
                      rng.choice(("Deutsche Bahn", "Lufthansa", "Booking.com", "Uber")),
-                     -rng.randrange(1_500, 45_001, 100))
+                     -shape.amount(rng, 14_000, 1_500, 45_000))
         for _ in range(rng.randint(12, 16)):
-            book.add(first.replace(day=rng.randint(1, 27)), "OFFICE SUPPLIES", "Office",
+            book.add(first.replace(day=shape.day(rng)), "OFFICE SUPPLIES", "Office",
                      rng.choice(("Amazon Business", "IKEA", "Staples", "Rewe")),
-                     -rng.randrange(800, 9_001, 50))
+                     -shape.amount(rng, 3_500, 800, 9_000))
         for _ in range(rng.randint(10, 14)):
             emp = rng.choice(employees)["employee_id"]
-            book.add(first.replace(day=rng.randint(1, 27)), f"EXPENSE REIMBURSEMENT {emp}",
-                     "Reimbursements", emp, -rng.randrange(2_000, 18_001, 100))
+            book.add(first.replace(day=shape.day(rng)), f"EXPENSE REIMBURSEMENT {emp}",
+                     "Reimbursements", emp, -shape.amount(rng, 7_500, 2_000, 18_000))
         for _ in range(rng.randint(6, 10)):
-            book.add(first.replace(day=rng.randint(1, 27)), "TEAM MEALS", "Meals",
+            book.add(first.replace(day=shape.day(rng)), "TEAM MEALS", "Meals",
                      rng.choice(("Restaurant Alte Post", "Lieferando", "Cafe Nord")),
-                     -rng.randrange(1_500, 22_001, 100))
+                     -shape.amount(rng, 6_000, 1_500, 22_000))
         if first.month in (1, 4, 7, 10):
             book.add(first.replace(day=10), "VAT PAYMENT QUARTERLY", "Taxes", "Tax Office",
                      -rng.randrange(1_400_000, 1_900_001, 10_000))
@@ -550,7 +578,7 @@ def generate(seed: int, out_dir: Path) -> dict[str, int]:
     book = TxnBook()
     add_software(book, seed, months, plan)
     add_income(book, seed, months, end)
-    add_overheads(book, seed, months, employees)
+    add_overheads(book, seed, months, employees, BankShape())
     txn_rows, tag_ids = finalize_transactions(book, cfg.data.opening_balance_eur * 100)
 
     emp_header = ["employee_id", "name", "email", "role", "job_title", "department",

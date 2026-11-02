@@ -7,8 +7,8 @@
       "tool": "GitHub",
       "month": "2026-01",
       "txn_ids": [
-        "T0171",
-        "T0175"
+        "T0162",
+        "T0163"
       ],
       "expected_detection_key": "duplicate_charge|GitHub|2026-01"
     },
@@ -18,8 +18,8 @@
       "tool": "Docker",
       "month": "2026-09",
       "txn_ids": [
-        "T0862",
-        "T0874"
+        "T0852",
+        "T0866"
       ],
       "expected_detection_key": "duplicate_charge|Docker|2026-09"
     },
@@ -29,8 +29,8 @@
       "tool": "Cloudflare",
       "month": "2026-09",
       "txn_ids": [
-        "T0899",
-        "T0900"
+        "T0889",
+        "T0890"
       ],
       "expected_detection_key": "duplicate_charge|Cloudflare|2026-09"
     },
@@ -41,7 +41,7 @@
       "month": "2026-03",
       "txn_ids": [
         "T0327",
-        "T0334"
+        "T0332"
       ],
       "expected_detection_key": "duplicate_charge|Google Workspace|2026-03"
     },
@@ -51,7 +51,7 @@
       "tool": "Sentry",
       "month": "2026-05",
       "txn_ids": [
-        "T0525",
+        "T0529",
         "T0538"
       ],
       "expected_detection_key": "duplicate_charge|Sentry|2026-05"
@@ -62,7 +62,7 @@
       "tool": "1Password",
       "month": "2026-05",
       "txn_ids": [
-        "T0529"
+        "T0532"
       ],
       "expected_detection_key": "price_increase|1Password|2026-05"
     },
@@ -72,7 +72,7 @@
       "tool": "Figma",
       "month": "2026-08",
       "txn_ids": [
-        "T0787"
+        "T0786"
       ],
       "expected_detection_key": "price_increase|Figma|2026-08"
     },
@@ -82,7 +82,7 @@
       "tool": "Postman",
       "month": "2026-04",
       "txn_ids": [
-        "T0432"
+        "T0433"
       ],
       "expected_detection_key": "price_increase|Postman|2026-04"
     },
@@ -92,7 +92,7 @@
       "tool": "Docker",
       "month": "2026-01",
       "txn_ids": [
-        "T0177"
+        "T0165"
       ],
       "expected_detection_key": "price_increase|Docker|2026-01"
     },
@@ -102,7 +102,7 @@
       "tool": "Cloudflare",
       "month": "2026-07",
       "txn_ids": [
-        "T0726"
+        "T0716"
       ],
       "expected_detection_key": "price_increase|Cloudflare|2026-07"
     },
@@ -114,10 +114,10 @@
       "txn_ids": [
         "T0542",
         "T0635",
-        "T0733",
-        "T0813",
-        "T0903",
-        "T0992"
+        "T0723",
+        "T0805",
+        "T0892",
+        "T0978"
       ],
       "expected_detection_key": "unused_subscription|Datadog|2026-05"
     },
@@ -127,13 +127,13 @@
       "tool": "Zoom",
       "month": "2026-04",
       "txn_ids": [
-        "T0426",
-        "T0514",
-        "T0601",
-        "T0688",
-        "T0780",
-        "T0869",
-        "T0952"
+        "T0428",
+        "T0515",
+        "T0602",
+        "T0687",
+        "T0777",
+        "T0859",
+        "T0939"
       ],
       "expected_detection_key": "unused_subscription|Zoom|2026-04"
     },
@@ -143,11 +143,11 @@
       "tool": "Postman",
       "month": "2026-06",
       "txn_ids": [
-        "T0606",
-        "T0694",
-        "T0784",
-        "T0875",
-        "T0957"
+        "T0609",
+        "T0693",
+        "T0782",
+        "T0867",
+        "T0944"
       ],
       "expected_detection_key": "unused_subscription|Postman|2026-06"
     },
@@ -157,14 +157,14 @@
       "tool": "Sentry",
       "month": "2026-03",
       "txn_ids": [
-        "T0362",
-        "T0449",
-        "T0525",
-        "T0618",
-        "T0711",
-        "T0797",
-        "T0889",
-        "T0974"
+        "T0352",
+        "T0447",
+        "T0529",
+        "T0621",
+        "T0709",
+        "T0795",
+        "T0881",
+        "T0960"
       ],
       "expected_detection_key": "unused_subscription|Sentry|2026-03"
     },
@@ -174,14 +174,14 @@
       "tool": "Canva",
       "month": "2026-03",
       "txn_ids": [
-        "T0344",
-        "T0429",
+        "T0342",
+        "T0431",
         "T0516",
-        "T0602",
-        "T0691",
-        "T0782",
-        "T0870",
-        "T0955"
+        "T0607",
+        "T0690",
+        "T0780",
+        "T0863",
+        "T0942"
       ],
       "expected_detection_key": "unlisted_charge|Canva|2026-03"
     },
@@ -191,15 +191,15 @@
       "tool": "Dropbox",
       "month": "2026-02",
       "txn_ids": [
-        "T0280",
-        "T0359",
-        "T0448",
-        "T0524",
-        "T0617",
-        "T0709",
+        "T0267",
+        "T0349",
+        "T0444",
+        "T0527",
+        "T0619",
+        "T0707",
         "T0794",
-        "T0886",
-        "T0972"
+        "T0878",
+        "T0956"
       ],
       "expected_detection_key": "unlisted_charge|Dropbox|2026-02"
     },
@@ -210,11 +210,11 @@
       "month": "2026-05",
       "txn_ids": [
         "T0540",
-        "T0632",
-        "T0731",
-        "T0808",
-        "T0901",
-        "T0990"
+        "T0633",
+        "T0719",
+        "T0803",
+        "T0891",
+        "T0976"
       ],
       "expected_detection_key": "unlisted_charge|Loom|2026-05"
     },
@@ -224,8 +224,8 @@
       "tool": "Jira+Linear",
       "month": "2026-05",
       "txn_ids": [
-        "T0513",
-        "T0522"
+        "T0511",
+        "T0524"
       ],
       "expected_detection_key": "overlap|Jira+Linear|2026-05"
     },
@@ -235,8 +235,8 @@
       "tool": "Confluence+Notion",
       "month": "2026-06",
       "txn_ids": [
-        "T0624",
-        "T0638"
+        "T0630",
+        "T0639"
       ],
       "expected_detection_key": "overlap|Confluence+Notion|2026-06"
     },
@@ -247,7 +247,7 @@
       "month": "2026-03",
       "txn_ids": [
         "T0324",
-        "T0384"
+        "T0368"
       ],
       "expected_detection_key": "overlap|Microsoft Teams+Slack|2026-03"
     }
@@ -259,7 +259,7 @@
       "tool": "AWS",
       "month": "2026-06",
       "txn_ids": [
-        "T0586"
+        "T0591"
       ],
       "would_be_false_key": "price_increase|AWS|2026-06",
       "note": "Usage-based bill rose ~75%; documented in plan_changes.csv."
@@ -270,7 +270,7 @@
       "tool": "JetBrains",
       "month": "2025-12",
       "txn_ids": [
-        "T0109"
+        "T0099"
       ],
       "would_be_false_key": "price_increase|JetBrains|2025-12",
       "note": "Annual licence charged once per year."
@@ -281,7 +281,7 @@
       "tool": "Zoom",
       "month": "2026-02",
       "txn_ids": [
-        "T0267"
+        "T0251"
       ],
       "would_be_false_key": "price_increase|Zoom|2026-02",
       "note": "Plan upgrade recorded in plan_changes.csv."
@@ -292,7 +292,7 @@
       "tool": "Figma",
       "month": "2026-03",
       "txn_ids": [
-        "T0349"
+        "T0346"
       ],
       "would_be_false_key": "unused_subscription|Figma|2026-03",
       "note": "Only 2 months without users (below the 3-month threshold)."
@@ -303,7 +303,7 @@
       "tool": "Slack",
       "month": "2026-06",
       "txn_ids": [
-        "T0591"
+        "T0596"
       ],
       "would_be_false_key": "duplicate_charge|Slack|2026-06",
       "note": "Second charge is a small prorated seat add-on, not a duplicate."

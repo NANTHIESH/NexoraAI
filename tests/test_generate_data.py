@@ -127,3 +127,24 @@ def test_planted_patterns_hold(datasets: dict[int, Path], seed: int) -> None:
             prev = abs(float(before[-1]["amount"]))
             rise = abs(float(rows[0]["amount"])) / prev - 1
             assert 0.15 <= rise <= 0.61
+
+
+def test_bank_shape_is_bounded_and_deterministic() -> None:
+    import random
+
+    from scripts.generate_data import BankShape
+
+    shape = BankShape()
+    a = [shape.amount(random.Random(1), 3_500, 800, 9_000) for _ in range(3)]
+    b = [shape.amount(random.Random(1), 3_500, 800, 9_000) for _ in range(3)]
+    assert a == b
+    rng = random.Random(2)
+    assert all(800 <= shape.amount(rng, 3_500, 800, 9_000) <= 9_000 for _ in range(500))
+    assert all(1 <= shape.day(rng) <= 27 for _ in range(500))
+
+
+def test_missing_bank_profile_gives_clear_error(tmp_path: Path) -> None:
+    from scripts.generate_data import BankShape
+
+    with pytest.raises(FileNotFoundError, match="scripts.profile_bank"):
+        BankShape(tmp_path / "nope.json")
