@@ -1,0 +1,197 @@
+{
+  "note": "The 15 evaluation questions. expected_answer_contains lists required facts: every entry must appear in the answer (case-insensitive; numbers match as whole numbers). An entry {\"any_of\": [...]} is satisfied by any one alternative. forbidden_contains lists texts that make an answer fail. source_doc is the file that must be cited by System A; null for unanswerable questions. Number questions accept the digit or the word (\"2\" or \"two\"); this was added after the first run scored a correct answer \"Two approvals ...\" as a miss (see docs/evaluation-protocol.md).",
+  "questions": [
+    {
+      "id": 1,
+      "question": "How many vacation days do full-time employees get?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "25",
+            "twenty-five",
+            "twenty five"
+          ]
+        }
+      ],
+      "source_doc": "06-leave-policy.docx",
+      "answerable": true
+    },
+    {
+      "id": 2,
+      "question": "How many unused vacation days can be carried over?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "5",
+            "five"
+          ]
+        }
+      ],
+      "source_doc": "06-leave-policy.docx",
+      "answerable": true
+    },
+    {
+      "id": 3,
+      "question": "How many days per week can I work remotely?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "3",
+            "three"
+          ]
+        }
+      ],
+      "forbidden_contains": [
+        "2 days",
+        "two days"
+      ],
+      "source_doc": "07-remote-work-policy-v2.md",
+      "answerable": true
+    },
+    {
+      "id": 4,
+      "question": "How many approvals does a pull request need?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "2",
+            "two"
+          ]
+        }
+      ],
+      "source_doc": "01-engineering-standards.md",
+      "answerable": true
+    },
+    {
+      "id": 5,
+      "question": "Can we deploy to production on a Friday afternoon?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "no",
+            "not",
+            "cannot",
+            "never"
+          ]
+        },
+        "14:00"
+      ],
+      "source_doc": "02-release-and-deployment.pdf",
+      "answerable": true
+    },
+    {
+      "id": 6,
+      "question": "What is the annual training budget per developer?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "1,000",
+            "1000",
+            "one thousand"
+          ]
+        }
+      ],
+      "source_doc": "09-expenses-equipment-training.docx",
+      "answerable": true
+    },
+    {
+      "id": 7,
+      "question": "Who must approve an expense above 100 EUR?",
+      "expected_answer_contains": [
+        "owner"
+      ],
+      "source_doc": "09-expenses-equipment-training.docx",
+      "answerable": true
+    },
+    {
+      "id": 8,
+      "question": "What must happen before we buy a new software tool?",
+      "expected_answer_contains": [
+        "owner",
+        "subscription list"
+      ],
+      "source_doc": "11-tool-purchase-approval.docx",
+      "answerable": true
+    },
+    {
+      "id": 9,
+      "question": "After how many days of sick leave is a medical certificate required?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "3",
+            "three"
+          ]
+        }
+      ],
+      "source_doc": "06-leave-policy.docx",
+      "answerable": true
+    },
+    {
+      "id": 10,
+      "question": "Can I send customer data to my personal email?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "no",
+            "not",
+            "never",
+            "cannot"
+          ]
+        }
+      ],
+      "source_doc": "05-data-protection.pdf",
+      "answerable": true
+    },
+    {
+      "id": 11,
+      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "15",
+            "fifteen"
+          ]
+        }
+      ],
+      "source_doc": "03-incident-response.pdf",
+      "answerable": true
+    },
+    {
+      "id": 12,
+      "question": "On which day of the month are payslips sent?",
+      "expected_answer_contains": [
+        {
+          "any_of": [
+            "28",
+            "twenty-eighth",
+            "twenty eighth"
+          ]
+        }
+      ],
+      "source_doc": "10-payroll.docx",
+      "answerable": true
+    },
+    {
+      "id": 13,
+      "question": "What is the annual bonus structure?",
+      "expected_answer_contains": [],
+      "source_doc": null,
+      "answerable": false
+    },
+    {
+      "id": 14,
+      "question": "Do we have a four-day work week policy?",
+      "expected_answer_contains": [],
+      "source_doc": null,
+      "answerable": false
+    },
+    {
+      "id": 15,
+      "question": "What is the office dress code?",
+      "expected_answer_contains": [],
+      "source_doc": null,
+      "answerable": false
+    }
+  ]
+}

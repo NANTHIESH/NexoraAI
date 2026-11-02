@@ -1,0 +1,634 @@
+{
+  "run_at": "2026-11-02T19:52:46+00:00",
+  "model": "llama3.2:3b",
+  "runs": 1,
+  "settings": {
+    "temperature": 0.0,
+    "seed": 42,
+    "hybrid": false,
+    "reranker": false,
+    "min_retrieval_score": 0.35,
+    "top_k": 5
+  },
+  "system_a": {
+    "description": "Nexora: retrieval + strict prompt + refusal",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 13,
+        "accuracy": 0.867,
+        "answerable_accuracy": 0.833,
+        "citation_accuracy": 0.833,
+        "refusal_accuracy": 1.0,
+        "hallucinations": 0,
+        "wrong_or_missed_answerable": 2,
+        "latency_mean_seconds": 2.98,
+        "latency_median_seconds": 2.75
+      }
+    ]
+  },
+  "system_b": {
+    "description": "Baseline: same model, no documents",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 3,
+        "accuracy": 0.2,
+        "answerable_accuracy": 0.0,
+        "citation_accuracy": null,
+        "refusal_accuracy": 1.0,
+        "hallucinations": 0,
+        "wrong_or_missed_answerable": 12,
+        "latency_mean_seconds": 2.87,
+        "latency_median_seconds": 2.87
+      }
+    ]
+  },
+  "accuracy_across_runs": {
+    "A": {
+      "mean": 0.867,
+      "stdev": 0.0
+    },
+    "B": {
+      "mean": 0.2,
+      "stdev": 0.0
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "How many vacation days do full-time employees get?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "Full-time employees get 25 days of paid vacation per year. [Leave Policy: Vacation and Sick Leave, Vacation]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7398,
+          "latency_seconds": 11.63,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "I don't have that information. I'm not aware of the specific vacation day policy for full-time employees at Nexora Software Ltd. If you need to know the details, I recommend checking the company's HR policies or speaking with HR directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.88,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "How many unused vacation days can be carried over?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "Up to 5 unused vacation days can be carried over into the next year and must be used by 31 March. [Leave Policy: Vacation and Sick Leave, Up to 5 unused vacation days can be carried over into the next year and must be used by 31 March]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.6772,
+          "latency_seconds": 3.06,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "I don't have that information. I'm not aware of the company's specific policies regarding unused vacation days. If you need to know the details, I recommend checking the company's HR policies or speaking with HR directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.81,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "How many days per week can I work remotely?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "Employees may work remotely up to 3 days per week. [Remote Work Policy, Remote Days]",
+          "cited_sources": [
+            "07-remote-work-policy-v2.md"
+          ],
+          "top_score": 0.8103,
+          "latency_seconds": 2.72,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "I'm not sure about the specific remote work policy for Nexora Software Ltd. I don't have that information. Can I check with HR or management for you?",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.68,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "How many approvals does a pull request need?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "Two approvals are needed before a pull request can be merged. [Engineering Standards, Code Review]",
+          "cited_sources": [
+            "01-engineering-standards.md"
+          ],
+          "top_score": 0.6114,
+          "latency_seconds": 2.76,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "I don't know the specific number of approvals required for a pull request at Nexora Software Ltd. Our company policies and procedures may have changed, and I don't have access to the most up-to-date information on this topic. If you're looking for the current policy, I recommend checking our company's internal documentation or speaking with a member of our management team.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 3.11,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Can we deploy to production on a Friday afternoon?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.7679,
+          "latency_seconds": 2.53,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": false,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "I'm not aware of the company's specific policies regarding deployment to production on Fridays. I don't have that information, and I wouldn't want to provide an incorrect answer. If you're looking for clarification, I would recommend checking with our team lead or the company's documentation on deployment procedures.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.99,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What is the annual training budget per developer?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "The annual training budget per developer is 1,000 EUR. [Expenses, Equipment and Training Budget, Training Budget]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.785,
+          "latency_seconds": 2.81,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "I don't have that information. I'm not aware of the company's specific policies or budgets for training developers. If you need to know this, I recommend checking the company's internal resources or speaking with HR or management directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.82,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Who must approve an expense above 100 EUR?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "The owner must approve an expense above 100 EUR. [Expenses, Equipment and Training Budget, Expenses]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.6925,
+          "latency_seconds": 2.75,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "I don't know who must approve an expense above 100 EUR. I'm not aware of the specific company policies regarding expense approvals. If you could check the company's policies or consult with HR or management, they would be able to provide the most accurate information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.91,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What must happen before we buy a new software tool?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "A new software tool needs owner approval and must be registered in the subscription list before purchase. [Software Tool Purchase Approval, Rule]",
+          "cited_sources": [
+            "11-tool-purchase-approval.docx"
+          ],
+          "top_score": 0.5828,
+          "latency_seconds": 2.77,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "I don't have that information. I'm not aware of the specific procedures or requirements for purchasing new software tools within Nexora Software Ltd. If you need to know the company's policies or procedures for this, I recommend checking with our management or HR department.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.88,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "question": "After how many days of sick leave is a medical certificate required?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "A medical certificate is required after 3 consecutive days of sick leave and must be given to the Operations Manager. [Leave Policy: Vacation and Sick Leave, Sick Leave]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7318,
+          "latency_seconds": 2.97,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "I don't know the specific company policy regarding the requirement for a medical certificate after a certain number of days of sick leave. I would recommend checking the company's HR policies or speaking with HR directly for the most accurate and up-to-date information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.87,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Can I send customer data to my personal email?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.5841,
+          "latency_seconds": 2.55,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": false,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "I don't know the company's specific policies on this matter. I would recommend checking the company's internal policies or speaking with a supervisor or HR representative to confirm the guidelines for handling customer data.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.75,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "A Sev-1 incident must be acknowledged within 15 minutes. [Incident Response and On-Call, Severity Levels]",
+          "cited_sources": [
+            "03-incident-response.pdf"
+          ],
+          "top_score": 0.7431,
+          "latency_seconds": 2.75,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "I don't know the specific time frame for acknowledging a Sev-1 incident. I'm not aware of the company's incident response policies or procedures. If you need to know this information, I recommend checking the company's internal documentation or contacting the IT or incident response team directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.99,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "On which day of the month are payslips sent?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "Salips are sent on the 28th of each month through the payroll portal. [Payroll and Salary Payments, Payment Date]",
+          "cited_sources": [
+            "10-payroll.docx"
+          ],
+          "top_score": 0.7404,
+          "latency_seconds": 2.81,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "I don't know the specific day of the month when payslips are sent at Nexora Software Ltd. I would recommend checking the company's internal policies or HR department for the most accurate and up-to-date information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.82,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": "What is the annual bonus structure?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.2999,
+          "latency_seconds": 0.01,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I don't have that information. I'm not aware of the specific details regarding the annual bonus structure for Nexora Software Ltd. If you need to know this information, I recommend checking the company's internal policies or speaking with HR or management directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.91,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "Do we have a four-day work week policy?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.5829,
+          "latency_seconds": 2.5,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "I don't have that information. I'm not aware of any specific policy regarding a four-day work week for Nexora Software Ltd. If you're looking for information on company policies, I recommend checking with HR or management directly.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.84,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "question": "What is the office dress code?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.3023,
+          "latency_seconds": 0.01,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I don't have that information. I'm not aware of the specific office dress code for Nexora Software Ltd. If you need to know the dress code, I recommend checking with HR or a supervisor for the most up-to-date information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 2.83,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "target_time_reduction": 0.5,
+  "note": "Values come from real stopwatch runs entered by the team. null = not measured yet.",
+  "tasks": {
+    "find_rule": {
+      "description": "Find a company rule (for example: how many vacation days carry over)",
+      "manual_seconds": null,
+      "nexora_seconds": null,
+      "reduction": null,
+      "measurements": []
+    },
+    "monthly_report": {
+      "description": "Produce a monthly report (income, expenses, net, task status)",
+      "manual_seconds": null,
+      "nexora_seconds": null,
+      "reduction": null,
+      "measurements": []
+    },
+    "wasteful_subscriptions": {
+      "description": "Find wasteful software subscriptions",
+      "manual_seconds": null,
+      "nexora_seconds": null,
+      "reduction": null,
+      "measurements": []
+    }
+  }
+}

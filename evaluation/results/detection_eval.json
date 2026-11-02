@@ -1,0 +1,174 @@
+{
+  "run_at": "2026-11-02T19:40:55+00:00",
+  "thresholds": {
+    "software_categories": [
+      "Software",
+      "Cloud"
+    ],
+    "duplicate_window_days": 7,
+    "duplicate_amount_tolerance": 0.02,
+    "price_increase_threshold": 0.1,
+    "unused_min_months": 3,
+    "recurring_min_months": 3,
+    "overlap_categories": {
+      "issue_tracking": [
+        "Jira",
+        "Linear"
+      ],
+      "docs_wiki": [
+        "Notion",
+        "Confluence"
+      ],
+      "chat": [
+        "Slack",
+        "Microsoft Teams"
+      ]
+    }
+  },
+  "targets": {
+    "recall": 0.8,
+    "max_false_alerts": 3,
+    "precision": 0.8
+  },
+  "seeds": [
+    {
+      "errors_inserted": 20,
+      "errors_found": 20,
+      "recall": 1.0,
+      "flags_total": 20,
+      "false_alerts": 0,
+      "false_alert_keys": [],
+      "precision": 1.0,
+      "missed_keys": [],
+      "decoys_total": 5,
+      "decoys_wrongly_flagged": [],
+      "per_type": {
+        "duplicate_charge": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "overlap": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "price_increase": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "unlisted_charge": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "unused_subscription": {
+          "inserted": 4,
+          "found": 4,
+          "recall": 1.0
+        }
+      },
+      "seed": 42,
+      "estimated_savings_eur": {
+        "monthly": 1027.74,
+        "yearly": 12332.88,
+        "one_off_refunds": 555.67
+      },
+      "meets_targets": true
+    },
+    {
+      "errors_inserted": 20,
+      "errors_found": 20,
+      "recall": 1.0,
+      "flags_total": 20,
+      "false_alerts": 0,
+      "false_alert_keys": [],
+      "precision": 1.0,
+      "missed_keys": [],
+      "decoys_total": 5,
+      "decoys_wrongly_flagged": [],
+      "per_type": {
+        "duplicate_charge": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "overlap": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "price_increase": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "unlisted_charge": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "unused_subscription": {
+          "inserted": 4,
+          "found": 4,
+          "recall": 1.0
+        }
+      },
+      "seed": 7,
+      "estimated_savings_eur": {
+        "monthly": 1059.92,
+        "yearly": 12719.04,
+        "one_off_refunds": 536.8
+      },
+      "meets_targets": true
+    },
+    {
+      "errors_inserted": 20,
+      "errors_found": 20,
+      "recall": 1.0,
+      "flags_total": 20,
+      "false_alerts": 0,
+      "false_alert_keys": [],
+      "precision": 1.0,
+      "missed_keys": [],
+      "decoys_total": 5,
+      "decoys_wrongly_flagged": [],
+      "per_type": {
+        "duplicate_charge": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "overlap": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "price_increase": {
+          "inserted": 5,
+          "found": 5,
+          "recall": 1.0
+        },
+        "unlisted_charge": {
+          "inserted": 3,
+          "found": 3,
+          "recall": 1.0
+        },
+        "unused_subscription": {
+          "inserted": 4,
+          "found": 4,
+          "recall": 1.0
+        }
+      },
+      "seed": 123,
+      "estimated_savings_eur": {
+        "monthly": 1042.44,
+        "yearly": 12509.28,
+        "one_off_refunds": 558.98
+      },
+      "meets_targets": true
+    }
+  ],
+  "note": "Thresholds are the config.yaml defaults for every seed (no per-seed tuning). Generator and detectors were developed together on synthetic data."
+}

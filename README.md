@@ -2,44 +2,51 @@
 
 *An intelligent business assistant to search, manage and act, powered by RAG and AI Agents.*
 
-Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
-
-> Status: **Phase 6 (quality upgrades)**. Sections marked "not run yet" are filled by scripts in later phases.
+An academic business-idea prototype by Nanthiesh Mohanavel, Dhaval Patel and Ameni Jemai.
 
 ## What and why
 
-Nexora AI is a local, multi-agent, RAG-powered assistant for small businesses (1-50 people). It answers questions about internal rules with citations (or refuses), generates weekly/monthly/yearly reports from bank and project data, flags subscription and billing problems, and reads summaries aloud. It is an academic prototype; everything runs on one laptop, for free, offline after a one-time model download. All data is synthetic.
+Nexora AI is a local, multi-agent, RAG-powered assistant for small businesses (1-50 people). It
+
+- answers questions about internal rules **with citations**, or refuses when the answer is not in the documents;
+- generates weekly, monthly and yearly reports from bank and project data (Python computes every number; the model only words the summary);
+- finds problems in software subscriptions and billing: duplicate charges, price increases, unused tools, unlisted charges and overlapping tools;
+- reads summaries aloud, and can take questions by voice.
+
+Information in small companies is scattered across documents, spreadsheets and tools, and billing mistakes go unnoticed. Everything here runs on one laptop, for free, offline after a one-time model download: no paid APIs, no API keys, no cloud. All company data is synthetic.
 
 ## Canvas
 
 | | |
 |---|---|
-| **User** | Office manager of a 12-15 person software company |
-| **Data** | Synthetic documents, 12 months of transactions, subscriptions, usage, tasks |
-| **Metric** | >90% on 15 rule questions; recall >=80% with <=3 false alerts on 20 planted errors; task time -50%; satisfaction >85% |
-| **Baseline** | Same LLM without documents; manual review; manual timing |
+| **User** | The office manager of a 12-15 person software company (secondary: managers and employees of small businesses with 1-50 people) |
+| **Data** | Synthetic company documents, 12 months of bank transactions, subscription and usage logs, project tasks, employees |
+| **Metric** | Answer accuracy on 15 rule questions >90%; detection recall >=80% with <=3 false alerts on 20 planted errors; task time -50%; user satisfaction >85%; subscription savings in EUR |
+| **Baseline** | The same model without documents; manual review; manual timing |
 
-Full canvas: [docs/scoping-canvas.md](docs/scoping-canvas.md).
+Full canvas (problem, value, technique, risks): [docs/scoping-canvas.md](docs/scoping-canvas.md).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  U[User: Streamlit UI] --> API[FastAPI + RBAC]
-  API --> R{Router}
-  R -->|knowledge| K[Knowledge agent: RAG]
-  R -->|report| P[Report agent]
-  R -->|subscription| S[Subscription agent + detectors]
+  UI[Streamlit UI: chat + dashboard] -->|HTTP + token| API[FastAPI + RBAC]
+  API --> ORCH[Orchestrator: memory + router]
+  ORCH -->|knowledge| K[Knowledge agent: hybrid search + reranker]
+  ORCH -->|report| R[Report agent]
+  ORCH -->|subscription| S[Subscription agent + 5 detectors]
   K --> V[(ChromaDB)]
-  P --> D[(SQLite)]
+  R --> D[(SQLite)]
   S --> D
-  K & P & S --> L[Ollama llama3.2:3b or extractive fallback]
+  K & R --> L[Ollama llama3.2:3b, or extractive fallback]
   API --> A[(Audit log, PII redaction)]
 ```
 
+More detail and design decisions: [docs/architecture.md](docs/architecture.md).
+
 ## Setup
 
-Requires Python 3.11+ and (optional but recommended) [Ollama](https://ollama.com).
+Requires Python 3.11+ and, for written answers, [Ollama](https://ollama.com) (free). Without Ollama the app still works in *extractive mode*: it shows the best matching passage with its citation and a notice.
 
 **Windows (PowerShell)**
 ```powershell
@@ -47,7 +54,7 @@ python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 pip install -e .
-python -m scripts.setup_models
+python -m scripts.setup_models      # checks Ollama, pulls llama3.2:3b, downloads the embedding and reranker models
 ```
 
 **macOS / Linux**
@@ -58,59 +65,169 @@ pip install -e .
 python -m scripts.setup_models
 ```
 
-Without Ollama the app runs in extractive mode (best passage plus citation) and shows a notice.
+Optional voice: `pip install -r requirements-voice.txt` (offline text-to-speech and speech-to-text).
 
 ## Quick start
+
+```
+make data docs load index   # synthetic data, documents, SQLite, vector index
+make api                    # terminal 1: http://localhost:8000
+make ui                     # terminal 2: http://localhost:8501
+```
+`make demo` does all of this, runs the tests and starts both servers. `make` is not installed on Windows by default; use the plain commands:
 
 | Make target | Plain command |
 |---|---|
 | `make setup` | `python -m scripts.setup_models` |
-| `make data` | `python -m scripts.generate_data` |
+| `make data` | `python -m scripts.generate_data` (seed from `config.yaml`, default 42) |
 | `make docs` | `python -m scripts.make_documents` |
-| `make load` | `python -m scripts.load_db` (CSVs into SQLite) |
-| `make index` | `python -m scripts.build_index` |
+| `make load` | `python -m scripts.load_db` |
+| `make index` | `python -m scripts.build_index` (re-indexes only changed files) |
 | `make api` | `python -m uvicorn nexora.api.main:app --port 8000` |
 | `make ui` | `python -m streamlit run app/Home.py` |
-| `make index` | `python -m scripts.build_index` (re-indexes only changed files) |
-| ask a question | `python -m nexora.rag.generator "How many vacation days do I get?"` (add `--no-docs` for the baseline) |
 | `make test` | `python -m pytest` |
-| `make eval` | `python -m evaluation.eval_rules` and `python -m evaluation.eval_detection` |
+| `make eval` | the evaluation scripts below |
+| `make smoke` | `python -m scripts.smoke_test` (API must be running) |
+| ask from the terminal | `python -m nexora.rag.generator "How many vacation days do I get?"` (add `--no-docs` for the baseline) |
 
-(`make` is not installed on Windows by default; use the plain commands.)
+Log in by choosing a person in the sidebar. All synthetic users share the demo password in `config.yaml` (`auth.demo_password`, stored bcrypt-hashed). The Owner and the Operations Manager see everything; the Project Manager sees documents, tasks and project reports but no money data; employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
 
-## Running the demo
+Security: role-based access, PII redaction (emails, IBANs, phone numbers) before anything is stored, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed; the "Confirm" button only records a decision in the audit log.
 
-```
-make data docs load index     # or the python -m commands above
-make api                      # terminal 1: FastAPI on http://localhost:8000
-make ui                       # terminal 2: Streamlit on http://localhost:8501
-python -m scripts.smoke_test  # optional: chat answer, refusal, report, subscription analysis
-```
-`make demo` does everything and starts both servers. Log in by choosing a person in the sidebar; the demo password for all synthetic users is shown in `config.yaml` (`auth.demo_password`; stored bcrypt-hashed). Try different roles: the Owner and Operations Manager see everything, the Project Manager sees documents, tasks and project reports (no money data), employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
+## Data
 
-Security features: role-based access control, PII redaction (emails, IBANs, phone numbers) before anything is stored in chat history or the audit log, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed: the "Confirm" button only records a decision in the audit log.
+All company data is synthetic and reproducible: the same seed gives byte-identical files. Details are in [docs/data-dictionary.md](docs/data-dictionary.md).
 
-## Quality features
+- **Demo company:** Nexora Software Ltd, 15 people, 3 clients, 4 projects.
+- **Generated files:** employees, 18 subscriptions, monthly usage, about 1,000 bank transactions over 12 months, 250 tasks, and `ground_truth.json` with **20 planted errors** (5 duplicate charges, 5 price increases, 4 unused subscriptions, 3 unlisted charges, 3 overlapping tools) plus **decoys** that look suspicious but are legitimate.
+- **Documents:** 20 company documents in Markdown, Word and PDF, with version, effective date and status (one policy exists as a current and a superseded version).
+- **Real data used only as statistics:** amount and payment-day patterns from the public Berka bank dataset, and task lifecycles (type, priority, points, durations, no text or people) from The Public Jira Dataset.
 
-- **Hybrid retrieval and reranker:** BM25 keyword search is fused with embedding search (reciprocal rank fusion) and the candidates are re-ordered by a cross-encoder (`cross-encoder/ms-marco-MiniLM-L-6-v2`). Both can be switched off in `config.yaml` (`retrieval.hybrid`, `reranker.enabled`). The comparison on development questions is in `evaluation/results/retrieval_dev_eval.json` (`python -m evaluation.eval_retrieval`).
-- **Conversation memory:** the last 5 turns of a chat session are used to rewrite follow-up questions ("and for the year?") into standalone ones; the UI shows "Understood as: ...".
-- **Outdated-document warning:** answers that rely on a document older than 18 months (`retrieval.outdated_after_days`) or on a superseded version carry a warning.
-- **Voice:** optional offline speech output (pyttsx3) and input (faster-whisper, model `tiny`): `pip install -r requirements-voice.txt`. Without it the rest of the app is unaffected.
+## How evaluation works
 
-## Data, evaluation, results
+Every number below is produced by a script and written to `evaluation/results/*.json`; `python -m scripts.fill_readme` copies the numbers into this file. If something was not run, it says "not run yet". Full protocol, scoring rules and known limits: [docs/evaluation-protocol.md](docs/evaluation-protocol.md).
 
-Synthetic data is described in [docs/data-dictionary.md](docs/data-dictionary.md) (`make data`, seed 42). Evaluation is not built yet. Results tables will be generated from `evaluation/results/*.json`; until then: **not run yet**.
+| Evaluation | Command | What it measures |
+|---|---|---|
+| A. Rules assistant vs. no-documents baseline | `python -m evaluation.eval_rules [--runs N] [--model qwen2.5:7b] [--semantic-only]` | 15 questions: accuracy, citations, refusals, hallucinations, latency (needs Ollama) |
+| B. Detection | `python -m evaluation.eval_detection` | recall, false alerts, precision on 20 planted errors, seeds 42, 7 and 123; savings |
+| Retrieval modes | `python -m evaluation.eval_retrieval` | semantic vs. hybrid vs. reranker on development questions |
+| C. Time | `python -m evaluation.eval_time record ...` | manual vs. Nexora stopwatch times entered by the team |
+| Satisfaction | `python -m evaluation.eval_satisfaction` | thumbs up / down from real users |
 
-## Data credits
+## Results
 
-- Task lifecycles are derived from *The Public Jira Dataset* (Montgomery, Lüders, Maalej, MSR 2022), CC BY 4.0: https://zenodo.org/records/15719919
-- Eight of the 20 company documents (code of conduct, complaint policy, sabbatical, new parent leave, other protected absences, drug and alcohol policy, employee privacy, and the structure of the holiday list) are adapted from the public Clef employee handbook. The other twelve are written for Nexora. Please check the handbook's licence before publishing this repository.
-- Background transaction amounts follow statistics of the public PKDD'99 (Berka) bank dataset. This is real, anonymised data, used only as aggregate statistics; no rows are copied.
+### A. Rules assistant vs. baseline
+
+<!-- BEGIN:rules -->
+Model `llama3.2:3b`, temperature 0.0, 3 run(s), run on 2026-11-02. Passed / accuracy are from the first run and the mean over runs.
+
+| System | Passed (run 1) | Accuracy | Citation accuracy | Refusal accuracy | Hallucinations | Mean latency |
+|---|---|---|---|---|---|---|
+| Nexora (retrieval + refusal) | 14/15 | 93.3% | 91.7% | 100.0% | 0 | 2.9 s |
+| Nexora with semantic-only retrieval (before Phase 6) | 13/15 | 86.7% | 83.3% | 100.0% | 0 | 3.0 s |
+| Baseline: same model, no documents | 3/15 | 20.0% | n/a | 100.0% | 0 | 2.9 s |
+
+Target: accuracy above 90% (at least 14 of 15) for Nexora: **met** (mean 93.3%, standard deviation 0.000 over 3 run(s)).
+
+| # | Question | Nexora passed | Baseline passed |
+|---|---|---|---|
+| 1 | How many vacation days do full-time employees get? | yes | **no** |
+| 2 | How many unused vacation days can be carried over? | yes | **no** |
+| 3 | How many days per week can I work remotely? | yes | **no** |
+| 4 | How many approvals does a pull request need? | yes | **no** |
+| 5 | Can we deploy to production on a Friday afternoon? | yes | **no** |
+| 6 | What is the annual training budget per developer? | yes | **no** |
+| 7 | Who must approve an expense above 100 EUR? | yes | **no** |
+| 8 | What must happen before we buy a new software tool? | yes | **no** |
+| 9 | After how many days of sick leave is a medical certificate required? | yes | **no** |
+| 10 | Can I send customer data to my personal email? | **no** | **no** |
+| 11 | Within how many minutes must a Sev-1 incident be acknowledged? | yes | **no** |
+| 12 | On which day of the month are payslips sent? | yes | **no** |
+| 13 | What is the annual bonus structure? | yes | yes |
+| 14 | Do we have a four-day work week policy? | yes | yes |
+| 15 | What is the office dress code? | yes | yes |
+<!-- END:rules -->
+
+### Retrieval modes (development questions)
+
+<!-- BEGIN:retrieval -->
+28 answerable and 10 unanswerable development questions (not the 15 evaluation questions); retrieval only, no language model.
+
+| Mode | Right document first | In top 3 | MRR | Unanswerable refused by threshold |
+|---|---|---|---|---|
+| semantic | 0.82 | 0.93 | 0.88 | 90% |
+| hybrid | 0.79 | 0.96 | 0.88 | 90% |
+| semantic+rerank | 0.89 | 1.00 | 0.94 | 90% |
+| hybrid+rerank | 0.89 | 1.00 | 0.94 | 90% |
+<!-- END:retrieval -->
+
+### B. Detection of planted errors, and savings
+
+<!-- BEGIN:detection -->
+| Seed | Errors inserted | Found | Recall | False alerts | Precision | Decoys wrongly flagged | Estimated savings (EUR/month) |
+|---|---|---|---|---|---|---|---|
+| 42 | 20 | 20 | 100% | 0 | 100.0% | 0 | 1,028 |
+| 7 | 20 | 20 | 100% | 0 | 100.0% | 0 | 1,060 |
+| 123 | 20 | 20 | 100% | 0 | 100.0% | 0 | 1,042 |
+
+Targets: recall >= 80%, false alerts <= 3, precision >= 80%: **met on all seeds**. Thresholds are the `config.yaml` defaults for every seed. The generator and the detectors were built together on synthetic data, so this shows consistency, not performance on real bank data.
+
+| Error type | Found (all seeds) | Recall |
+|---|---|---|
+| duplicate_charge | 15/15 | 100% |
+| overlap | 9/9 | 100% |
+| price_increase | 15/15 | 100% |
+| unlisted_charge | 9/9 | 100% |
+| unused_subscription | 12/12 | 100% |
+<!-- END:detection -->
+
+### C. Time saved
+
+<!-- BEGIN:time -->
+| Task | Manual (stopwatch) | With Nexora (stopwatch) | Time saved |
+|---|---|---|---|
+| find_rule | not measured | not measured | not measured |
+| monthly_report | not measured | not measured | not measured |
+| wasteful_subscriptions | not measured | not measured | not measured |
+
+Target: 50% less time. Values are entered by the team with `python -m evaluation.eval_time record ...`; nothing is estimated.
+<!-- END:time -->
+
+### User satisfaction
+
+<!-- BEGIN:satisfaction -->
+**not measured** (no thumbs up/down feedback yet; target 85%).
+<!-- END:satisfaction -->
 
 ## Limitations
 
-Synthetic data only; a 3B model can be wrong, which is why answers are cited and refusals are explicit. Details are added after evaluation.
+- **Synthetic data and small samples.** The documents, the data and the 15 questions were written by the team; 15 questions means one answer moves the score by 6.7 points. Detection scores show consistency with the planted patterns, not accuracy on real bank data.
+- **A 3B local model can be wrong or slow.** An answer takes several seconds on a laptop (up to three model calls per message: routing, rewriting, answering). Citations, refusals and the extractive fallback exist because of this. Fixed-wording questions work best.
+- **Retrieval misses happen.** On the development questions the right document is not always first; the reranker fixes most but not all cases.
+- **Report snapshots.** Task status is a snapshot at the end of the data; blocked and overdue counts for earlier periods use that snapshot.
+- **Demo-grade security.** One shared demo password, local tokens, no HTTPS. PII redaction is pattern-based (a German-format amount like `12.345.678` can be mistaken for a phone number).
+- **Not yet measured:** task-time savings and user satisfaction need real stopwatch runs and real users (see the tables above).
+- **Licences to confirm:** eight documents are adapted from a public employee handbook whose licence has not been verified; the Jira dataset is CC BY 4.0 (credited below).
+
+## Data credits
+
+- Task lifecycles: *The Public Jira Dataset*, Montgomery L., Lüders C., Maalej W., MSR 2022, CC BY 4.0 (https://zenodo.org/records/15719919).
+- Background transaction statistics: the public PKDD'99 (Berka) bank dataset. This is real, anonymised data used only as aggregate statistics; no rows are copied.
+- Eight documents (code of conduct, complaint policy, sabbatical, new parent leave, other protected absences, drug and alcohol policy, employee privacy, and the structure of the holiday list) are adapted from the public Clef employee handbook. The other twelve are written for Nexora.
 
 ## Roadmap
 
-Phases 1-7: data generator, documents, RAG, agents, API and UI, quality upgrades, evaluation.
+- Connect real data through CSV adapters (bank export, subscription list, project tracker) instead of the synthetic generator.
+- Replace the demo login with the company's identity provider; add HTTPS.
+- Measure time savings and satisfaction with real users; grow the question set well beyond 15.
+- Try larger local models (for example `qwen2.5:7b`) and compare with `--model`.
+- Let a person approve a recommendation and apply it in the billing tool (today it is only logged).
+
+## Team
+
+Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Data and document credits are listed above.
