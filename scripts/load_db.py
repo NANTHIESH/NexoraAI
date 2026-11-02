@@ -12,6 +12,7 @@ import pandas as pd
 
 from nexora.config import Config, load_config
 from nexora.db.session import connect
+from nexora.security.auth import hash_password
 
 TABLES = {  # table -> csv file; load order does not matter (no foreign keys between them)
     "employees": "employees.csv",
@@ -38,6 +39,11 @@ def load_db(cfg: Config | None = None) -> dict[str, int]:
             conn.execute(f"DELETE FROM {table}")
             df.to_sql(table, conn, if_exists="append", index=False)
             counts[table] = len(df)
+        # Demo logins: every synthetic employee gets the configured demo password (bcrypt-hashed).
+        conn.execute("DELETE FROM credentials")
+        conn.executemany("INSERT INTO credentials VALUES (?, ?)",
+                         [(e, hash_password(cfg.auth.demo_password, cfg.auth.bcrypt_rounds))
+                          for e in pd.read_csv(folder / "employees.csv")["employee_id"]])
     conn.close()
     return counts
 

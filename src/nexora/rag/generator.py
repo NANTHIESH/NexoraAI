@@ -15,6 +15,7 @@ from nexora.llm.ollama_client import ModelNotPulledError, OllamaClient, OllamaUn
 from nexora.rag.prompts import BASELINE_SYSTEM_PROMPT, NOT_FOUND, SYSTEM_PROMPT, build_user_prompt
 from nexora.rag.retriever import Retriever
 from nexora.rag.vectorstore import Hit
+from nexora.security.injection import sanitize_hits
 
 CITATION = re.compile(r"\[([^\[\]]+)\]")
 
@@ -37,6 +38,7 @@ class Answer:
     top_score: float = 0.0
     warning: str | None = None
     notice: str | None = None
+    injection_flagged: list[str] = field(default_factory=list)
 
 
 def parse_citations(text: str, hits: list[Hit]) -> tuple[list[str], list[str]]:
@@ -69,18 +71,20 @@ class Assistant:
         found = self.retriever.retrieve(question, include_superseded)
         if not found.hits or found.top_score < self.cfg.retrieval.min_retrieval_score:
             return self._refusal("llm", found.hits, found.top_score, found.warning)
+        hits, flagged = sanitize_hits(found.hits)  # documents are data, never instructions
         try:
-            text = self.llm.chat(SYSTEM_PROMPT, build_user_prompt(question, found.hits))
+            text = self.llm.chat(SYSTEM_PROMPT, build_user_prompt(question, hits))
         except (OllamaUnavailableError, ModelNotPulledError) as exc:
-            best = found.hits[0]
-            return Answer(extractive_answer(found.hits), False, "extractive",
+            best = hits[0]
+            return Answer(extractive_answer(hits), False, "extractive",
                           citations=[best.chunk.citation], cited_sources=[best.chunk.source],
-                          sources=found.hits, top_score=found.top_score,
-                          warning=found.warning, notice=f"{FALLBACK_NOTICE} ({exc})")
+                          sources=hits, top_score=found.top_score, warning=found.warning,
+                          notice=f"{FALLBACK_NOTICE} ({exc})", injection_flagged=flagged)
         if NOT_FOUND in text:
-            return self._refusal("llm", found.hits, found.top_score, found.warning)
-        citations, files = parse_citations(text, found.hits)
-        return Answer(text, False, "llm", citations, files, found.hits, found.top_score, found.warning)
+            return self._refusal("llm", hits, found.top_score, found.warning)
+        citations, files = parse_citations(text, hits)
+        return Answer(text, False, "llm", citations, files, hits, found.top_score, found.warning,
+                      injection_flagged=flagged)
 
     def ask_without_documents(self, question: str) -> Answer:
         """Baseline: same model and question, no retrieved context (needs Ollama)."""

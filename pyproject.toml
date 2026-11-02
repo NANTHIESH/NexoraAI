@@ -28,3 +28,5 @@ select = ["E", "F", "I", "B", "UP"]
 "scripts/generate_data.py" = ["E501"]  # wide catalog tables
 "src/nexora/rag/prompts.py" = ["E501"]  # prompt prose
 "src/nexora/agents/router.py" = ["E501"]  # prompt prose
+"app/*.py" = ["E501"]  # UI layout lines
+"app/pages/*.py" = ["E501"]

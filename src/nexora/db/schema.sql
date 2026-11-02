@@ -133,3 +133,8 @@ CREATE TABLE IF NOT EXISTS eval_results (
     value     REAL,
     detail    TEXT
 );
+
+CREATE TABLE IF NOT EXISTS credentials (
+    employee_id   TEXT PRIMARY KEY REFERENCES employees(employee_id),
+    password_hash TEXT NOT NULL            -- bcrypt
+);

@@ -1,7 +1,7 @@
 # Cross-platform note: on Windows without `make`, run the plain commands shown after each target.
 PY ?= python
 
-.PHONY: setup data docs load index api ui test lint eval demo
+.PHONY: setup data docs load index api ui test lint eval demo smoke
 
 setup:   ## python -m scripts.setup_models
 	$(PY) -m scripts.setup_models
@@ -34,4 +34,8 @@ eval:    ## python -m evaluation.eval_rules ; eval_detection ; eval_time
 	$(PY) -m evaluation.eval_rules
 	$(PY) -m evaluation.eval_detection
 
-demo: data load index test ui
+demo: data docs load index test
+	$(PY) -m scripts.run_demo
+
+smoke:   ## python -m scripts.smoke_test (API must be running)
+	$(PY) -m scripts.smoke_test

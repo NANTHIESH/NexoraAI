@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 4 (database and agents)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 5 (API, security and UI)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -77,6 +77,18 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 | `make eval` | `python -m evaluation.eval_rules` and `python -m evaluation.eval_detection` |
 
 (`make` is not installed on Windows by default; use the plain commands.)
+
+## Running the demo
+
+```
+make data docs load index     # or the python -m commands above
+make api                      # terminal 1: FastAPI on http://localhost:8000
+make ui                       # terminal 2: Streamlit on http://localhost:8501
+python -m scripts.smoke_test  # optional: chat answer, refusal, report, subscription analysis
+```
+`make demo` does everything and starts both servers. Log in by choosing a person in the sidebar; the demo password for all synthetic users is shown in `config.yaml` (`auth.demo_password`; stored bcrypt-hashed). Try different roles: the Owner and Operations Manager see everything, the Project Manager sees documents, tasks and project reports (no money data), employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
+
+Security features: role-based access control, PII redaction (emails, IBANs, phone numbers) before anything is stored in chat history or the audit log, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed: the "Confirm" button only records a decision in the audit log.
 
 ## Data, evaluation, results
 

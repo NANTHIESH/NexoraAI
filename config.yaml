@@ -55,3 +55,11 @@ detectors:
 voice:
   tts_enabled: true
   stt_model: tiny
+
+auth:
+  demo_password: nexora-demo   # demo only: every synthetic user gets this password (bcrypt-hashed)
+  bcrypt_rounds: 10
+  token_ttl_minutes: 480
+
+api:
+  base_url: http://localhost:8000

@@ -142,3 +142,18 @@ def build_report(frames: Frames, period: str, ref_date: date | None = None,
         if text and _numbers(text) <= _numbers(facts):
             return Report(data, text, "llm")
     return Report(data, template_summary(data), "template")
+
+
+FINANCE_KEYS = ("income", "expenses", "net", "expenses_by_category", "top_cost_increases")
+
+
+def project_view(data: dict[str, Any]) -> dict[str, Any]:
+    """Report data without any money figures (what the project manager role may see)."""
+    return {k: v for k, v in data.items() if k not in FINANCE_KEYS}
+
+
+def template_project_summary(data: dict[str, Any]) -> str:
+    """Summary of a project-only report (tasks, no finance)."""
+    t = data["tasks"]
+    return (f"{data['period'].capitalize()} project report {data['start']} to {data['end']}: "
+            f"{t['done']} tasks done, {t['blocked']} blocked, {t['overdue']} overdue.")
