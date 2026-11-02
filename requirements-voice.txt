@@ -1,0 +1,4 @@
+# Optional voice features (Phase 6). Install with: pip install -r requirements-voice.txt
+# Versions are pinned in Phase 6 after they are installed and tested.
+pyttsx3
+faster-whisper

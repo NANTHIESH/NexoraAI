@@ -1,0 +1,50 @@
+# Nexora AI configuration. Secrets and per-machine overrides go in .env (see .env.example).
+seed: 42
+
+paths:
+  documents: data/documents
+  generated: data/generated
+  db_dir: data/db
+  sqlite: data/db/nexora.sqlite
+  chroma: data/db/chroma
+  eval_results: evaluation/results
+
+llm:
+  provider: ollama
+  base_url: http://localhost:11434
+  model: llama3.2:3b          # alternative: qwen2.5:7b
+  temperature: 0.0
+  timeout_seconds: 120
+
+embeddings:
+  model: sentence-transformers/all-MiniLM-L6-v2
+
+reranker:
+  model: cross-encoder/ms-marco-MiniLM-L-6-v2
+  enabled: false              # switched on in Phase 6
+
+retrieval:
+  top_k: 5
+  min_retrieval_score: 0.30   # refuse below this top score (tuned in Phase 3)
+  hybrid: false               # BM25 + embeddings, Phase 6
+  chunk_tokens_min: 300
+  chunk_tokens_max: 500
+  chunk_overlap_tokens: 50
+  collection: nexora_docs
+
+refusal_text: "I could not find this in the company documents. Please ask your manager."
+
+detectors:
+  duplicate_window_days: 7
+  duplicate_amount_tolerance: 0.02
+  price_increase_threshold: 0.10
+  unused_min_months: 3
+  recurring_min_months: 3
+  overlap_categories:
+    issue_tracking: [Jira, Linear]
+    docs_wiki: [Notion, Confluence]
+    chat: [Slack, Microsoft Teams]
+
+voice:
+  tts_enabled: true
+  stt_model: tiny
