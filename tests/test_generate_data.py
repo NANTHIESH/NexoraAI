@@ -148,3 +148,31 @@ def test_missing_bank_profile_gives_clear_error(tmp_path: Path) -> None:
 
     with pytest.raises(FileNotFoundError, match="scripts.profile_bank"):
         BankShape(tmp_path / "nope.json")
+
+
+def test_tasks_use_real_jira_lifecycles(datasets: dict[int, Path]) -> None:
+    tasks = read(datasets[42] / "tasks.csv")
+    assert {t["status"] for t in tasks} == {"todo", "in_progress", "blocked", "done"}
+    assert {t["type"] for t in tasks} <= {"bug", "story", "task"}
+    for t in tasks:
+        assert t["created"] <= t["due"]
+        assert (t["status"] == "done") == bool(t["completed"])
+        if t["completed"]:
+            assert t["created"] <= t["completed"] <= "2026-10-31"
+
+
+def test_jira_sample_has_no_text_or_people() -> None:
+    from scripts.generate_data import JIRA_SAMPLE_PATH
+
+    sample = json.loads(JIRA_SAMPLE_PATH.read_text(encoding="utf-8"))
+    assert sample["issues"] and "CC BY 4.0" in sample["source"]
+    allowed = {"type", "status", "status_category", "priority", "story_points",
+               "resolve_days", "due_days"}
+    assert all(set(issue) == allowed for issue in sample["issues"])
+
+
+def test_missing_jira_sample_gives_clear_error(tmp_path: Path) -> None:
+    from scripts.generate_data import load_jira_sample
+
+    with pytest.raises(FileNotFoundError, match="scripts.sample_jira"):
+        load_jira_sample(tmp_path / "nope.json")

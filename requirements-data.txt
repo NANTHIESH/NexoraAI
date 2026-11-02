@@ -1,0 +1,2 @@
+# One-time data sampling only (scripts/sample_jira.py); not needed to run the app or generate data.
+pymongo==4.19.0

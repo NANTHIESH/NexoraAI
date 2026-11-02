@@ -1,0 +1,3609 @@
+{
+ "source": "The Public Jira Dataset (Montgomery, Lueders, Maalej, MSR 2022), CC BY 4.0",
+ "repository": "Hyperledger",
+ "project": "STL",
+ "issues_in_project": 1663,
+ "sample_size": 400,
+ "issues": [
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 99,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 1.0,
+   "resolve_days": 6,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 17,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 11,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 50,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Lowest",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "High",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "High",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 1398,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 41,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 76,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 1.0,
+   "resolve_days": 6,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 6,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1379,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 17,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": null,
+   "resolve_days": 1375,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "In Progress",
+   "status_category": "In Progress",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 22,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1396,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "In Review",
+   "status_category": "In Progress",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 219,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 26,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 23,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 22,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 79,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 35,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 26,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 55,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 182,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 9,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 86,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 232,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 63,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1370,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 247,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 18,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Lowest",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 91,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 24,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 127,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 25,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 23,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1392,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 8,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 91,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 35,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 26,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 99,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 59,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1398,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 202,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": 119,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Planning",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 20,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 1394,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 60,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 20,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1394,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 4,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 274,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 35,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 116,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 31,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 233,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "In Progress",
+   "status_category": "In Progress",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 11,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 42,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 4,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 32,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 9,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "To Do",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 72,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": 3.0,
+   "resolve_days": 87,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 267,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 260,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 716,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 36,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 48,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 58,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 5.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 184,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 31,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 8.0,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 1.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 4,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 8.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 42,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 9,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 19,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 98,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Won't Fix",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 253,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 121,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 48,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 115,
+   "due_days": 5
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 74,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 202,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 4,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 3.0,
+   "resolve_days": 26,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 237,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 2,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1411,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": 1389,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1434,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Duplicate",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Lowest",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 391,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 101,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 37,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 54,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Duplicate",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 0.0,
+   "resolve_days": 48,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 8,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1394,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1383,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 2,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 252,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 32,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 45,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": 0.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 22,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 1.0,
+   "resolve_days": 3,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 58,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 3.0,
+   "resolve_days": 1378,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 9,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": 3.0,
+   "resolve_days": 157,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "High",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 21,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 440,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 17,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 39,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1396,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 108,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 60,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 0.0,
+   "resolve_days": 63,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 37,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 147,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1370,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 31,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 23,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 29,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 36,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 9,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Sub-task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": 32,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 22,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1370,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 11,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 132,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 35,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 32,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 54,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 2.0,
+   "resolve_days": 19,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 38,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 1396,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Duplicate",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 13,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 26,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 1.0,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 27,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 178,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 59,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 394,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1370,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 19,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 1398,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": 1391,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 64,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 20,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": 1384,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": null,
+   "resolve_days": 47,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 38,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 40,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 48,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 12,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Low",
+   "story_points": 5.0,
+   "resolve_days": 1375,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 42,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Lowest",
+   "story_points": 1.0,
+   "resolve_days": 22,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 137,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 28,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 10,
+   "due_days": null
+  },
+  {
+   "type": "Epic",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 60,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 64,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 7,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Highest",
+   "story_points": 3.0,
+   "resolve_days": 109,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 86,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Lowest",
+   "story_points": 2.0,
+   "resolve_days": 33,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 30,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 6,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 46,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 20,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 0.0,
+   "resolve_days": 16,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1390,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 20,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 14,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Duplicate",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 104,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 19,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 34,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 91,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": 5.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 35,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 89,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 6,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 0,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Low",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 1395,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 41,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 90,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 109,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 5.0,
+   "resolve_days": 220,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 15,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 25,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 170,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Bug",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Task",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": 5,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 2,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 81,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Backlog",
+   "status_category": "To Do",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "New Feature",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "High",
+   "story_points": null,
+   "resolve_days": 1395,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 2.0,
+   "resolve_days": 581,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 3.0,
+   "resolve_days": 19,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 1,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 11,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Invalid",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": null,
+   "resolve_days": null,
+   "due_days": null
+  },
+  {
+   "type": "Improvement",
+   "status": "Complete",
+   "status_category": "Done",
+   "priority": "Medium",
+   "story_points": 1.0,
+   "resolve_days": 10,
+   "due_days": null
+  }
+ ]
+}

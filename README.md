@@ -78,6 +78,11 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 
 Synthetic data is described in [docs/data-dictionary.md](docs/data-dictionary.md) (`make data`, seed 42). Evaluation is not built yet. Results tables will be generated from `evaluation/results/*.json`; until then: **not run yet**.
 
+## Data credits
+
+- Task lifecycles are derived from *The Public Jira Dataset* (Montgomery, Lüders, Maalej, MSR 2022), CC BY 4.0: https://zenodo.org/records/15719919
+- Background transaction amounts follow statistics of the public PKDD'99 (Berka) bank dataset. This is real, anonymised data, used only as aggregate statistics; no rows are copied.
+
 ## Limitations
 
 Synthetic data only; a 3B model can be wrong, which is why answers are cited and refusals are explicit. Details are added after evaluation.

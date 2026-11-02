@@ -466,38 +466,71 @@ def finalize_transactions(book: TxnBook, opening_cents: int) -> tuple[list[list[
 # --------------------------------------------------------------------------------------
 
 
-def make_tasks(seed: int, employees: list[dict[str, Any]], start: date, end: date, count: int) -> list[list[Any]]:
-    """About ``count`` Jira-like issues across the four projects."""
+JIRA_SAMPLE_PATH = PROJECT_ROOT / "data" / "reference" / "jira_sample.json"
+JIRA_TYPE_MAP = {"Bug": "bug", "Task": "task", "Sub-task": "task",
+                 "New Feature": "story", "Improvement": "story", "Story": "story"}
+JIRA_PRIORITY_MAP = {"Blocker": "critical", "Critical": "critical", "Major": "high", "High": "high",
+                     "Minor": "low", "Low": "low", "Trivial": "low"}
+# Real Jira resolutions that are not delivered work.
+JIRA_NOT_WORK = {"Invalid", "Won't Fix", "Duplicate", "Cannot Reproduce", "Rejected"}
+BLOCKED_SHARE = 0.3  # share of unfinished tasks marked blocked (the Jira sample has no such status)
+MAX_REAL_DUE_DAYS = 90
+
+
+def load_jira_sample(path: Path = JIRA_SAMPLE_PATH) -> list[dict[str, Any]]:
+    """Real issue lifecycles (type, priority, points, durations) sampled from The Public Jira Dataset.
+
+    Epics and non-delivered issues (invalid, duplicate, won't fix) are dropped. Built by
+    scripts/sample_jira.py; contains no titles, descriptions or people.
+    """
+    if not path.exists():
+        raise FileNotFoundError(
+            f"{path} is missing. Run: python -m scripts.sample_jira --zip <ThePublicJiraDataset.zip>")
+    issues = json.loads(path.read_text(encoding="utf-8"))["issues"]
+    return [i for i in issues if i["type"] in JIRA_TYPE_MAP and i["status"] not in JIRA_NOT_WORK]
+
+
+def make_tasks(seed: int, employees: list[dict[str, Any]], start: date, end: date, count: int,
+               issues: list[dict[str, Any]]) -> list[list[Any]]:
+    """``count`` issues whose type, priority, points and lifecycle come from real Jira data.
+
+    Titles, projects, owners and dates are synthetic; a real issue that would not yet be
+    resolved by ``end`` is left in progress.
+    """
     rng = sub_rng(seed, "tasks")
     workers = [e["employee_id"] for e in employees if e["job_title"] not in
                ("CEO & Owner", "Sales Manager", "Office & Operations Manager", "Project Manager")]
     span = (end - start).days
     rows = []
-    for n in range(1, count + 1):
+    for n, issue in enumerate(rng.sample(issues, count), start=1):
         project = rng.choices(PROJECTS, weights=(35, 25, 25, 15))[0]
-        kind = rng.choices(("bug", "story", "task"), weights=(35, 35, 30))[0]
+        kind = JIRA_TYPE_MAP[issue["type"]]
         comp = rng.choice(COMPONENTS[project])
         if kind == "bug":
-            title, points = f"Fix {rng.choice(BUG_SYMPTOMS)} in {comp}", rng.choice((1, 2, 3, 5))
+            title = f"Fix {rng.choice(BUG_SYMPTOMS)} in {comp}"
         elif kind == "story":
-            title, points = f"Add {rng.choice(STORY_GOALS)} to {comp}", rng.choice((3, 5, 8, 13))
+            title = f"Add {rng.choice(STORY_GOALS)} to {comp}"
         else:
-            title, points = f"{rng.choice(CHORES).capitalize()} for {comp}", rng.choice((1, 2, 3, 5))
+            title = f"{rng.choice(CHORES).capitalize()} for {comp}"
+        points = issue["story_points"]
+        points = max(1, round(points)) if points else rng.choice((1, 2, 3, 5, 8))
         created = start + timedelta(days=rng.randint(0, span - 3))
-        due = created + timedelta(days=rng.randint(7, 28))
-        age = (end - created).days
-        p_done = min(0.9, 0.3 + age / 200)
-        rest = (1 - p_done) / 3
-        status = rng.choices(("done", "todo", "in_progress", "blocked"),
-                             weights=(p_done, rest, rest, rest))[0]
-        completed = ""
-        if status == "done":
-            completed = min(end, created + timedelta(days=rng.randint(2, 30))).isoformat()
+        due_days = issue["due_days"]
+        if due_days is None or not 3 <= due_days <= MAX_REAL_DUE_DAYS:
+            due_days = rng.randint(7, 28)
+        done_on = created + timedelta(days=issue["resolve_days"]) if (
+            issue["status_category"] == "Done" and issue["resolve_days"] is not None) else None
+        if done_on is not None and done_on <= end:
+            status, completed = "done", done_on.isoformat()
+        else:
+            status, completed = "todo" if issue["status_category"] == "To Do" else "in_progress", ""
+            if rng.random() < BLOCKED_SHARE:
+                status = "blocked"
         rows.append([
             f"NX-{n:03d}", project, kind, title, rng.choice(workers), status,
-            rng.choices(("low", "medium", "high", "critical"), weights=(20, 50, 25, 5))[0],
+            JIRA_PRIORITY_MAP.get(issue["priority"], "medium"),
             points, f"S{(created - start).days // 14 + 1:02d}", created.isoformat(),
-            due.isoformat(), completed, rng.choice(NOTES[status]),
+            (created + timedelta(days=due_days)).isoformat(), completed, rng.choice(NOTES[status]),
         ])
     return rows
 
@@ -598,7 +631,7 @@ def generate(seed: int, out_dir: Path) -> dict[str, int]:
     write_csv(out_dir / "transactions.csv",
               ["txn_id", "date", "description", "category", "counterparty", "amount", "balance"],
               txn_rows)
-    tasks = make_tasks(seed, employees, months[0], end, cfg.data.task_count)
+    tasks = make_tasks(seed, employees, months[0], end, cfg.data.task_count, load_jira_sample())
     write_csv(out_dir / "tasks.csv",
               ["task_id", "project", "type", "title", "owner", "status", "priority",
                "story_points", "sprint", "created", "due", "completed", "weekly_note"], tasks)

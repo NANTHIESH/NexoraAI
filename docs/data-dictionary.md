@@ -35,7 +35,14 @@ Demo company: Nexora Software Ltd, 15 people, 3 external clients (Brightwave Ret
 
 ## tasks.csv (250 rows)
 `task_id, project, type (bug/story/task), title, owner (employee_id), status (todo/in_progress/blocked/done), priority, story_points, sprint, created, due, completed, weekly_note`.
-Generated with Faker-free templates and the seeded RNG. The optional public Jira dataset (Zenodo) is **not** used yet: it is not in `data/raw/`, and its file format has not been verified.
+
+Task lifecycles come from real data: `data/reference/jira_sample.json` holds 400 issues of the Hyperledger "STL" project from The Public Jira Dataset (built once by `python -m scripts.sample_jira --zip <zip>`). Only type, status, priority, story points and durations (days to resolve, days to due) are stored: no titles, descriptions or people. Mapping:
+- Jira type: Bug -> bug; New Feature/Improvement/Story -> story; Task/Sub-task -> task. Epics and invalid/duplicate/won't-fix issues are dropped.
+- Priority: Blocker/Critical -> critical, Major/High -> high, Minor/Low/Trivial -> low, anything else -> medium.
+- A real "done" issue is `done` with `completed = created + resolve_days`; if that date falls after the data window it stays `in_progress`. Open issues are `todo`/`in_progress`; 30% of unfinished tasks are marked `blocked` (the sample has no blocked status).
+- Project, title, owner, created date and sprint (two-week buckets from the window start) are synthetic. The real project is feature-heavy and mostly medium priority, so the mix of types and priorities reflects that.
+
+Credit: Montgomery L., Lüders C., Maalej W., *An Alternative Issue Tracking Dataset of Public Jira Repositories*, MSR 2022. Licence CC BY 4.0, https://zenodo.org/records/15719919.
 
 ## plan_changes.csv
 Recorded, legitimate changes that detectors must respect: a plan upgrade (Zoom) and a documented AWS usage spike.
