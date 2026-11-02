@@ -31,7 +31,7 @@ reranker:
 
 retrieval:
   top_k: 5
-  min_retrieval_score: 0.30   # refuse below this top score (tuned in Phase 3)
+  min_retrieval_score: 0.35   # chosen on tests/fixtures/dev_questions.json (not the eval set)
   hybrid: false               # BM25 + embeddings, Phase 6
   chunk_tokens_min: 300
   chunk_tokens_max: 500

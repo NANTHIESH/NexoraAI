@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 2 (company documents)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 3 (RAG pipeline)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -70,6 +70,8 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 | `make index` | `python -m scripts.build_index` |
 | `make api` | `python -m uvicorn nexora.api.main:app --port 8000` |
 | `make ui` | `python -m streamlit run app/Home.py` |
+| `make index` | `python -m scripts.build_index` (re-indexes only changed files) |
+| ask a question | `python -m nexora.rag.generator "How many vacation days do I get?"` (add `--no-docs` for the baseline) |
 | `make test` | `python -m pytest` |
 | `make eval` | `python -m evaluation.eval_rules` and `python -m evaluation.eval_detection` |
 

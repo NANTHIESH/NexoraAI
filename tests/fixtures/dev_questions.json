@@ -1,0 +1,29 @@
+{
+  "note": "Development questions used to choose min_retrieval_score. They are NOT the 15 evaluation questions.",
+  "answerable": [
+    "How much paid time off do permanent staff get each year?",
+    "Who signs off on purchases over a hundred euros?",
+    "When do we receive our salary slips?",
+    "How quickly must someone react when the production service is down?",
+    "Which open source licences are not allowed in client products?",
+    "How do I request time off?",
+    "Is two-factor authentication required for company accounts?",
+    "What are the support hours for clients?",
+    "Is the office closed at Christmas?",
+    "How long do we keep project data after a contract ends?",
+    "What is the rule for working from home each week?",
+    "What must a pull request pass before it can be merged?"
+  ],
+  "unanswerable": [
+    "What is the capital of France?",
+    "Can I bring my dog to the office?",
+    "What is the company pension plan?",
+    "How do I cook pasta?",
+    "What stock options do employees get?",
+    "Who won the football match yesterday?",
+    "What is the parking policy?",
+    "What is the wifi password?",
+    "How much revenue did the company make last year?",
+    "Do we offer a gym membership?"
+  ]
+}
