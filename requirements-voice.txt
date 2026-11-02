@@ -1,3 +1,5 @@
 # Optional voice features. Install with: pip install -r requirements-voice.txt
+# av is pinned below 17 because faster-whisper 1.2.1 does not work with PyAV 19.
 pyttsx3==2.99
-faster-whisper
+faster-whisper==1.2.1
+av==16.1.0

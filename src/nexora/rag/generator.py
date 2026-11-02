@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import re
 from dataclasses import dataclass, field
+from datetime import date
 
 from nexora.config import Config, load_config
 from nexora.llm.fallback import FALLBACK_NOTICE, extractive_answer
@@ -54,11 +55,34 @@ def parse_citations(text: str, hits: list[Hit]) -> tuple[list[str], list[str]]:
     return citations, files
 
 
+def outdated_warning(hits: list[Hit], cited_sources: list[str], max_age_days: int, today: date) -> str | None:
+    """Warn when the document an answer relies on is older than ``max_age_days``.
+
+    Uses the cited documents, or the best hit when the answer cites none.
+    """
+    used = [h for h in hits if h.chunk.source in cited_sources] or hits[:1]
+    seen, notes = set(), []
+    for hit in used:
+        c = hit.chunk
+        age = (today - date.fromisoformat(c.effective_date)).days
+        if c.source not in seen and age > max_age_days:
+            seen.add(c.source)
+            notes.append(f"'{c.doc_title}' is dated {c.effective_date} ({age // 30} months ago). "
+                         "Please check that it is still current.")
+    return " ".join(notes) or None
+
+
+def combine_warnings(*warnings: str | None) -> str | None:
+    """Join non-empty warnings into one text."""
+    return " ".join(w for w in warnings if w) or None
+
+
 class Assistant:
     """Document question answering: retrieve, generate, refuse when unsupported."""
 
     def __init__(self, cfg: Config | None = None, retriever: Retriever | None = None,
-                 llm: OllamaClient | None = None) -> None:
+                 llm: OllamaClient | None = None, today: date | None = None) -> None:
+        self.today = today or date.today()
         self.cfg = cfg or load_config()
         self.retriever = retriever or Retriever(self.cfg)
         self.llm = llm or OllamaClient(self.cfg)
@@ -78,13 +102,17 @@ class Assistant:
             best = hits[0]
             return Answer(extractive_answer(hits), False, "extractive",
                           citations=[best.chunk.citation], cited_sources=[best.chunk.source],
-                          sources=hits, top_score=found.top_score, warning=found.warning,
+                          sources=hits, top_score=found.top_score,
+                          warning=combine_warnings(found.warning, self._outdated(hits, [best.chunk.source])),
                           notice=f"{FALLBACK_NOTICE} ({exc})", injection_flagged=flagged)
         if NOT_FOUND in text:
             return self._refusal("llm", hits, found.top_score, found.warning)
         citations, files = parse_citations(text, hits)
-        return Answer(text, False, "llm", citations, files, hits, found.top_score, found.warning,
-                      injection_flagged=flagged)
+        return Answer(text, False, "llm", citations, files, hits, found.top_score,
+                      combine_warnings(found.warning, self._outdated(hits, files)), injection_flagged=flagged)
+
+    def _outdated(self, hits: list[Hit], cited_sources: list[str]) -> str | None:
+        return outdated_warning(hits, cited_sources, self.cfg.retrieval.outdated_after_days, self.today)
 
     def ask_without_documents(self, question: str) -> Answer:
         """Baseline: same model and question, no retrieved context (needs Ollama)."""

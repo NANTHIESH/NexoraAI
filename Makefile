@@ -31,6 +31,7 @@ lint:    ## python -m ruff check .
 	$(PY) -m ruff check .
 
 eval:    ## python -m evaluation.eval_rules ; eval_detection ; eval_time
+	$(PY) -m evaluation.eval_retrieval
 	$(PY) -m evaluation.eval_rules
 	$(PY) -m evaluation.eval_detection
 

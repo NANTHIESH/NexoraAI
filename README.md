@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 5 (API, security and UI)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 6 (quality upgrades)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -89,6 +89,13 @@ python -m scripts.smoke_test  # optional: chat answer, refusal, report, subscrip
 `make demo` does everything and starts both servers. Log in by choosing a person in the sidebar; the demo password for all synthetic users is shown in `config.yaml` (`auth.demo_password`; stored bcrypt-hashed). Try different roles: the Owner and Operations Manager see everything, the Project Manager sees documents, tasks and project reports (no money data), employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
 
 Security features: role-based access control, PII redaction (emails, IBANs, phone numbers) before anything is stored in chat history or the audit log, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed: the "Confirm" button only records a decision in the audit log.
+
+## Quality features
+
+- **Hybrid retrieval and reranker:** BM25 keyword search is fused with embedding search (reciprocal rank fusion) and the candidates are re-ordered by a cross-encoder (`cross-encoder/ms-marco-MiniLM-L-6-v2`). Both can be switched off in `config.yaml` (`retrieval.hybrid`, `reranker.enabled`). The comparison on development questions is in `evaluation/results/retrieval_dev_eval.json` (`python -m evaluation.eval_retrieval`).
+- **Conversation memory:** the last 5 turns of a chat session are used to rewrite follow-up questions ("and for the year?") into standalone ones; the UI shows "Understood as: ...".
+- **Outdated-document warning:** answers that rely on a document older than 18 months (`retrieval.outdated_after_days`) or on a superseded version carry a warning.
+- **Voice:** optional offline speech output (pyttsx3) and input (faster-whisper, model `tiny`): `pip install -r requirements-voice.txt`. Without it the rest of the app is unaffected.
 
 ## Data, evaluation, results
 

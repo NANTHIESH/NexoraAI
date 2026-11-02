@@ -26,6 +26,7 @@ from nexora.rag.vectorstore import EmptyIndexError
 from nexora.security import audit
 from nexora.security.auth import AuthError, User, get_user, login, read_token
 from nexora.security.rbac import Permission, PermissionDenied, can, require
+from nexora.voice.stt import MAX_AUDIO_BYTES, transcribe
 from nexora.voice.tts import VoiceUnavailableError, synthesize
 
 Period = Annotated[str, Query(pattern="^(weekly|monthly|yearly)$")]
@@ -199,6 +200,19 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
             raise HTTPException(503, str(exc)) from exc
         audit.log_event(conn, user.employee_id, user.role, "tts", detail=f"chars={len(body.text)}")
         return Response(audio, media_type="audio/wav")
+
+    @app.post("/voice/stt")
+    async def stt(request: Request, conn: Conn, user: Me) -> dict[str, str]:
+        """Speech to text: the request body is the raw audio (WAV, MP3 or OGG)."""
+        audio = await request.body()
+        if len(audio) > MAX_AUDIO_BYTES:
+            raise HTTPException(413, "The audio is too large (limit 10 MB).")
+        try:
+            text = transcribe(audio)
+        except VoiceUnavailableError as exc:
+            raise HTTPException(503, str(exc)) from exc
+        audit.log_event(conn, user.employee_id, user.role, "stt", detail=f"bytes={len(audio)}")
+        return {"text": text}
 
     return app
 

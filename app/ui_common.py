@@ -22,9 +22,9 @@ class ApiError(Exception):
         self.status, self.detail = status, detail
 
 
-def api(method: str, path: str, **kwargs: Any) -> httpx.Response:
+def api(method: str, path: str, headers: dict[str, str] | None = None, **kwargs: Any) -> httpx.Response:
     """Call the Nexora API with the logged-in user's token; raises :class:`ApiError` on failure."""
-    headers = {}
+    headers = dict(headers or {})
     if token := st.session_state.get("token"):
         headers["Authorization"] = f"Bearer {token}"
     try:
@@ -62,7 +62,7 @@ def require_login() -> dict[str, Any]:
             user = st.session_state["user"]
             st.write(f"**{user['name']}**  \n{user['job_title']} ({user['role']})")
             if st.button("Log out"):
-                for key in ("token", "user", "messages"):
+                for key in ("token", "user", "messages", "session_id", "last_audio_id", "rated"):
                     st.session_state.pop(key, None)
                 st.rerun()
         else:

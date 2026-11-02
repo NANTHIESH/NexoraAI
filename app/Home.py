@@ -5,6 +5,7 @@ Run: python -m streamlit run app/Home.py   (or: make ui; the API must be running
 
 from __future__ import annotations
 
+import uuid
 from typing import Any
 
 import streamlit as st
@@ -79,6 +80,8 @@ def render_assistant(msg: dict[str, Any], key: int) -> None:
         st.warning("Instruction-like text was found and removed from: " + ", ".join(msg["injection_flagged"]))
     render_extras(msg)
     render_sources(msg)
+    if msg.get("rewritten_question"):
+        st.caption(f"Understood as: {msg['rewritten_question']}")
     st.caption(f"Intent: {msg['intent']} ({msg['method']})")
     cols = st.columns([1, 1, 2, 6])
     chat_id = msg["chat_id"]
@@ -102,12 +105,34 @@ for i, message in enumerate(st.session_state.get("messages", [])):
 if error := st.session_state.pop("feedback_error", None):
     st.error(error)
 
-if question := st.chat_input("Ask about company rules, reports or subscriptions"):
+def ask(question: str) -> None:
+    """Send a question to the API (with this login session's id so follow-ups work) and show the answer."""
     st.session_state["messages"].append({"role": "user", "text": question})
+    session_id = st.session_state.setdefault("session_id", uuid.uuid4().hex)
     try:
         with st.spinner("Thinking..."):
-            answer = api("POST", "/chat", json={"question": question}).json()
+            answer = api("POST", "/chat", json={"question": question, "session_id": session_id}).json()
     except ApiError as exc:
         answer = {"text": exc.detail, "denied": True, "intent": "error", "method": "-", "chat_id": -1}
     st.session_state["messages"].append({"role": "assistant", **answer})
     st.rerun()
+
+
+with st.expander("Ask by voice (optional)"):
+    recording = st.audio_input("Record your question")
+    if recording is not None and recording.file_id != st.session_state.get("last_audio_id"):
+        st.session_state["last_audio_id"] = recording.file_id
+        try:
+            spoken = api("POST", "/voice/stt", content=recording.getvalue(),
+                         headers={"content-type": "audio/wav"}).json()["text"]
+        except ApiError as exc:
+            st.warning(f"Voice input is not available: {exc.detail}")
+        else:
+            if spoken:
+                st.caption(f"Heard: {spoken}")
+                ask(spoken)
+            else:
+                st.warning("I could not hear anything. Please try again.")
+
+if question := st.chat_input("Ask about company rules, reports or subscriptions"):
+    ask(question)

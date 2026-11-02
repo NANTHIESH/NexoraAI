@@ -209,7 +209,8 @@ def test_history_and_audit_store_redacted_text(client: TestClient, cfg: Config) 
 
 
 def test_every_chat_is_audited_with_intent(client: TestClient, cfg: Config) -> None:
-    client.post("/chat", json={"question": "audit me please"}, headers=auth(client, "pm"))
+    client.post("/chat", json={"question": "audit me please", "session_id": "audit-test"},
+                headers=auth(client, "pm"))
     row = connect(cfg.path("sqlite")).execute(
         "SELECT user_id, role, intent, action FROM audit_log WHERE question = 'audit me please'").fetchone()
     assert (row["user_id"], row["role"], row["intent"], row["action"]) == ("E003", "pm", "knowledge", "chat")

@@ -67,6 +67,16 @@ def download_embedding_model(name: str) -> bool:
     return True
 
 
+def download_reranker(name: str) -> bool:
+    """Download the cross-encoder reranker model into the local cache."""
+    try:
+        from sentence_transformers import CrossEncoder
+    except ImportError:
+        return False
+    CrossEncoder(name)
+    return True
+
+
 def main() -> int:
     """Run all checks and print a status summary."""
     cfg = load_config()

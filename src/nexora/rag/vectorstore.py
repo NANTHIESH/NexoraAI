@@ -24,6 +24,7 @@ class Hit:
 
     chunk: Chunk
     score: float
+    rerank_score: float | None = None  # set when the cross-encoder reranker ordered the results
 
 
 def _to_metadata(c: Chunk) -> dict[str, str | int]:
@@ -62,6 +63,19 @@ class VectorStore:
     def delete_source(self, source: str) -> None:
         """Remove every chunk that came from the file ``source``."""
         self._col.delete(where={"source": source})
+
+    def all_chunks(self) -> list[Chunk]:
+        """Every stored chunk (used to build the keyword index)."""
+        res = self._col.get(include=["documents", "metadatas"])
+        return [_from_row(i, doc, meta)
+                for i, doc, meta in zip(res["ids"], res["documents"], res["metadatas"], strict=True)]
+
+    def embeddings_for(self, chunk_ids: list[str]) -> dict[str, list[float]]:
+        """Stored embeddings of the given chunks."""
+        if not chunk_ids:
+            return {}
+        res = self._col.get(ids=chunk_ids, include=["embeddings"])
+        return {i: list(map(float, e)) for i, e in zip(res["ids"], res["embeddings"], strict=True)}
 
     def search(self, embedding: list[float], k: int, include_superseded: bool) -> list[Hit]:
         """Top-``k`` chunks by cosine similarity; superseded documents only if asked."""

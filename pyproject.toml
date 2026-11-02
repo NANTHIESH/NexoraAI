@@ -30,3 +30,4 @@ select = ["E", "F", "I", "B", "UP"]
 "src/nexora/agents/router.py" = ["E501"]  # prompt prose
 "app/*.py" = ["E501"]  # UI layout lines
 "app/pages/*.py" = ["E501"]
+"src/nexora/agents/memory.py" = ["E501"]  # prompt prose

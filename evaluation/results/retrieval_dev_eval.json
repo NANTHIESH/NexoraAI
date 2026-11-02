@@ -1,0 +1,210 @@
+{
+  "run_at": "2026-11-02T19:28:00+00:00",
+  "note": "Development questions only (tests/fixtures/dev_questions.json); not the evaluation set.",
+  "n_answerable": 28,
+  "n_unanswerable": 10,
+  "min_retrieval_score": 0.35,
+  "modes": {
+    "semantic": {
+      "hit@1": 0.821,
+      "hit@3": 0.929,
+      "hit@5": 1.0,
+      "mrr": 0.883,
+      "answerable_passing_threshold": 1.0,
+      "unanswerable_refused_by_threshold": 0.9,
+      "min_answerable_top_score": 0.382,
+      "max_unanswerable_top_score": 0.404,
+      "not_ranked_first": [
+        {
+          "question": "How do I request time off?",
+          "rank": 2,
+          "got": [
+            "12-client-onboarding-invoicing-sla.docx",
+            "06-leave-policy.docx",
+            "13-sabbatical.md"
+          ]
+        },
+        {
+          "question": "What does SSPL mean for our client work?",
+          "rank": 5,
+          "got": [
+            "12-client-onboarding-invoicing-sla.docx",
+            "07-remote-work-policy-v2.md",
+            "07-remote-work-policy-v2.md"
+          ]
+        },
+        {
+          "question": "Can I use my own phone for company email (BYOD)?",
+          "rank": 5,
+          "got": [
+            "20-employee-privacy-and-email-use.md",
+            "20-employee-privacy-and-email-use.md",
+            "20-employee-privacy-and-email-use.md"
+          ]
+        },
+        {
+          "question": "What happens after five years at the company?",
+          "rank": 3,
+          "got": [
+            "09-expenses-equipment-training.docx",
+            "05-data-protection.pdf",
+            "13-sabbatical.md"
+          ]
+        },
+        {
+          "question": "How fast do we answer a client whose feature is broken?",
+          "rank": 2,
+          "got": [
+            "03-incident-response.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "02-release-and-deployment.pdf"
+          ]
+        }
+      ]
+    },
+    "hybrid": {
+      "hit@1": 0.786,
+      "hit@3": 0.964,
+      "hit@5": 1.0,
+      "mrr": 0.882,
+      "answerable_passing_threshold": 0.964,
+      "unanswerable_refused_by_threshold": 0.9,
+      "min_answerable_top_score": 0.232,
+      "max_unanswerable_top_score": 0.404,
+      "not_ranked_first": [
+        {
+          "question": "Who signs off on purchases over a hundred euros?",
+          "rank": 2,
+          "got": [
+            "12-client-onboarding-invoicing-sla.docx",
+            "09-expenses-equipment-training.docx",
+            "13-sabbatical.md"
+          ]
+        },
+        {
+          "question": "How do I request time off?",
+          "rank": 5,
+          "got": [
+            "13-sabbatical.md",
+            "19-other-protected-absences.md",
+            "18-new-parent-leave.docx"
+          ]
+        },
+        {
+          "question": "What does SSPL mean for our client work?",
+          "rank": 2,
+          "got": [
+            "12-client-onboarding-invoicing-sla.docx",
+            "01-engineering-standards.md",
+            "05-data-protection.pdf"
+          ]
+        },
+        {
+          "question": "Can I use my own phone for company email (BYOD)?",
+          "rank": 2,
+          "got": [
+            "20-employee-privacy-and-email-use.md",
+            "04-information-security.pdf",
+            "20-employee-privacy-and-email-use.md"
+          ]
+        },
+        {
+          "question": "What happens after five years at the company?",
+          "rank": 2,
+          "got": [
+            "09-expenses-equipment-training.docx",
+            "13-sabbatical.md",
+            "05-data-protection.pdf"
+          ]
+        },
+        {
+          "question": "How fast do we answer a client whose feature is broken?",
+          "rank": 2,
+          "got": [
+            "03-incident-response.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "12-client-onboarding-invoicing-sla.docx"
+          ]
+        }
+      ]
+    },
+    "semantic+rerank": {
+      "hit@1": 0.893,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "mrr": 0.94,
+      "answerable_passing_threshold": 1.0,
+      "unanswerable_refused_by_threshold": 0.9,
+      "min_answerable_top_score": 0.373,
+      "max_unanswerable_top_score": 0.404,
+      "not_ranked_first": [
+        {
+          "question": "How do I request time off?",
+          "rank": 3,
+          "got": [
+            "19-other-protected-absences.md",
+            "18-new-parent-leave.docx",
+            "06-leave-policy.docx"
+          ]
+        },
+        {
+          "question": "What is needed before a new client project starts?",
+          "rank": 2,
+          "got": [
+            "05-data-protection.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "05-data-protection.pdf"
+          ]
+        },
+        {
+          "question": "How fast do we answer a client whose feature is broken?",
+          "rank": 2,
+          "got": [
+            "03-incident-response.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "05-data-protection.pdf"
+          ]
+        }
+      ]
+    },
+    "hybrid+rerank": {
+      "hit@1": 0.893,
+      "hit@3": 1.0,
+      "hit@5": 1.0,
+      "mrr": 0.94,
+      "answerable_passing_threshold": 1.0,
+      "unanswerable_refused_by_threshold": 0.9,
+      "min_answerable_top_score": 0.373,
+      "max_unanswerable_top_score": 0.404,
+      "not_ranked_first": [
+        {
+          "question": "How do I request time off?",
+          "rank": 3,
+          "got": [
+            "19-other-protected-absences.md",
+            "18-new-parent-leave.docx",
+            "06-leave-policy.docx"
+          ]
+        },
+        {
+          "question": "What is needed before a new client project starts?",
+          "rank": 2,
+          "got": [
+            "05-data-protection.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "05-data-protection.pdf"
+          ]
+        },
+        {
+          "question": "How fast do we answer a client whose feature is broken?",
+          "rank": 2,
+          "got": [
+            "03-incident-response.pdf",
+            "12-client-onboarding-invoicing-sla.docx",
+            "05-data-protection.pdf"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -8,8 +8,9 @@ from datetime import UTC, datetime
 from typing import Any
 
 from nexora.agents.knowledge import KnowledgeAgent
+from nexora.agents.memory import load_history, rewrite_question
 from nexora.agents.report import build_report, project_view, template_project_summary
-from nexora.agents.router import route
+from nexora.agents.router import keyword_route, route
 from nexora.agents.subscription import analyze_subscriptions
 from nexora.agents.tools import format_eur, parse_period
 from nexora.config import Config, load_config
@@ -43,6 +44,7 @@ class ChatResult:
     report: dict[str, Any] | None = None
     analysis: dict[str, Any] | None = None
     injection_flagged: list[str] = field(default_factory=list)
+    rewritten_question: str | None = None
     chat_id: int | None = None
 
 
@@ -76,9 +78,15 @@ class Orchestrator:
              include_superseded: bool | None = None) -> ChatResult:
         """Answer one message for ``user``; stores history and an audit record."""
         ready = self.llm_ready()
-        chosen = route(question, self.llm if ready else None)
-        result = self._dispatch(conn, user, question, chosen.intent, include_superseded)
+        llm = self.llm if ready else None
+        history = load_history(conn, user.employee_id, session_id, self.cfg.retrieval.history_turns)
+        effective = question
+        if keyword_route(question) != "smalltalk":  # greetings and thanks are never rewritten
+            effective = rewrite_question(question, history, llm)
+        chosen = route(effective, llm)
+        result = self._dispatch(conn, user, effective, chosen.intent, include_superseded)
         result.intent, result.method = chosen.intent, chosen.method
+        result.rewritten_question = effective if effective != question else None
         conn.execute("INSERT INTO chat_history (user_id, session_id, role, content, intent, created_at) "
                      "VALUES (?,?,?,?,?,?)",
                      (user.employee_id, session_id, "user", redact(question), chosen.intent, _now()))
@@ -91,7 +99,8 @@ class Orchestrator:
         action = "chat_denied" if result.denied else ("chat_refused" if result.refused else "chat")
         audit.log_event(conn, user.employee_id, user.role, action, question=question, intent=chosen.intent,
                         sources=sorted({s["source"] for s in result.sources}),
-                        detail=f"method={chosen.method} mode={result.mode}")
+                        detail=f"method={chosen.method} mode={result.mode}"
+                               + (f" rewritten={result.rewritten_question}" if result.rewritten_question else ""))
         return result
 
     # ------------------------------------------------------------------ intents

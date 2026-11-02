@@ -224,3 +224,64 @@ def test_real_model_answers_and_refuses(indexed: Config) -> None:
     ok = assistant.ask("How many vacation days do full-time employees get?")
     assert "25" in ok.text and ok.cited_sources == ["06-leave-policy.docx"]
     assert assistant.ask("What is the capital of France?").refused
+
+
+# ----------------------------------------------------------------- Phase 6: hybrid search and reranker
+def retrieval_config(indexed: Config, hybrid: bool, rerank: bool) -> Config:
+    cfg = Config(copy.deepcopy(dict(indexed)))
+    cfg["retrieval"]["hybrid"] = hybrid
+    cfg["reranker"]["enabled"] = rerank
+    return cfg
+
+
+def test_reciprocal_rank_fusion_prefers_items_ranked_high_in_both_lists() -> None:
+    from nexora.rag.retriever import reciprocal_rank_fusion
+
+    fused = reciprocal_rank_fusion([["a", "b", "c"], ["c", "b", "d"]], k=60)
+    assert set(fused[:2]) == {"b", "c"} and set(fused) == {"a", "b", "c", "d"}
+
+
+def test_tokenizer_drops_stopwords_and_keeps_rare_terms() -> None:
+    from nexora.rag.retriever import tokenize
+
+    assert tokenize("What does SSPL mean for our client work?") == ["sspl", "mean", "client", "work"]
+
+
+def test_hybrid_search_finds_an_exact_term_the_embedding_may_miss(indexed: Config) -> None:
+    res = Retriever(retrieval_config(indexed, hybrid=True, rerank=False)).retrieve("SSPL")
+    assert "01-engineering-standards.md" in [h.chunk.source for h in res.hits]
+    assert all(0.0 <= h.score <= 1.0 for h in res.hits) and res.top_score > 0
+
+
+def test_hybrid_keeps_superseded_documents_out_by_default(indexed: Config) -> None:
+    res = Retriever(retrieval_config(indexed, hybrid=True, rerank=False)).retrieve("remote work core hours")
+    assert res.hits and all(h.chunk.status == "current" for h in res.hits)
+
+
+class ReverseReranker:
+    """Fake cross-encoder that prefers the chunk about sick leave."""
+
+    def score(self, question: str, chunks: list[Chunk]) -> list[float]:
+        return [10.0 if c.section == "Sick Leave" else 0.0 for c in chunks]
+
+
+def test_reranker_reorders_candidates_and_records_its_score(indexed: Config) -> None:
+    cfg = retrieval_config(indexed, hybrid=False, rerank=True)
+    res = Retriever(cfg, reranker=ReverseReranker()).retrieve("How many vacation days do I get?")
+    assert res.hits[0].chunk.section == "Sick Leave" and res.hits[0].rerank_score == 10.0
+    assert len(res.hits) == cfg.retrieval.top_k
+
+
+def test_refusal_threshold_uses_the_best_embedding_score_in_every_mode(indexed: Config) -> None:
+    for hybrid, rerank in [(False, False), (True, False), (True, True)]:
+        retriever = Retriever(retrieval_config(indexed, hybrid, rerank))
+        unrelated = retriever.retrieve("What is the capital of France?")
+        assert unrelated.top_score < indexed.retrieval.min_retrieval_score
+        assert retriever.retrieve("How many vacation days do full-time employees get?").top_score > 0.6
+
+
+def test_real_reranker_puts_the_right_document_first(indexed: Config) -> None:
+    retriever = Retriever(retrieval_config(indexed, hybrid=True, rerank=True))
+    res = retriever.retrieve("Who signs off on purchases over a hundred euros?")
+    assert res.hits[0].chunk.source == "09-expenses-equipment-training.docx"
+    assert res.hits[0].rerank_score is not None
