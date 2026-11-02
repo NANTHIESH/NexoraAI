@@ -99,6 +99,9 @@ def main() -> int:
     print(f"[3/3] Embedding model {cfg.embeddings.model}")
     ok = download_embedding_model(cfg.embeddings.model)
     status["embeddings"] = "ready" if ok else "FAILED"
+    if cfg.reranker.enabled:
+        print(f"[+] Reranker model {cfg.reranker.model}")
+        status["reranker"] = "ready" if download_reranker(cfg.reranker.model) else "FAILED"
 
     print("\nStatus:")
     for key, value in status.items():
