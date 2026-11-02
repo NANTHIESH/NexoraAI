@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 3 (RAG pipeline)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 4 (database and agents)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -67,6 +67,7 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 | `make setup` | `python -m scripts.setup_models` |
 | `make data` | `python -m scripts.generate_data` |
 | `make docs` | `python -m scripts.make_documents` |
+| `make load` | `python -m scripts.load_db` (CSVs into SQLite) |
 | `make index` | `python -m scripts.build_index` |
 | `make api` | `python -m uvicorn nexora.api.main:app --port 8000` |
 | `make ui` | `python -m streamlit run app/Home.py` |

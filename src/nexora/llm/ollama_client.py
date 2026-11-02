@@ -52,12 +52,14 @@ class OllamaClient:
             return False
         return self.model in installed or (":" not in self.model and f"{self.model}:latest" in installed)
 
-    def chat(self, system: str, user: str) -> str:
-        """Single-turn chat; returns the assistant text."""
+    def chat(self, system: str, user: str, json_mode: bool = False) -> str:
+        """Single-turn chat; returns the assistant text (valid JSON when ``json_mode``)."""
         payload = {"model": self.model, "stream": False,
                    "messages": [{"role": "system", "content": system},
                                 {"role": "user", "content": user}],
                    "options": {"temperature": self.temperature, "seed": self.seed}}
+        if json_mode:
+            payload["format"] = "json"
         try:
             resp = httpx.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout)
         except (httpx.ConnectError, httpx.ConnectTimeout) as exc:
