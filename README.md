@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 1 (synthetic data generator)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 2 (company documents)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -66,6 +66,7 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 |---|---|
 | `make setup` | `python -m scripts.setup_models` |
 | `make data` | `python -m scripts.generate_data` |
+| `make docs` | `python -m scripts.make_documents` |
 | `make index` | `python -m scripts.build_index` |
 | `make api` | `python -m uvicorn nexora.api.main:app --port 8000` |
 | `make ui` | `python -m streamlit run app/Home.py` |
@@ -81,6 +82,7 @@ Synthetic data is described in [docs/data-dictionary.md](docs/data-dictionary.md
 ## Data credits
 
 - Task lifecycles are derived from *The Public Jira Dataset* (Montgomery, Lüders, Maalej, MSR 2022), CC BY 4.0: https://zenodo.org/records/15719919
+- Eight of the 20 company documents (code of conduct, complaint policy, sabbatical, new parent leave, other protected absences, drug and alcohol policy, employee privacy, and the structure of the holiday list) are adapted from the public Clef employee handbook. The other twelve are written for Nexora. Please check the handbook's licence before publishing this repository.
 - Background transaction amounts follow statistics of the public PKDD'99 (Berka) bank dataset. This is real, anonymised data, used only as aggregate statistics; no rows are copied.
 
 ## Limitations

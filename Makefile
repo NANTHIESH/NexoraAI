@@ -1,13 +1,16 @@
 # Cross-platform note: on Windows without `make`, run the plain commands shown after each target.
 PY ?= python
 
-.PHONY: setup data load index api ui test lint eval demo
+.PHONY: setup data docs load index api ui test lint eval demo
 
 setup:   ## python -m scripts.setup_models
 	$(PY) -m scripts.setup_models
 
 data:    ## python -m scripts.generate_data
 	$(PY) -m scripts.generate_data
+
+docs:    ## python -m scripts.make_documents
+	$(PY) -m scripts.make_documents
 
 load:    ## python -m scripts.load_db
 	$(PY) -m scripts.load_db
