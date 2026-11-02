@@ -244,4 +244,4 @@ Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai.
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Data and document credits are listed above.
+No licence has been chosen yet, so all rights are reserved by the authors. Data and document credits are listed above.

@@ -7,7 +7,6 @@ name = "nexora-ai"
 version = "0.1.0"
 description = "Local multi-agent RAG business assistant for small businesses."
 requires-python = ">=3.11"
-license = { text = "MIT" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
