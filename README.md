@@ -94,6 +94,20 @@ Log in by choosing a person in the sidebar. All synthetic users share the demo p
 
 Security: role-based access, PII redaction (emails, IBANs, phone numbers) before anything is stored, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed; the "Confirm" button only records a decision in the audit log.
 
+## What you can ask
+
+| Kind | Examples | Who |
+|---|---|---|
+| Company rules (cited, or a refusal) | "How many vacation days do full-time employees get?", "What was the remote work rule before?" | everyone |
+| Spending (computed from the bank data) | "How much did we spend on GitHub last month?", "How much on subscriptions alone?", "How much on travel in March?" | Owner, Operations Manager |
+| Income, profit, rankings | "What was our income in March?", "What is our net profit this year?", "What is our biggest expense?" | Owner, Operations Manager |
+| Tasks | "How many tasks are blocked?", "Which tasks are overdue?" | everyone (employees see only their own) |
+| Headcount | "How many employees do we have?" | everyone |
+| Reports | "Give me the monthly report", "weekly report", "yearly report" | Owner, Operations Manager (project manager: tasks only) |
+| Subscriptions | "Which subscriptions can we cancel?", "Which tools are unused?", "What does Datadog cost?", "How many people use Slack?" | Owner, Operations Manager |
+
+Amounts, counts and facts are always computed from the data with pandas, never written by the language model. A question that matches none of these gets a message listing what is possible, not an unrelated report. "Last month" means the latest month in the data (2026-10). Free-form questions outside this list are not supported.
+
 ## Data
 
 All company data is synthetic and reproducible: the same seed gives byte-identical files. Details are in [docs/data-dictionary.md](docs/data-dictionary.md).

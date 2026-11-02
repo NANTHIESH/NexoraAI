@@ -31,3 +31,4 @@ select = ["E", "F", "I", "B", "UP"]
 "app/*.py" = ["E501"]  # UI layout lines
 "app/pages/*.py" = ["E501"]
 "src/nexora/agents/memory.py" = ["E501"]  # prompt prose
+"src/nexora/agents/lookups.py" = ["E501"]  # regex vocab and user-facing text
