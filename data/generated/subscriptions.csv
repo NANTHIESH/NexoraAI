@@ -1,0 +1,19 @@
+sub_id,tool,category,plan,pricing_model,monthly_cost,seats,billing_day,owner,start_month
+S01,GitHub,dev,Team,fixed,60.00,15,3,Sian Cox,2025-11
+S02,JetBrains,dev,All Products Pack,annual,202.30,7,12,Sian Cox,2025-11
+S03,Docker,dev,Business,fixed,168.00,7,5,Sam Harrison,2025-11
+S04,Postman,dev,Team,fixed,98.00,7,9,Sian Cox,2025-11
+S05,Sentry,dev,Team,fixed,26.00,7,14,Sam Harrison,2025-11
+S06,AWS,cloud,Pay-as-you-go,usage_based,1450.00,7,2,Sam Harrison,2025-11
+S07,Cloudflare,cloud,Pro,fixed,50.00,2,18,Sam Harrison,2025-11
+S08,Datadog,cloud,Pro,fixed,120.00,5,20,Sam Harrison,2025-11
+S09,Slack,collaboration,Pro,fixed,108.75,15,1,Henry Smith,2025-11
+S10,Zoom,collaboration,Pro,fixed,97.93,7,7,Henry Smith,2025-11
+S11,Google Workspace,collaboration,Business Standard,fixed,204.00,15,2,Henry Smith,2025-11
+S12,Notion,collaboration,Plus,fixed,150.00,15,16,Henry Smith,2025-11
+S13,Confluence,collaboration,Standard,fixed,86.25,15,22,Bradley Newman,2026-06
+S14,Jira,planning_design,Standard,fixed,116.25,15,11,Bradley Newman,2025-11
+S15,Linear,planning_design,Standard,fixed,64.00,8,6,Bradley Newman,2026-05
+S16,Figma,planning_design,Professional,fixed,45.00,3,10,Thomas Reed,2025-11
+S17,1Password,security,Business,fixed,119.85,15,15,Henry Smith,2025-11
+S18,Microsoft Teams,collaboration,Teams Essentials,fixed,60.00,15,24,Henry Smith,2026-03

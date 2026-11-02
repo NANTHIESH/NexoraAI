@@ -1,0 +1,251 @@
+task_id,project,type,title,owner,status,priority,story_points,sprint,created,due,completed,weekly_note
+NX-001,LogiDash,story,Add email digest to driver app,E010,done,low,8,S25,2026-10-04,2026-10-30,2026-10-16,Shipped in sprint review
+NX-002,ShopFlow Web,story,Add export to CSV to checkout,E008,blocked,medium,5,S20,2026-07-30,2026-08-12,,Blocked: needs API access
+NX-003,Internal Tools,task,Write tests for CI pipeline,E004,done,low,5,S16,2026-05-31,2026-06-25,2026-06-02,Merged and deployed
+NX-004,FitTrack Mobile,story,Add export to CSV to workout tracker,E004,done,medium,3,S24,2026-09-19,2026-10-11,2026-10-14,
+NX-005,ShopFlow Web,bug,Fix layout glitch in checkout,E004,todo,medium,3,S20,2026-08-05,2026-08-13,,
+NX-006,LogiDash,bug,Fix slow response in driver app,E005,done,medium,2,S05,2025-12-27,2026-01-14,2026-01-09,Shipped in sprint review
+NX-007,ShopFlow Web,bug,Fix crash in product catalog,E011,done,high,1,S09,2026-02-26,2026-03-19,2026-03-05,Merged and deployed
+NX-008,Internal Tools,bug,Fix wrong total in invoice export,E010,done,medium,1,S07,2026-01-24,2026-02-19,2026-02-23,Merged and deployed
+NX-009,LogiDash,bug,Fix wrong total in route map,E013,done,low,3,S06,2026-01-19,2026-02-03,2026-02-15,Merged and deployed
+NX-010,ShopFlow Web,task,Clean up for product catalog,E010,done,medium,5,S16,2026-06-12,2026-07-02,2026-07-08,
+NX-011,LogiDash,bug,Fix slow response in alerts engine,E012,done,high,2,S13,2026-04-20,2026-05-12,2026-05-18,
+NX-012,LogiDash,bug,Fix slow response in route map,E011,in_progress,critical,5,S20,2026-07-30,2026-08-24,,Needs review this week
+NX-013,ShopFlow Web,bug,Fix layout glitch in admin panel,E010,done,low,3,S04,2025-12-18,2025-12-27,2026-01-12,Merged and deployed
+NX-014,ShopFlow Web,bug,Fix slow response in checkout,E010,blocked,medium,3,S25,2026-10-04,2026-10-27,,Blocked: dependency on another team
+NX-015,LogiDash,story,Add audit trail to alerts engine,E014,done,high,3,S13,2026-04-21,2026-05-12,2026-04-23,Merged and deployed
+NX-016,LogiDash,bug,Fix timeout in alerts engine,E010,done,medium,2,S07,2026-02-06,2026-03-01,2026-02-09,
+NX-017,LogiDash,story,Add filter by date to driver app,E011,done,critical,3,S11,2026-04-02,2026-04-24,2026-04-19,Merged and deployed
+NX-018,ShopFlow Web,story,Add dark mode to search,E011,done,medium,5,S09,2026-02-25,2026-03-23,2026-03-04,
+NX-019,LogiDash,story,Add email digest to reports,E009,blocked,medium,13,S22,2026-09-02,2026-09-26,,Blocked: needs API access
+NX-020,Internal Tools,bug,Fix layout glitch in invoice export,E011,done,medium,2,S23,2026-09-06,2026-09-16,2026-10-01,Shipped in sprint review
+NX-021,LogiDash,task,Set up monitoring for alerts engine,E011,done,low,3,S10,2026-03-07,2026-03-31,2026-03-20,Shipped in sprint review
+NX-022,ShopFlow Web,task,Upgrade dependencies for checkout,E014,done,medium,3,S07,2026-02-05,2026-02-13,2026-02-11,
+NX-023,FitTrack Mobile,task,Write tests for workout tracker,E014,todo,medium,2,S19,2026-07-17,2026-08-05,,
+NX-024,FitTrack Mobile,bug,Fix wrong total in push notifications,E010,done,medium,2,S06,2026-01-19,2026-02-07,2026-01-22,Shipped in sprint review
+NX-025,ShopFlow Web,bug,Fix missing validation in search,E004,done,medium,3,S24,2026-09-22,2026-10-11,2026-09-30,
+NX-026,ShopFlow Web,story,Add email digest to order API,E013,done,critical,5,S16,2026-06-07,2026-06-25,2026-06-26,Shipped in sprint review
+NX-027,LogiDash,bug,Fix layout glitch in shipment table,E013,done,medium,1,S21,2026-08-08,2026-08-18,2026-09-03,Shipped in sprint review
+NX-028,FitTrack Mobile,task,Write tests for onboarding,E008,done,medium,1,S03,2025-12-12,2025-12-26,2026-01-10,Merged and deployed
+NX-029,ShopFlow Web,story,Add email digest to order API,E012,done,medium,5,S15,2026-05-16,2026-06-07,2026-06-10,Merged and deployed
+NX-030,FitTrack Mobile,task,Refactor for workout tracker,E008,done,high,5,S19,2026-07-20,2026-08-13,2026-08-05,
+NX-031,ShopFlow Web,story,Add export to CSV to search,E005,todo,critical,13,S03,2025-12-01,2025-12-10,,Planned for next sprint
+NX-032,ShopFlow Web,story,Add email digest to order API,E006,done,medium,3,S04,2025-12-24,2026-01-08,2026-01-23,Shipped in sprint review
+NX-033,Internal Tools,story,Add filter by date to invoice export,E011,blocked,high,5,S25,2026-10-12,2026-11-02,,Blocked: needs API access
+NX-034,ShopFlow Web,story,Add email digest to checkout,E011,done,medium,5,S04,2025-12-21,2026-01-11,2026-01-14,
+NX-035,LogiDash,story,Add audit trail to route map,E011,done,medium,3,S11,2026-03-25,2026-04-04,2026-04-09,Shipped in sprint review
+NX-036,FitTrack Mobile,story,Add filter by date to onboarding,E007,done,medium,3,S07,2026-01-29,2026-02-18,2026-01-31,Shipped in sprint review
+NX-037,ShopFlow Web,bug,Fix slow response in checkout,E004,done,medium,2,S08,2026-02-13,2026-02-28,2026-03-06,Merged and deployed
+NX-038,LogiDash,story,Add dark mode to alerts engine,E009,done,medium,5,S12,2026-04-11,2026-04-22,2026-05-11,
+NX-039,ShopFlow Web,story,Add email digest to cart,E004,done,low,13,S03,2025-12-01,2025-12-25,2025-12-20,Shipped in sprint review
+NX-040,ShopFlow Web,task,Upgrade dependencies for admin panel,E011,done,medium,5,S07,2026-02-04,2026-02-13,2026-02-28,Shipped in sprint review
+NX-041,LogiDash,task,Document for alerts engine,E010,done,medium,5,S03,2025-12-05,2025-12-28,2025-12-18,Shipped in sprint review
+NX-042,ShopFlow Web,story,Add email digest to order API,E007,blocked,medium,3,S25,2026-10-03,2026-10-11,,Blocked: needs API access
+NX-043,ShopFlow Web,task,Document for admin panel,E006,done,medium,1,S03,2025-12-02,2025-12-19,2025-12-22,Shipped in sprint review
+NX-044,FitTrack Mobile,story,Add audit trail to onboarding,E008,done,low,3,S12,2026-04-09,2026-04-20,2026-05-03,Shipped in sprint review
+NX-045,FitTrack Mobile,bug,Fix timeout in push notifications,E004,done,medium,1,S10,2026-03-19,2026-04-14,2026-04-15,Merged and deployed
+NX-046,Internal Tools,bug,Fix layout glitch in CI pipeline,E006,done,medium,5,S17,2026-06-14,2026-07-07,2026-06-23,
+NX-047,LogiDash,story,Add filter by date to shipment table,E011,done,medium,3,S01,2025-11-03,2025-11-26,2025-11-25,Merged and deployed
+NX-048,Internal Tools,task,Upgrade dependencies for time tracking,E010,done,medium,2,S11,2026-03-28,2026-04-09,2026-04-02,
+NX-049,FitTrack Mobile,story,Add bulk edit to sync service,E009,done,medium,3,S14,2026-05-14,2026-06-07,2026-05-27,Merged and deployed
+NX-050,ShopFlow Web,story,Add dark mode to order API,E006,done,medium,13,S06,2026-01-20,2026-02-03,2026-01-23,
+NX-051,LogiDash,bug,Fix timeout in reports,E012,done,medium,1,S10,2026-03-16,2026-04-03,2026-04-04,Merged and deployed
+NX-052,ShopFlow Web,bug,Fix wrong total in admin panel,E006,done,high,1,S14,2026-05-09,2026-05-26,2026-06-05,
+NX-053,LogiDash,story,Add export to CSV to shipment table,E011,in_progress,high,3,S20,2026-08-04,2026-08-27,,Slightly behind estimate
+NX-054,LogiDash,bug,Fix layout glitch in alerts engine,E012,done,high,2,S16,2026-06-09,2026-07-07,2026-06-24,
+NX-055,LogiDash,story,Add audit trail to alerts engine,E014,done,medium,3,S24,2026-09-24,2026-10-16,2026-09-30,
+NX-056,Internal Tools,story,Add email digest to time tracking,E013,done,high,8,S22,2026-08-30,2026-09-16,2026-09-29,
+NX-057,Internal Tools,story,Add bulk edit to time tracking,E009,blocked,medium,5,S22,2026-08-28,2026-09-07,,Blocked: waiting on client sign-off
+NX-058,Internal Tools,story,Add dark mode to wiki,E011,done,low,13,S05,2025-12-28,2026-01-10,2026-01-22,
+NX-059,ShopFlow Web,story,Add bulk edit to order API,E008,done,medium,5,S02,2025-11-23,2025-12-17,2025-11-29,Shipped in sprint review
+NX-060,FitTrack Mobile,task,Document for profile,E009,done,critical,2,S10,2026-03-09,2026-03-17,2026-03-19,Shipped in sprint review
+NX-061,FitTrack Mobile,task,Upgrade dependencies for workout tracker,E007,done,low,1,S13,2026-04-28,2026-05-21,2026-05-06,
+NX-062,Internal Tools,story,Add email digest to invoice export,E010,done,high,13,S16,2026-06-01,2026-06-12,2026-06-11,
+NX-063,ShopFlow Web,story,Add email digest to product catalog,E007,done,high,5,S03,2025-12-03,2025-12-12,2026-01-01,
+NX-064,LogiDash,task,Set up monitoring for route map,E004,done,medium,3,S15,2026-05-29,2026-06-09,2026-06-15,Shipped in sprint review
+NX-065,FitTrack Mobile,bug,Fix slow response in sync service,E009,done,low,3,S04,2025-12-16,2026-01-12,2025-12-21,Shipped in sprint review
+NX-066,ShopFlow Web,bug,Fix layout glitch in cart,E007,done,high,2,S05,2026-01-02,2026-01-10,2026-01-20,
+NX-067,LogiDash,bug,Fix layout glitch in alerts engine,E013,done,high,3,S12,2026-04-04,2026-04-19,2026-04-24,Shipped in sprint review
+NX-068,LogiDash,story,Add email digest to reports,E005,done,low,8,S08,2026-02-15,2026-02-22,2026-03-06,
+NX-069,ShopFlow Web,story,Add export to CSV to checkout,E010,done,high,3,S07,2026-02-05,2026-02-22,2026-02-10,Merged and deployed
+NX-070,FitTrack Mobile,story,Add export to CSV to sync service,E004,done,medium,8,S13,2026-05-01,2026-05-10,2026-05-13,
+NX-071,Internal Tools,bug,Fix layout glitch in wiki,E008,todo,medium,5,S15,2026-05-27,2026-06-23,,
+NX-072,FitTrack Mobile,story,Add audit trail to profile,E010,done,high,3,S01,2025-11-08,2025-11-21,2025-11-20,Merged and deployed
+NX-073,LogiDash,bug,Fix crash in driver app,E013,done,medium,5,S06,2026-01-10,2026-02-07,2026-02-08,Shipped in sprint review
+NX-074,ShopFlow Web,story,Add bulk edit to search,E012,done,medium,3,S22,2026-08-30,2026-09-21,2026-09-11,
+NX-075,LogiDash,bug,Fix wrong total in alerts engine,E012,todo,medium,1,S23,2026-09-08,2026-09-28,,
+NX-076,Internal Tools,task,Set up monitoring for time tracking,E014,done,medium,5,S04,2025-12-25,2026-01-21,2026-01-21,Shipped in sprint review
+NX-077,FitTrack Mobile,story,Add email digest to push notifications,E013,blocked,low,5,S19,2026-07-18,2026-08-12,,Blocked: needs API access
+NX-078,FitTrack Mobile,story,Add email digest to workout tracker,E011,done,low,3,S07,2026-02-01,2026-02-28,2026-03-02,Merged and deployed
+NX-079,Internal Tools,task,Document for wiki,E008,todo,low,1,S22,2026-09-02,2026-09-26,,
+NX-080,ShopFlow Web,bug,Fix missing validation in search,E009,todo,medium,1,S01,2025-11-06,2025-12-03,,
+NX-081,ShopFlow Web,bug,Fix slow response in cart,E014,done,medium,5,S06,2026-01-18,2026-02-08,2026-02-05,Merged and deployed
+NX-082,LogiDash,task,Document for reports,E014,done,medium,1,S02,2025-11-16,2025-12-04,2025-12-10,Shipped in sprint review
+NX-083,ShopFlow Web,bug,Fix timeout in order API,E013,done,high,3,S12,2026-04-08,2026-04-29,2026-04-27,Shipped in sprint review
+NX-084,FitTrack Mobile,story,Add audit trail to push notifications,E014,done,low,3,S20,2026-08-06,2026-09-01,2026-08-18,Shipped in sprint review
+NX-085,LogiDash,task,Refactor for route map,E006,in_progress,low,3,S25,2026-10-12,2026-10-31,,Needs review this week
+NX-086,Internal Tools,story,Add filter by date to time tracking,E009,done,high,5,S22,2026-08-22,2026-09-08,2026-09-04,
+NX-087,LogiDash,bug,Fix slow response in shipment table,E007,done,medium,3,S20,2026-08-06,2026-09-01,2026-08-08,Merged and deployed
+NX-088,LogiDash,story,Add email digest to route map,E004,done,medium,8,S10,2026-03-09,2026-03-23,2026-03-24,Merged and deployed
+NX-089,Internal Tools,story,Add export to CSV to time tracking,E009,done,high,13,S06,2026-01-17,2026-02-06,2026-01-20,Merged and deployed
+NX-090,ShopFlow Web,task,Document for order API,E011,in_progress,low,2,S26,2026-10-20,2026-10-30,,Needs review this week
+NX-091,LogiDash,bug,Fix layout glitch in shipment table,E004,done,medium,5,S04,2025-12-22,2026-01-04,2025-12-24,Shipped in sprint review
+NX-092,FitTrack Mobile,bug,Fix slow response in sync service,E013,done,high,2,S08,2026-02-11,2026-02-19,2026-03-08,Shipped in sprint review
+NX-093,ShopFlow Web,story,Add bulk edit to product catalog,E006,done,medium,13,S23,2026-09-06,2026-10-04,2026-09-20,
+NX-094,Internal Tools,bug,Fix crash in wiki,E005,done,high,5,S02,2025-11-18,2025-12-15,2025-12-03,
+NX-095,FitTrack Mobile,task,Refactor for workout tracker,E004,done,medium,3,S18,2026-07-06,2026-07-25,2026-07-30,Shipped in sprint review
+NX-096,FitTrack Mobile,bug,Fix slow response in workout tracker,E007,in_progress,medium,5,S17,2026-06-25,2026-07-10,,Needs review this week
+NX-097,LogiDash,task,Upgrade dependencies for route map,E007,in_progress,medium,2,S24,2026-10-01,2026-10-24,,Slightly behind estimate
+NX-098,Internal Tools,task,Set up monitoring for wiki,E010,done,high,3,S06,2026-01-15,2026-01-22,2026-02-11,Shipped in sprint review
+NX-099,Internal Tools,bug,Fix missing validation in CI pipeline,E007,in_progress,medium,3,S01,2025-11-02,2025-11-23,,Needs review this week
+NX-100,LogiDash,story,Add audit trail to reports,E009,done,medium,5,S04,2025-12-21,2025-12-31,2025-12-25,Shipped in sprint review
+NX-101,LogiDash,bug,Fix slow response in route map,E010,done,low,1,S04,2025-12-19,2026-01-14,2026-01-17,
+NX-102,FitTrack Mobile,story,Add audit trail to workout tracker,E011,done,medium,3,S07,2026-01-24,2026-02-16,2026-02-15,
+NX-103,FitTrack Mobile,story,Add email digest to workout tracker,E004,blocked,low,8,S04,2025-12-19,2025-12-31,,Blocked: waiting on client sign-off
+NX-104,FitTrack Mobile,bug,Fix timeout in sync service,E013,done,low,3,S01,2025-11-11,2025-12-03,2025-12-09,Shipped in sprint review
+NX-105,LogiDash,story,Add audit trail to shipment table,E008,done,medium,3,S02,2025-11-21,2025-12-18,2025-12-09,Merged and deployed
+NX-106,LogiDash,task,Set up monitoring for reports,E009,done,high,2,S21,2026-08-11,2026-09-05,2026-08-23,Shipped in sprint review
+NX-107,FitTrack Mobile,task,Refactor for sync service,E010,todo,high,2,S26,2026-10-23,2026-11-12,,Planned for next sprint
+NX-108,ShopFlow Web,bug,Fix timeout in admin panel,E010,done,medium,3,S10,2026-03-10,2026-04-05,2026-04-02,Merged and deployed
+NX-109,LogiDash,story,Add filter by date to reports,E014,done,medium,3,S18,2026-06-27,2026-07-25,2026-07-16,Merged and deployed
+NX-110,ShopFlow Web,task,Clean up for cart,E006,in_progress,low,1,S23,2026-09-12,2026-09-24,,Slightly behind estimate
+NX-111,LogiDash,task,Write tests for shipment table,E005,done,high,1,S01,2025-11-11,2025-11-24,2025-11-18,Merged and deployed
+NX-112,LogiDash,bug,Fix wrong total in driver app,E007,done,low,3,S16,2026-06-10,2026-07-06,2026-06-15,Shipped in sprint review
+NX-113,LogiDash,story,Add email digest to shipment table,E014,done,low,5,S19,2026-07-20,2026-08-14,2026-08-06,Shipped in sprint review
+NX-114,ShopFlow Web,story,Add bulk edit to search,E006,done,medium,13,S19,2026-07-18,2026-08-06,2026-08-14,
+NX-115,LogiDash,story,Add email digest to alerts engine,E012,done,high,3,S12,2026-04-07,2026-04-24,2026-04-22,
+NX-116,FitTrack Mobile,story,Add filter by date to onboarding,E011,done,medium,3,S19,2026-07-12,2026-07-31,2026-08-07,Shipped in sprint review
+NX-117,ShopFlow Web,task,Document for order API,E005,done,low,2,S08,2026-02-07,2026-02-22,2026-02-17,Merged and deployed
+NX-118,Internal Tools,story,Add filter by date to wiki,E006,done,low,5,S22,2026-09-02,2026-09-15,2026-09-30,
+NX-119,ShopFlow Web,story,Add filter by date to order API,E005,done,critical,13,S05,2026-01-03,2026-01-17,2026-01-17,
+NX-120,LogiDash,bug,Fix missing validation in driver app,E009,in_progress,medium,2,S23,2026-09-10,2026-09-26,,On track
+NX-121,ShopFlow Web,story,Add audit trail to cart,E012,done,critical,8,S15,2026-05-22,2026-06-02,2026-05-24,Merged and deployed
+NX-122,FitTrack Mobile,task,Clean up for push notifications,E004,done,medium,5,S06,2026-01-14,2026-02-05,2026-01-17,Shipped in sprint review
+NX-123,FitTrack Mobile,task,Write tests for push notifications,E012,done,medium,3,S04,2025-12-21,2026-01-07,2025-12-30,Merged and deployed
+NX-124,Internal Tools,task,Write tests for invoice export,E010,done,critical,1,S11,2026-03-22,2026-03-30,2026-04-17,Merged and deployed
+NX-125,ShopFlow Web,story,Add bulk edit to checkout,E008,done,high,3,S25,2026-10-03,2026-10-20,2026-10-22,Merged and deployed
+NX-126,LogiDash,bug,Fix layout glitch in reports,E011,done,low,3,S04,2025-12-13,2026-01-08,2025-12-20,Shipped in sprint review
+NX-127,ShopFlow Web,story,Add email digest to checkout,E008,todo,high,5,S12,2026-04-10,2026-05-08,,
+NX-128,LogiDash,bug,Fix crash in driver app,E014,done,low,1,S06,2026-01-21,2026-02-09,2026-02-11,Merged and deployed
+NX-129,Internal Tools,task,Refactor for deploy script,E012,in_progress,low,1,S02,2025-11-27,2025-12-10,,On track
+NX-130,ShopFlow Web,bug,Fix slow response in product catalog,E009,done,medium,3,S09,2026-03-06,2026-03-14,2026-03-27,Merged and deployed
+NX-131,LogiDash,bug,Fix slow response in driver app,E007,done,low,2,S16,2026-06-12,2026-07-10,2026-07-07,Shipped in sprint review
+NX-132,ShopFlow Web,bug,Fix slow response in checkout,E014,done,low,3,S26,2026-10-28,2026-11-16,2026-10-31,
+NX-133,Internal Tools,task,Write tests for time tracking,E006,done,critical,1,S22,2026-09-04,2026-09-21,2026-09-27,Merged and deployed
+NX-134,ShopFlow Web,task,Refactor for cart,E013,in_progress,medium,3,S21,2026-08-12,2026-08-25,,Slightly behind estimate
+NX-135,ShopFlow Web,bug,Fix missing validation in order API,E006,done,critical,3,S21,2026-08-13,2026-09-07,2026-08-19,
+NX-136,ShopFlow Web,task,Refactor for admin panel,E008,done,high,5,S14,2026-05-08,2026-05-22,2026-05-29,
+NX-137,ShopFlow Web,story,Add bulk edit to search,E011,done,critical,13,S01,2025-11-03,2025-11-24,2025-12-01,Merged and deployed
+NX-138,ShopFlow Web,task,Write tests for admin panel,E004,done,high,2,S05,2026-01-02,2026-01-21,2026-01-09,Merged and deployed
+NX-139,Internal Tools,story,Add email digest to deploy script,E013,done,medium,5,S13,2026-04-21,2026-05-02,2026-05-14,Merged and deployed
+NX-140,ShopFlow Web,task,Clean up for cart,E012,done,high,1,S04,2025-12-21,2026-01-01,2026-01-07,Merged and deployed
+NX-141,LogiDash,task,Document for driver app,E005,done,medium,5,S18,2026-06-29,2026-07-18,2026-07-14,Shipped in sprint review
+NX-142,ShopFlow Web,task,Set up monitoring for cart,E011,done,low,1,S22,2026-08-23,2026-09-06,2026-09-14,
+NX-143,FitTrack Mobile,task,Write tests for profile,E008,in_progress,high,2,S25,2026-10-11,2026-11-01,,Slightly behind estimate
+NX-144,ShopFlow Web,task,Set up monitoring for cart,E009,done,medium,2,S10,2026-03-18,2026-03-30,2026-04-14,
+NX-145,Internal Tools,task,Write tests for time tracking,E005,done,low,5,S15,2026-05-24,2026-06-14,2026-06-06,Merged and deployed
+NX-146,FitTrack Mobile,story,Add email digest to sync service,E006,done,medium,3,S02,2025-11-15,2025-12-13,2025-11-23,Shipped in sprint review
+NX-147,FitTrack Mobile,bug,Fix wrong total in workout tracker,E006,blocked,high,5,S26,2026-10-18,2026-11-01,,Blocked: needs API access
+NX-148,LogiDash,bug,Fix timeout in shipment table,E012,done,medium,5,S12,2026-04-07,2026-04-20,2026-05-06,Merged and deployed
+NX-149,FitTrack Mobile,bug,Fix slow response in profile,E009,done,high,1,S18,2026-07-01,2026-07-19,2026-07-09,
+NX-150,ShopFlow Web,story,Add export to CSV to search,E011,done,medium,13,S12,2026-04-09,2026-04-16,2026-04-18,Merged and deployed
+NX-151,ShopFlow Web,story,Add audit trail to search,E011,done,medium,5,S02,2025-11-28,2025-12-18,2025-12-12,
+NX-152,ShopFlow Web,story,Add export to CSV to cart,E013,done,low,3,S07,2026-02-05,2026-02-22,2026-02-15,
+NX-153,FitTrack Mobile,task,Document for workout tracker,E012,done,high,1,S23,2026-09-15,2026-10-12,2026-10-06,
+NX-154,ShopFlow Web,story,Add filter by date to search,E013,done,medium,3,S13,2026-04-24,2026-05-08,2026-04-27,Merged and deployed
+NX-155,ShopFlow Web,task,Refactor for admin panel,E007,done,high,3,S19,2026-07-13,2026-08-10,2026-07-22,
+NX-156,ShopFlow Web,bug,Fix wrong total in order API,E004,done,low,5,S14,2026-05-12,2026-06-08,2026-06-06,Merged and deployed
+NX-157,ShopFlow Web,task,Refactor for checkout,E006,done,low,1,S07,2026-01-28,2026-02-18,2026-02-26,
+NX-158,ShopFlow Web,story,Add audit trail to checkout,E007,blocked,medium,5,S17,2026-06-17,2026-07-12,,Blocked: needs API access
+NX-159,LogiDash,story,Add dark mode to reports,E012,done,medium,8,S01,2025-11-14,2025-12-05,2025-11-27,Merged and deployed
+NX-160,ShopFlow Web,bug,Fix crash in search,E013,done,high,2,S07,2026-02-06,2026-03-03,2026-02-14,Merged and deployed
+NX-161,FitTrack Mobile,task,Document for profile,E010,done,high,3,S10,2026-03-20,2026-04-12,2026-04-12,
+NX-162,FitTrack Mobile,task,Write tests for profile,E006,done,critical,3,S13,2026-04-27,2026-05-06,2026-05-25,Shipped in sprint review
+NX-163,LogiDash,bug,Fix slow response in shipment table,E013,done,medium,2,S19,2026-07-20,2026-07-27,2026-08-18,Shipped in sprint review
+NX-164,ShopFlow Web,bug,Fix missing validation in search,E012,done,high,5,S01,2025-11-03,2025-11-24,2025-11-15,Merged and deployed
+NX-165,FitTrack Mobile,task,Write tests for profile,E014,done,high,5,S14,2026-05-10,2026-05-28,2026-05-19,Shipped in sprint review
+NX-166,FitTrack Mobile,task,Refactor for profile,E010,done,medium,1,S18,2026-07-10,2026-07-27,2026-07-16,Merged and deployed
+NX-167,FitTrack Mobile,bug,Fix crash in push notifications,E010,in_progress,low,2,S25,2026-10-11,2026-10-30,,Slightly behind estimate
+NX-168,Internal Tools,bug,Fix slow response in time tracking,E011,done,high,3,S08,2026-02-17,2026-03-03,2026-03-07,
+NX-169,FitTrack Mobile,bug,Fix missing validation in onboarding,E008,done,medium,3,S21,2026-08-18,2026-09-02,2026-09-09,Merged and deployed
+NX-170,LogiDash,story,Add export to CSV to driver app,E004,done,medium,8,S16,2026-06-07,2026-06-23,2026-07-05,Shipped in sprint review
+NX-171,FitTrack Mobile,story,Add email digest to sync service,E006,done,medium,13,S11,2026-03-26,2026-04-08,2026-04-22,
+NX-172,ShopFlow Web,task,Set up monitoring for order API,E012,done,medium,2,S12,2026-04-04,2026-04-21,2026-04-23,Shipped in sprint review
+NX-173,LogiDash,task,Document for alerts engine,E013,done,medium,2,S06,2026-01-23,2026-02-01,2026-02-07,
+NX-174,Internal Tools,story,Add dark mode to wiki,E010,done,medium,5,S18,2026-06-29,2026-07-12,2026-07-04,Shipped in sprint review
+NX-175,ShopFlow Web,bug,Fix crash in admin panel,E008,todo,high,2,S18,2026-07-08,2026-07-20,,
+NX-176,ShopFlow Web,bug,Fix crash in cart,E011,in_progress,high,2,S25,2026-10-06,2026-10-21,,Needs review this week
+NX-177,ShopFlow Web,story,Add dark mode to checkout,E008,blocked,medium,13,S01,2025-11-10,2025-12-05,,Blocked: needs API access
+NX-178,FitTrack Mobile,task,Clean up for onboarding,E013,done,medium,5,S02,2025-11-21,2025-12-09,2025-12-03,Shipped in sprint review
+NX-179,LogiDash,story,Add audit trail to alerts engine,E006,done,critical,13,S06,2026-01-17,2026-02-09,2026-01-22,
+NX-180,ShopFlow Web,bug,Fix missing validation in checkout,E014,done,high,2,S11,2026-03-27,2026-04-21,2026-04-08,
+NX-181,ShopFlow Web,story,Add audit trail to admin panel,E013,done,low,5,S14,2026-05-08,2026-06-04,2026-05-19,
+NX-182,LogiDash,story,Add bulk edit to shipment table,E012,done,high,8,S22,2026-08-26,2026-09-15,2026-09-02,
+NX-183,Internal Tools,bug,Fix wrong total in CI pipeline,E014,done,medium,3,S01,2025-11-01,2025-11-27,2025-11-26,
+NX-184,Internal Tools,bug,Fix layout glitch in CI pipeline,E013,done,medium,3,S08,2026-02-17,2026-03-07,2026-03-01,
+NX-185,ShopFlow Web,task,Document for product catalog,E014,done,medium,3,S20,2026-07-31,2026-08-23,2026-08-14,
+NX-186,LogiDash,story,Add filter by date to route map,E008,todo,low,13,S09,2026-02-26,2026-03-06,,Planned for next sprint
+NX-187,FitTrack Mobile,bug,Fix slow response in workout tracker,E006,todo,high,3,S23,2026-09-10,2026-09-18,,
+NX-188,LogiDash,task,Write tests for reports,E014,done,critical,5,S07,2026-02-06,2026-02-20,2026-02-28,
+NX-189,ShopFlow Web,task,Write tests for order API,E009,todo,medium,3,S19,2026-07-11,2026-07-21,,
+NX-190,ShopFlow Web,story,Add dark mode to admin panel,E014,done,high,13,S04,2025-12-14,2026-01-01,2026-01-01,Merged and deployed
+NX-191,Internal Tools,task,Write tests for invoice export,E014,done,medium,2,S23,2026-09-06,2026-09-24,2026-09-30,
+NX-192,ShopFlow Web,story,Add email digest to order API,E013,done,low,13,S19,2026-07-20,2026-08-17,2026-08-17,Shipped in sprint review
+NX-193,ShopFlow Web,task,Write tests for product catalog,E004,done,high,3,S19,2026-07-13,2026-08-09,2026-08-01,
+NX-194,FitTrack Mobile,bug,Fix wrong total in onboarding,E009,todo,medium,3,S23,2026-09-09,2026-09-23,,Planned for next sprint
+NX-195,LogiDash,task,Write tests for driver app,E013,done,medium,1,S07,2026-02-02,2026-02-22,2026-02-26,Merged and deployed
+NX-196,LogiDash,task,Upgrade dependencies for alerts engine,E011,done,medium,3,S07,2026-02-02,2026-02-12,2026-02-21,
+NX-197,LogiDash,bug,Fix slow response in alerts engine,E010,done,high,1,S05,2026-01-08,2026-02-02,2026-01-11,Shipped in sprint review
+NX-198,LogiDash,story,Add email digest to driver app,E013,done,medium,13,S16,2026-05-31,2026-06-08,2026-06-26,
+NX-199,FitTrack Mobile,bug,Fix slow response in workout tracker,E010,todo,medium,2,S04,2025-12-14,2025-12-30,,
+NX-200,FitTrack Mobile,story,Add export to CSV to onboarding,E012,done,medium,5,S13,2026-04-22,2026-04-29,2026-04-28,Merged and deployed
+NX-201,ShopFlow Web,bug,Fix crash in cart,E011,done,high,3,S14,2026-05-06,2026-05-26,2026-05-14,Merged and deployed
+NX-202,Internal Tools,story,Add bulk edit to invoice export,E005,done,medium,8,S13,2026-04-21,2026-04-29,2026-05-12,Shipped in sprint review
+NX-203,Internal Tools,story,Add email digest to time tracking,E011,done,medium,3,S09,2026-02-26,2026-03-06,2026-03-24,Merged and deployed
+NX-204,LogiDash,bug,Fix crash in alerts engine,E004,done,medium,3,S15,2026-05-26,2026-06-02,2026-06-02,
+NX-205,FitTrack Mobile,task,Document for push notifications,E004,done,medium,1,S18,2026-06-27,2026-07-08,2026-07-09,
+NX-206,LogiDash,bug,Fix slow response in alerts engine,E008,done,high,1,S23,2026-09-16,2026-09-30,2026-09-23,Merged and deployed
+NX-207,ShopFlow Web,story,Add audit trail to order API,E006,done,critical,8,S04,2025-12-15,2026-01-11,2025-12-27,Merged and deployed
+NX-208,Internal Tools,bug,Fix wrong total in time tracking,E006,done,medium,5,S06,2026-01-12,2026-02-06,2026-01-14,
+NX-209,ShopFlow Web,story,Add audit trail to checkout,E008,blocked,low,3,S26,2026-10-18,2026-10-29,,Blocked: waiting on client sign-off
+NX-210,FitTrack Mobile,story,Add audit trail to profile,E007,done,high,3,S06,2026-01-16,2026-01-24,2026-01-24,Merged and deployed
+NX-211,LogiDash,story,Add bulk edit to route map,E004,done,high,5,S23,2026-09-16,2026-10-01,2026-09-20,Merged and deployed
+NX-212,ShopFlow Web,bug,Fix crash in admin panel,E005,done,low,3,S12,2026-04-11,2026-04-18,2026-05-05,Merged and deployed
+NX-213,ShopFlow Web,bug,Fix slow response in search,E007,done,medium,3,S15,2026-05-25,2026-06-21,2026-06-09,
+NX-214,ShopFlow Web,story,Add filter by date to search,E013,done,medium,8,S05,2026-01-01,2026-01-25,2026-01-26,Merged and deployed
+NX-215,FitTrack Mobile,story,Add email digest to onboarding,E004,done,medium,13,S08,2026-02-15,2026-03-12,2026-02-21,
+NX-216,ShopFlow Web,task,Set up monitoring for product catalog,E006,done,medium,2,S17,2026-06-18,2026-06-25,2026-07-12,Shipped in sprint review
+NX-217,ShopFlow Web,task,Document for order API,E009,done,medium,2,S14,2026-05-05,2026-05-13,2026-05-25,Shipped in sprint review
+NX-218,Internal Tools,bug,Fix wrong total in invoice export,E006,done,medium,3,S09,2026-02-22,2026-03-03,2026-02-27,Merged and deployed
+NX-219,ShopFlow Web,story,Add bulk edit to cart,E013,done,medium,3,S03,2025-12-09,2025-12-18,2025-12-28,Merged and deployed
+NX-220,Internal Tools,story,Add filter by date to invoice export,E010,done,medium,13,S19,2026-07-12,2026-07-25,2026-07-14,Shipped in sprint review
+NX-221,FitTrack Mobile,bug,Fix layout glitch in onboarding,E004,done,medium,2,S09,2026-02-24,2026-03-19,2026-02-27,Merged and deployed
+NX-222,ShopFlow Web,story,Add email digest to checkout,E014,todo,high,8,S26,2026-10-23,2026-11-07,,
+NX-223,ShopFlow Web,bug,Fix slow response in search,E008,done,high,1,S15,2026-05-27,2026-06-17,2026-06-02,Shipped in sprint review
+NX-224,Internal Tools,story,Add bulk edit to time tracking,E007,done,high,3,S21,2026-08-10,2026-08-17,2026-09-02,Merged and deployed
+NX-225,LogiDash,task,Upgrade dependencies for route map,E004,done,high,3,S09,2026-02-24,2026-03-22,2026-03-11,
+NX-226,Internal Tools,bug,Fix timeout in invoice export,E012,done,medium,2,S19,2026-07-12,2026-07-28,2026-08-08,
+NX-227,ShopFlow Web,task,Clean up for product catalog,E014,done,high,2,S13,2026-04-28,2026-05-12,2026-05-28,Merged and deployed
+NX-228,LogiDash,task,Write tests for route map,E013,done,critical,5,S09,2026-02-23,2026-03-05,2026-03-01,Merged and deployed
+NX-229,ShopFlow Web,story,Add audit trail to search,E010,todo,low,3,S09,2026-02-21,2026-03-11,,Planned for next sprint
+NX-230,Internal Tools,bug,Fix layout glitch in invoice export,E010,blocked,medium,5,S02,2025-11-24,2025-12-21,,Blocked: needs API access
+NX-231,LogiDash,story,Add bulk edit to driver app,E014,done,high,3,S22,2026-08-28,2026-09-10,2026-09-15,
+NX-232,ShopFlow Web,bug,Fix layout glitch in product catalog,E008,done,high,3,S05,2025-12-30,2026-01-09,2026-01-29,Merged and deployed
+NX-233,ShopFlow Web,bug,Fix timeout in order API,E012,done,medium,3,S11,2026-03-29,2026-04-24,2026-04-03,Shipped in sprint review
+NX-234,ShopFlow Web,bug,Fix slow response in product catalog,E006,done,high,1,S21,2026-08-15,2026-09-03,2026-09-06,Merged and deployed
+NX-235,ShopFlow Web,task,Upgrade dependencies for checkout,E014,todo,medium,1,S15,2026-05-18,2026-06-15,,
+NX-236,Internal Tools,story,Add email digest to time tracking,E013,todo,medium,8,S13,2026-05-01,2026-05-19,,
+NX-237,LogiDash,story,Add export to CSV to route map,E011,todo,low,13,S26,2026-10-19,2026-11-13,,
+NX-238,FitTrack Mobile,story,Add bulk edit to onboarding,E011,in_progress,low,5,S05,2025-12-29,2026-01-08,,On track
+NX-239,LogiDash,task,Upgrade dependencies for reports,E008,done,high,1,S08,2026-02-16,2026-02-23,2026-02-22,Merged and deployed
+NX-240,LogiDash,bug,Fix timeout in alerts engine,E008,done,medium,3,S02,2025-11-22,2025-12-09,2025-12-17,Merged and deployed
+NX-241,ShopFlow Web,task,Refactor for admin panel,E014,done,low,3,S19,2026-07-24,2026-08-02,2026-08-17,Merged and deployed
+NX-242,ShopFlow Web,bug,Fix slow response in admin panel,E009,done,medium,2,S02,2025-11-25,2025-12-15,2025-12-06,Merged and deployed
+NX-243,FitTrack Mobile,story,Add export to CSV to profile,E004,done,high,13,S15,2026-05-28,2026-06-25,2026-06-05,Shipped in sprint review
+NX-244,LogiDash,story,Add export to CSV to alerts engine,E006,done,low,3,S03,2025-11-29,2025-12-23,2025-12-19,Merged and deployed
+NX-245,Internal Tools,story,Add dark mode to invoice export,E012,done,high,5,S21,2026-08-11,2026-08-24,2026-09-05,Shipped in sprint review
+NX-246,LogiDash,story,Add audit trail to alerts engine,E009,done,medium,13,S17,2026-06-13,2026-06-20,2026-06-22,Shipped in sprint review
+NX-247,ShopFlow Web,bug,Fix layout glitch in order API,E014,done,medium,2,S14,2026-05-06,2026-05-31,2026-05-12,Shipped in sprint review
+NX-248,FitTrack Mobile,story,Add bulk edit to sync service,E008,blocked,low,5,S06,2026-01-16,2026-01-24,,Blocked: needs API access
+NX-249,ShopFlow Web,story,Add dark mode to order API,E012,done,medium,8,S02,2025-11-27,2025-12-07,2025-12-07,Merged and deployed
+NX-250,FitTrack Mobile,bug,Fix wrong total in profile,E008,done,high,2,S07,2026-02-05,2026-02-16,2026-02-15,

@@ -4,7 +4,7 @@
 
 Team: Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai. License: MIT.
 
-> Status: **Phase 0 (foundations)**. Sections marked "not run yet" are filled by scripts in later phases.
+> Status: **Phase 1 (synthetic data generator)**. Sections marked "not run yet" are filled by scripts in later phases.
 
 ## What and why
 
@@ -76,7 +76,7 @@ Without Ollama the app runs in extractive mode (best passage plus citation) and 
 
 ## Data, evaluation, results
 
-Not built yet. Results tables will be generated from `evaluation/results/*.json`; until then: **not run yet**.
+Synthetic data is described in [docs/data-dictionary.md](docs/data-dictionary.md) (`make data`, seed 42). Evaluation is not built yet. Results tables will be generated from `evaluation/results/*.json`; until then: **not run yet**.
 
 ## Limitations
 

@@ -1,0 +1,3 @@
+change_id,tool,month,change_type,old_monthly_cost,new_monthly_cost,note
+PC-01,Zoom,2026-02,plan_change,97.93,142.00,Upgraded from Pro to Business for webinar features.
+PC-02,AWS,2026-06,documented_usage_spike,,,Load test and data migration for the LogiDash launch.

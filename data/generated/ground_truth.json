@@ -1,0 +1,312 @@
+{
+  "seed": 42,
+  "errors": [
+    {
+      "id": "GT-01",
+      "type": "duplicate_charge",
+      "tool": "GitHub",
+      "month": "2026-01",
+      "txn_ids": [
+        "T0171",
+        "T0175"
+      ],
+      "expected_detection_key": "duplicate_charge|GitHub|2026-01"
+    },
+    {
+      "id": "GT-02",
+      "type": "duplicate_charge",
+      "tool": "Docker",
+      "month": "2026-09",
+      "txn_ids": [
+        "T0862",
+        "T0874"
+      ],
+      "expected_detection_key": "duplicate_charge|Docker|2026-09"
+    },
+    {
+      "id": "GT-03",
+      "type": "duplicate_charge",
+      "tool": "Cloudflare",
+      "month": "2026-09",
+      "txn_ids": [
+        "T0899",
+        "T0900"
+      ],
+      "expected_detection_key": "duplicate_charge|Cloudflare|2026-09"
+    },
+    {
+      "id": "GT-04",
+      "type": "duplicate_charge",
+      "tool": "Google Workspace",
+      "month": "2026-03",
+      "txn_ids": [
+        "T0327",
+        "T0334"
+      ],
+      "expected_detection_key": "duplicate_charge|Google Workspace|2026-03"
+    },
+    {
+      "id": "GT-05",
+      "type": "duplicate_charge",
+      "tool": "Sentry",
+      "month": "2026-05",
+      "txn_ids": [
+        "T0525",
+        "T0538"
+      ],
+      "expected_detection_key": "duplicate_charge|Sentry|2026-05"
+    },
+    {
+      "id": "GT-06",
+      "type": "price_increase",
+      "tool": "1Password",
+      "month": "2026-05",
+      "txn_ids": [
+        "T0529"
+      ],
+      "expected_detection_key": "price_increase|1Password|2026-05"
+    },
+    {
+      "id": "GT-07",
+      "type": "price_increase",
+      "tool": "Figma",
+      "month": "2026-08",
+      "txn_ids": [
+        "T0787"
+      ],
+      "expected_detection_key": "price_increase|Figma|2026-08"
+    },
+    {
+      "id": "GT-08",
+      "type": "price_increase",
+      "tool": "Postman",
+      "month": "2026-04",
+      "txn_ids": [
+        "T0432"
+      ],
+      "expected_detection_key": "price_increase|Postman|2026-04"
+    },
+    {
+      "id": "GT-09",
+      "type": "price_increase",
+      "tool": "Docker",
+      "month": "2026-01",
+      "txn_ids": [
+        "T0177"
+      ],
+      "expected_detection_key": "price_increase|Docker|2026-01"
+    },
+    {
+      "id": "GT-10",
+      "type": "price_increase",
+      "tool": "Cloudflare",
+      "month": "2026-07",
+      "txn_ids": [
+        "T0726"
+      ],
+      "expected_detection_key": "price_increase|Cloudflare|2026-07"
+    },
+    {
+      "id": "GT-11",
+      "type": "unused_subscription",
+      "tool": "Datadog",
+      "month": "2026-05",
+      "txn_ids": [
+        "T0542",
+        "T0635",
+        "T0733",
+        "T0813",
+        "T0903",
+        "T0992"
+      ],
+      "expected_detection_key": "unused_subscription|Datadog|2026-05"
+    },
+    {
+      "id": "GT-12",
+      "type": "unused_subscription",
+      "tool": "Zoom",
+      "month": "2026-04",
+      "txn_ids": [
+        "T0426",
+        "T0514",
+        "T0601",
+        "T0688",
+        "T0780",
+        "T0869",
+        "T0952"
+      ],
+      "expected_detection_key": "unused_subscription|Zoom|2026-04"
+    },
+    {
+      "id": "GT-13",
+      "type": "unused_subscription",
+      "tool": "Postman",
+      "month": "2026-06",
+      "txn_ids": [
+        "T0606",
+        "T0694",
+        "T0784",
+        "T0875",
+        "T0957"
+      ],
+      "expected_detection_key": "unused_subscription|Postman|2026-06"
+    },
+    {
+      "id": "GT-14",
+      "type": "unused_subscription",
+      "tool": "Sentry",
+      "month": "2026-03",
+      "txn_ids": [
+        "T0362",
+        "T0449",
+        "T0525",
+        "T0618",
+        "T0711",
+        "T0797",
+        "T0889",
+        "T0974"
+      ],
+      "expected_detection_key": "unused_subscription|Sentry|2026-03"
+    },
+    {
+      "id": "GT-15",
+      "type": "unlisted_charge",
+      "tool": "Canva",
+      "month": "2026-03",
+      "txn_ids": [
+        "T0344",
+        "T0429",
+        "T0516",
+        "T0602",
+        "T0691",
+        "T0782",
+        "T0870",
+        "T0955"
+      ],
+      "expected_detection_key": "unlisted_charge|Canva|2026-03"
+    },
+    {
+      "id": "GT-16",
+      "type": "unlisted_charge",
+      "tool": "Dropbox",
+      "month": "2026-02",
+      "txn_ids": [
+        "T0280",
+        "T0359",
+        "T0448",
+        "T0524",
+        "T0617",
+        "T0709",
+        "T0794",
+        "T0886",
+        "T0972"
+      ],
+      "expected_detection_key": "unlisted_charge|Dropbox|2026-02"
+    },
+    {
+      "id": "GT-17",
+      "type": "unlisted_charge",
+      "tool": "Loom",
+      "month": "2026-05",
+      "txn_ids": [
+        "T0540",
+        "T0632",
+        "T0731",
+        "T0808",
+        "T0901",
+        "T0990"
+      ],
+      "expected_detection_key": "unlisted_charge|Loom|2026-05"
+    },
+    {
+      "id": "GT-18",
+      "type": "overlap",
+      "tool": "Jira+Linear",
+      "month": "2026-05",
+      "txn_ids": [
+        "T0513",
+        "T0522"
+      ],
+      "expected_detection_key": "overlap|Jira+Linear|2026-05"
+    },
+    {
+      "id": "GT-19",
+      "type": "overlap",
+      "tool": "Confluence+Notion",
+      "month": "2026-06",
+      "txn_ids": [
+        "T0624",
+        "T0638"
+      ],
+      "expected_detection_key": "overlap|Confluence+Notion|2026-06"
+    },
+    {
+      "id": "GT-20",
+      "type": "overlap",
+      "tool": "Microsoft Teams+Slack",
+      "month": "2026-03",
+      "txn_ids": [
+        "T0324",
+        "T0384"
+      ],
+      "expected_detection_key": "overlap|Microsoft Teams+Slack|2026-03"
+    }
+  ],
+  "decoys": [
+    {
+      "id": "DECOY-usage_spike",
+      "type": "usage_spike",
+      "tool": "AWS",
+      "month": "2026-06",
+      "txn_ids": [
+        "T0586"
+      ],
+      "would_be_false_key": "price_increase|AWS|2026-06",
+      "note": "Usage-based bill rose ~75%; documented in plan_changes.csv."
+    },
+    {
+      "id": "DECOY-annual_renewal",
+      "type": "annual_renewal",
+      "tool": "JetBrains",
+      "month": "2025-12",
+      "txn_ids": [
+        "T0109"
+      ],
+      "would_be_false_key": "price_increase|JetBrains|2025-12",
+      "note": "Annual licence charged once per year."
+    },
+    {
+      "id": "DECOY-recorded_plan_change",
+      "type": "recorded_plan_change",
+      "tool": "Zoom",
+      "month": "2026-02",
+      "txn_ids": [
+        "T0267"
+      ],
+      "would_be_false_key": "price_increase|Zoom|2026-02",
+      "note": "Plan upgrade recorded in plan_changes.csv."
+    },
+    {
+      "id": "DECOY-short_usage_gap",
+      "type": "short_usage_gap",
+      "tool": "Figma",
+      "month": "2026-03",
+      "txn_ids": [
+        "T0349"
+      ],
+      "would_be_false_key": "unused_subscription|Figma|2026-03",
+      "note": "Only 2 months without users (below the 3-month threshold)."
+    },
+    {
+      "id": "DECOY-prorated_seat_addition",
+      "type": "prorated_seat_addition",
+      "tool": "Slack",
+      "month": "2026-06",
+      "txn_ids": [
+        "T0591"
+      ],
+      "would_be_false_key": "duplicate_charge|Slack|2026-06",
+      "note": "Second charge is a small prorated seat add-on, not a duplicate."
+    }
+  ]
+}

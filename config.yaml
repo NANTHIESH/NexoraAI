@@ -1,6 +1,12 @@
 # Nexora AI configuration. Secrets and per-machine overrides go in .env (see .env.example).
 seed: 42
 
+data:
+  start_month: "2025-11"      # first of 12 consecutive months of bank data
+  months: 12
+  opening_balance_eur: 180000
+  task_count: 250
+
 paths:
   documents: data/documents
   generated: data/generated
@@ -35,6 +41,7 @@ retrieval:
 refusal_text: "I could not find this in the company documents. Please ask your manager."
 
 detectors:
+  software_categories: [Software, Cloud]
   duplicate_window_days: 7
   duplicate_amount_tolerance: 0.02
   price_increase_threshold: 0.10

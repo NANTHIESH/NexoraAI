@@ -1,0 +1,16 @@
+employee_id,name,email,role,job_title,department,hire_date,gross_monthly_salary
+E001,Ruth Griffiths,ruth.griffiths@nexora.example,owner,CEO & Owner,Management,2021-11-29,8960.00
+E002,Henry Smith,henry.smith@nexora.example,ops_manager,Office & Operations Manager,Operations,2021-01-14,5200.00
+E003,Bradley Newman,bradley.newman@nexora.example,pm,Project Manager,Delivery,2020-09-18,6180.00
+E004,Sian Cox,sian.cox@nexora.example,employee,Senior Developer,Engineering,2024-01-25,6750.00
+E005,Janice Hopkins,janice.hopkins@nexora.example,employee,Developer,Engineering,2019-04-30,5450.00
+E006,Mary Higgins,mary.higgins@nexora.example,employee,Developer,Engineering,2022-09-11,5540.00
+E007,Colin Lloyd,colin.lloyd@nexora.example,employee,Developer,Engineering,2019-05-21,5540.00
+E008,Leanne Foster,leanne.foster@nexora.example,employee,Developer,Engineering,2022-08-08,5530.00
+E009,Chelsea Ryan,chelsea.ryan@nexora.example,employee,Developer,Engineering,2024-04-27,5480.00
+E010,Francesca Harrison,francesca.harrison@nexora.example,employee,Developer,Engineering,2023-12-23,5550.00
+E011,Samantha Quinn,samantha.quinn@nexora.example,employee,QA Engineer,Quality,2019-02-19,4400.00
+E012,Joan White,joan.white@nexora.example,employee,QA Engineer,Quality,2019-03-08,4410.00
+E013,Thomas Reed,thomas.reed@nexora.example,employee,UI/UX Designer,Design,2019-11-12,4810.00
+E014,Sam Harrison,sam.harrison@nexora.example,employee,DevOps Engineer,Engineering,2020-04-22,6180.00
+E015,Maurice White,maurice.white@nexora.example,employee,Sales Manager,Sales,2019-03-21,5620.00
