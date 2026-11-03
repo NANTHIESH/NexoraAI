@@ -1,0 +1,331 @@
+{
+  "run_at": "2026-11-03T10:27:57+00:00",
+  "model": "llama3.2:3b",
+  "n": 42,
+  "note": "labels are a judgement call by the team; the messages are not in the prompt's few-shot examples",
+  "intent_accuracy": {
+    "keywords": {
+      "k": 23,
+      "n": 42,
+      "share": 0.5476,
+      "ci95": [
+        0.3995,
+        0.6878
+      ]
+    },
+    "model": {
+      "k": 36,
+      "n": 42,
+      "share": 0.8571,
+      "ci95": [
+        0.7216,
+        0.9328
+      ]
+    },
+    "model_as_deployed": {
+      "k": 37,
+      "n": 42,
+      "share": 0.881,
+      "ci95": [
+        0.75,
+        0.9481
+      ]
+    }
+  },
+  "deployed_note": "model_as_deployed = the model's intent plus the same rule overrides the chat applies",
+  "by_tag": {
+    "keywords": {
+      "clean": {
+        "k": 6,
+        "n": 8,
+        "share": 0.75,
+        "ci95": [
+          0.4093,
+          0.9285
+        ]
+      },
+      "follow_up": {
+        "k": 4,
+        "n": 5,
+        "share": 0.8,
+        "ci95": [
+          0.3755,
+          0.9638
+        ]
+      },
+      "informal": {
+        "k": 9,
+        "n": 18,
+        "share": 0.5,
+        "ci95": [
+          0.2903,
+          0.7097
+        ]
+      },
+      "smalltalk": {
+        "k": 4,
+        "n": 4,
+        "share": 1.0,
+        "ci95": [
+          0.5101,
+          1.0
+        ]
+      },
+      "vague": {
+        "k": 0,
+        "n": 7,
+        "share": 0.0,
+        "ci95": [
+          0.0,
+          0.3543
+        ]
+      }
+    },
+    "model": {
+      "clean": {
+        "k": 8,
+        "n": 8,
+        "share": 1.0,
+        "ci95": [
+          0.6756,
+          1.0
+        ]
+      },
+      "follow_up": {
+        "k": 5,
+        "n": 5,
+        "share": 1.0,
+        "ci95": [
+          0.5655,
+          1.0
+        ]
+      },
+      "informal": {
+        "k": 16,
+        "n": 18,
+        "share": 0.8889,
+        "ci95": [
+          0.672,
+          0.969
+        ]
+      },
+      "smalltalk": {
+        "k": 4,
+        "n": 4,
+        "share": 1.0,
+        "ci95": [
+          0.5101,
+          1.0
+        ]
+      },
+      "vague": {
+        "k": 3,
+        "n": 7,
+        "share": 0.4286,
+        "ci95": [
+          0.1582,
+          0.7495
+        ]
+      }
+    }
+  },
+  "paired_model_vs_keywords": {
+    "only_model_right": 13,
+    "only_keywords_right": 0,
+    "p_value": 0.0002
+  },
+  "unneeded_clarifications": {
+    "k": 0,
+    "n": 35,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.0989
+    ]
+  },
+  "vague_messages_clarified": {
+    "k": 3,
+    "n": 7,
+    "share": 0.4286,
+    "ci95": [
+      0.1582,
+      0.7495
+    ]
+  },
+  "rewrite_keeps_names_and_numbers": {
+    "k": 6,
+    "n": 6,
+    "share": 1.0,
+    "ci95": [
+      0.6097,
+      1.0
+    ]
+  },
+  "model_unusable_answers": {
+    "k": 0,
+    "n": 42,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.0838
+    ]
+  },
+  "latency_seconds": {
+    "p50": 0.32,
+    "p95": 0.64
+  },
+  "misses": [
+    {
+      "text": "Can I carry over unused vacation days?",
+      "tag": "clean",
+      "expected": "knowledge",
+      "keyword": "subscription",
+      "model": "knowledge",
+      "rewritten": "Can I carry over unused vacation days?"
+    },
+    {
+      "text": "What does Datadog cost?",
+      "tag": "clean",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Datadog cost?"
+    },
+    {
+      "text": "wats our biggest cost",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is our biggest expense?"
+    },
+    {
+      "text": "any dupe charges on our tools",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Are there any duplicate or unnecessary charges on our tools?"
+    },
+    {
+      "text": "which softwares r we paying 4 but nobody uses",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Which software subscriptions are we paying for but nobody is using?"
+    },
+    {
+      "text": "how much do we pay for zoom per month",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "How much do we pay for Zoom per month?"
+    },
+    {
+      "text": "how many ppl work here",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many people work here?"
+    },
+    {
+      "text": "tasks that r stuck",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "What tasks are currently blocked?"
+    },
+    {
+      "text": "wasted software money?",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Are there any unused or overlapping software subscriptions that we can cancel or optimize?"
+    },
+    {
+      "text": "how much cash did we burn last month",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "How much cash did we burn last month?"
+    },
+    {
+      "text": "what are we paying for jira",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What are we paying for Jira?"
+    },
+    {
+      "text": "and what about Notion?",
+      "tag": "follow_up",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Notion cost?"
+    },
+    {
+      "text": "what is going on with the company?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "smalltalk",
+      "rewritten": "What is going on with the company?"
+    },
+    {
+      "text": "I need some information",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "clarify",
+      "rewritten": "I need some information"
+    },
+    {
+      "text": "can you check something for me",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "clarify",
+      "rewritten": "Can you check something for me?"
+    },
+    {
+      "text": "what should I look at today?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "clarify",
+      "rewritten": "What do you mean by 'what should I look at today'?"
+    },
+    {
+      "text": "is everything ok?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "smalltalk",
+      "rewritten": "Is everything okay?"
+    },
+    {
+      "text": "tell me about costs",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What are our monthly costs?"
+    },
+    {
+      "text": "status?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "smalltalk",
+      "rewritten": "How are you today?"
+    }
+  ]
+}

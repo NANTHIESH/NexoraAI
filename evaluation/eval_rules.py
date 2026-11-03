@@ -136,6 +136,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runs", type=int, default=1, help="repeat everything N times and report variance")
     parser.add_argument("--model", help="Ollama model (default: llm.model in config.yaml)")
+    parser.add_argument("--suffix", default="", help="added to the result file name, e.g. __qwen3-8b")
     parser.add_argument("--semantic-only", action="store_true",
                         help="System A without hybrid search and reranker (the Phase 3 behaviour)")
     args = parser.parse_args()
@@ -172,7 +173,7 @@ def main() -> int:
                        "a": [run["A"][i] for run in runs], "b": [run["B"][i] for run in runs]}
                       for i, q in enumerate(questions)],
     }
-    name = "rules_eval_semantic_only.json" if args.semantic_only else "rules_eval.json"
+    name = f"rules_eval_semantic_only{args.suffix}.json" if args.semantic_only else f"rules_eval{args.suffix}.json"
     path = cfg.path("eval_results") / name
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")

@@ -1,0 +1,608 @@
+{
+  "run_at": "2026-11-03T10:52:38+00:00",
+  "model": "llama3.2:3b",
+  "note": "development questions were used to choose thresholds: read the evaluation set as the independent one",
+  "all": {
+    "questions": 53,
+    "refused_when_answerable": {
+      "k": 6,
+      "n": 40,
+      "share": 0.15,
+      "ci95": [
+        0.0706,
+        0.2907
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 33,
+      "n": 40,
+      "share": 0.825,
+      "ci95": [
+        0.6805,
+        0.9125
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 22,
+      "n": 22,
+      "share": 1.0,
+      "ci95": [
+        0.8513,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 22,
+      "n": 22,
+      "share": 1.0,
+      "ci95": [
+        0.8513,
+        1.0
+      ]
+    }
+  },
+  "evaluation_set": {
+    "questions": 15,
+    "refused_when_answerable": {
+      "k": 1,
+      "n": 12,
+      "share": 0.0833,
+      "ci95": [
+        0.0149,
+        0.3539
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 3,
+      "n": 3,
+      "share": 1.0,
+      "ci95": [
+        0.4385,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 11,
+      "n": 12,
+      "share": 0.9167,
+      "ci95": [
+        0.6461,
+        0.9851
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
+      "ci95": [
+        0.7008,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
+      "ci95": [
+        0.7008,
+        1.0
+      ]
+    }
+  },
+  "development_set": {
+    "questions": 38,
+    "refused_when_answerable": {
+      "k": 5,
+      "n": 28,
+      "share": 0.1786,
+      "ci95": [
+        0.0788,
+        0.3559
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 10,
+      "n": 10,
+      "share": 1.0,
+      "ci95": [
+        0.7225,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 22,
+      "n": 28,
+      "share": 0.7857,
+      "ci95": [
+        0.6046,
+        0.8979
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    }
+  },
+  "accuracy_by_retrieval_score": [
+    {
+      "score_from": 0.0,
+      "score_to": 0.5,
+      "right": {
+        "k": 5,
+        "n": 7,
+        "share": 0.7143,
+        "ci95": [
+          0.3589,
+          0.9178
+        ]
+      }
+    },
+    {
+      "score_from": 0.5,
+      "score_to": 0.65,
+      "right": {
+        "k": 12,
+        "n": 16,
+        "share": 0.75,
+        "ci95": [
+          0.505,
+          0.8982
+        ]
+      }
+    },
+    {
+      "score_from": 0.65,
+      "score_to": 1.0,
+      "right": {
+        "k": 16,
+        "n": 17,
+        "share": 0.9412,
+        "ci95": [
+          0.7302,
+          0.9895
+        ]
+      }
+    }
+  ],
+  "questions": [
+    {
+      "set": "evaluation",
+      "question": "How many vacation days do full-time employees get?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "How many unused vacation days can be carried over?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "How many days per week can I work remotely?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "How many approvals does a pull request need?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "Can we deploy to production on a Friday afternoon?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "What is the annual training budget per developer?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "Who must approve an expense above 100 EUR?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "What must happen before we buy a new software tool?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "After how many days of sick leave is a medical certificate required?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "Can I send customer data to my personal email?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "evaluation",
+      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "On which day of the month are payslips sent?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "evaluation",
+      "question": "What is the annual bonus structure?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "evaluation",
+      "question": "Do we have a four-day work week policy?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "evaluation",
+      "question": "What is the office dress code?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "How much paid time off do permanent staff get each year?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "Who signs off on purchases over a hundred euros?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "When do we receive our salary slips?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "How quickly must someone react when the production service is down?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "Which open source licences are not allowed in client products?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How do I request time off?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "Is two-factor authentication required for company accounts?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What are the support hours for clients?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "Is the office closed at Christmas?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How long do we keep project data after a contract ends?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What is the rule for working from home each week?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What must a pull request pass before it can be merged?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What does SSPL mean for our client work?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "Can I use my own phone for company email (BYOD)?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "Where should API keys and tokens be stored?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What counts as a Sev-2 incident?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How many weeks of paid leave after a child is born?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What happens after five years at the company?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "Who do I contact about harassment at work?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "Is alcohol allowed at office events?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How often are old laptops replaced?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What is needed before a new client project starts?",
+      "answerable": true,
+      "refused": true,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "Does the company monitor employee email?",
+      "answerable": true,
+      "refused": false,
+      "right_document": false
+    },
+    {
+      "set": "development",
+      "question": "Do I get paid time off for jury duty?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What are the rollback rules after a release?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How are data subject requests handled under GDPR?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "How fast do we answer a client whose feature is broken?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "By when must changes to my bank details reach payroll?",
+      "answerable": true,
+      "refused": false,
+      "right_document": true
+    },
+    {
+      "set": "development",
+      "question": "What is the capital of France?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "Can I bring my dog to the office?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "What is the company pension plan?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "How do I cook pasta?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "What stock options do employees get?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "Who won the football match yesterday?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "What is the parking policy?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "What is the wifi password?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "How much revenue did the company make last year?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    },
+    {
+      "set": "development",
+      "question": "Do we offer a gym membership?",
+      "answerable": false,
+      "refused": true,
+      "right_document": null
+    }
+  ],
+  "unsupported_figures": [],
+  "wrong_or_missed": [
+    {
+      "question": "Can I send customer data to my personal email?",
+      "refused": true,
+      "top_score": 0.5841,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "When do we receive our salary slips?",
+      "refused": true,
+      "top_score": 0.5752,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "How do I request time off?",
+      "refused": true,
+      "top_score": 0.3731,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "What does SSPL mean for our client work?",
+      "refused": true,
+      "top_score": 0.3816,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "Can I use my own phone for company email (BYOD)?",
+      "refused": true,
+      "top_score": 0.5403,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "What is needed before a new client project starts?",
+      "refused": true,
+      "top_score": 0.5222,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "Does the company monitor employee email?",
+      "refused": false,
+      "top_score": 0.6523,
+      "answer": "The company may monitor employee email on company devices where the law allows it. [Internet Use, SOURCE 3]"
+    }
+  ]
+}

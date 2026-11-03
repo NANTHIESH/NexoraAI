@@ -1,0 +1,235 @@
+{
+  "run_at": "2026-11-03T10:10:04+00:00",
+  "model": "llama3.2:3b",
+  "note": "development questions were used to choose thresholds: read the evaluation set as the independent one",
+  "all": {
+    "questions": 53,
+    "refused_when_answerable": {
+      "k": 6,
+      "n": 40,
+      "share": 0.15,
+      "ci95": [
+        0.0706,
+        0.2907
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 33,
+      "n": 40,
+      "share": 0.825,
+      "ci95": [
+        0.6805,
+        0.9125
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 22,
+      "n": 22,
+      "share": 1.0,
+      "ci95": [
+        0.8513,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 22,
+      "n": 22,
+      "share": 1.0,
+      "ci95": [
+        0.8513,
+        1.0
+      ]
+    }
+  },
+  "evaluation_set": {
+    "questions": 15,
+    "refused_when_answerable": {
+      "k": 1,
+      "n": 12,
+      "share": 0.0833,
+      "ci95": [
+        0.0149,
+        0.3539
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 3,
+      "n": 3,
+      "share": 1.0,
+      "ci95": [
+        0.4385,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 11,
+      "n": 12,
+      "share": 0.9167,
+      "ci95": [
+        0.6461,
+        0.9851
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
+      "ci95": [
+        0.7008,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
+      "ci95": [
+        0.7008,
+        1.0
+      ]
+    }
+  },
+  "development_set": {
+    "questions": 38,
+    "refused_when_answerable": {
+      "k": 5,
+      "n": 28,
+      "share": 0.1786,
+      "ci95": [
+        0.0788,
+        0.3559
+      ]
+    },
+    "refused_when_unanswerable": {
+      "k": 10,
+      "n": 10,
+      "share": 1.0,
+      "ci95": [
+        0.7225,
+        1.0
+      ]
+    },
+    "answerable_answered_with_right_document": {
+      "k": 22,
+      "n": 28,
+      "share": 0.7857,
+      "ci95": [
+        0.6046,
+        0.8979
+      ]
+    },
+    "answers_with_figures_all_supported": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    },
+    "cited_passage_contains_the_figures": {
+      "k": 13,
+      "n": 13,
+      "share": 1.0,
+      "ci95": [
+        0.7719,
+        1.0
+      ]
+    }
+  },
+  "accuracy_by_retrieval_score": [
+    {
+      "score_from": 0.0,
+      "score_to": 0.5,
+      "right": {
+        "k": 5,
+        "n": 7,
+        "share": 0.7143,
+        "ci95": [
+          0.3589,
+          0.9178
+        ]
+      }
+    },
+    {
+      "score_from": 0.5,
+      "score_to": 0.65,
+      "right": {
+        "k": 12,
+        "n": 16,
+        "share": 0.75,
+        "ci95": [
+          0.505,
+          0.8982
+        ]
+      }
+    },
+    {
+      "score_from": 0.65,
+      "score_to": 1.0,
+      "right": {
+        "k": 16,
+        "n": 17,
+        "share": 0.9412,
+        "ci95": [
+          0.7302,
+          0.9895
+        ]
+      }
+    }
+  ],
+  "unsupported_figures": [],
+  "wrong_or_missed": [
+    {
+      "question": "Can I send customer data to my personal email?",
+      "refused": true,
+      "top_score": 0.5841,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "When do we receive our salary slips?",
+      "refused": true,
+      "top_score": 0.5752,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "How do I request time off?",
+      "refused": true,
+      "top_score": 0.3731,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "What does SSPL mean for our client work?",
+      "refused": true,
+      "top_score": 0.3816,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "Can I use my own phone for company email (BYOD)?",
+      "refused": true,
+      "top_score": 0.5403,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "What is needed before a new client project starts?",
+      "refused": true,
+      "top_score": 0.5222,
+      "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "Does the company monitor employee email?",
+      "refused": false,
+      "top_score": 0.6523,
+      "answer": "The company may monitor employee email on company devices where the law allows it. [Internet Use, SOURCE 3]"
+    }
+  ]
+}

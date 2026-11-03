@@ -1,0 +1,112 @@
+{
+  "run_at": "2026-11-03T10:03:22+00:00",
+  "seeds": [
+    42,
+    7,
+    123
+  ],
+  "note": "ground truth computed with plain pandas on the raw CSV files; the language model is switched off",
+  "overall": {
+    "k": 159,
+    "n": 159,
+    "share": 1.0,
+    "ci95": [
+      0.9764,
+      1.0
+    ]
+  },
+  "negative_control": {
+    "k": 0,
+    "n": 159,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.0236
+    ],
+    "meaning": "answers that also pass with another question's expected numbers (should be ~0)"
+  },
+  "by_type": {
+    "biggest expense": {
+      "k": 3,
+      "n": 3,
+      "share": 1.0,
+      "ci95": [
+        0.4385,
+        1.0
+      ]
+    },
+    "headcount": {
+      "k": 3,
+      "n": 3,
+      "share": 1.0,
+      "ci95": [
+        0.4385,
+        1.0
+      ]
+    },
+    "income and expenses": {
+      "k": 18,
+      "n": 18,
+      "share": 1.0,
+      "ci95": [
+        0.8241,
+        1.0
+      ]
+    },
+    "spending per category": {
+      "k": 36,
+      "n": 36,
+      "share": 1.0,
+      "ci95": [
+        0.9036,
+        1.0
+      ]
+    },
+    "spending per tool": {
+      "k": 36,
+      "n": 36,
+      "share": 1.0,
+      "ci95": [
+        0.9036,
+        1.0
+      ]
+    },
+    "subscription count": {
+      "k": 6,
+      "n": 6,
+      "share": 1.0,
+      "ci95": [
+        0.6097,
+        1.0
+      ]
+    },
+    "subscription price": {
+      "k": 24,
+      "n": 24,
+      "share": 1.0,
+      "ci95": [
+        0.862,
+        1.0
+      ]
+    },
+    "subscription seats": {
+      "k": 24,
+      "n": 24,
+      "share": 1.0,
+      "ci95": [
+        0.862,
+        1.0
+      ]
+    },
+    "task counts": {
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
+      "ci95": [
+        0.7008,
+        1.0
+      ]
+    }
+  },
+  "failures": []
+}

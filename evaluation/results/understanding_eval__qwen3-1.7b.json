@@ -1,0 +1,801 @@
+{
+  "run_at": "2026-11-03T11:08:06+00:00",
+  "model": "qwen3:1.7b",
+  "n": 42,
+  "note": "labels are a judgement call by the team; the messages are not in the prompt's few-shot examples",
+  "intent_accuracy": {
+    "keywords": {
+      "k": 23,
+      "n": 42,
+      "share": 0.5476,
+      "ci95": [
+        0.3995,
+        0.6878
+      ]
+    },
+    "model": {
+      "k": 32,
+      "n": 42,
+      "share": 0.7619,
+      "ci95": [
+        0.6147,
+        0.8652
+      ]
+    },
+    "model_as_deployed": {
+      "k": 32,
+      "n": 42,
+      "share": 0.7619,
+      "ci95": [
+        0.6147,
+        0.8652
+      ]
+    }
+  },
+  "deployed_note": "model_as_deployed = the model's intent plus the same rule overrides the chat applies",
+  "by_tag": {
+    "keywords": {
+      "clean": {
+        "k": 6,
+        "n": 8,
+        "share": 0.75,
+        "ci95": [
+          0.4093,
+          0.9285
+        ]
+      },
+      "follow_up": {
+        "k": 4,
+        "n": 5,
+        "share": 0.8,
+        "ci95": [
+          0.3755,
+          0.9638
+        ]
+      },
+      "informal": {
+        "k": 9,
+        "n": 18,
+        "share": 0.5,
+        "ci95": [
+          0.2903,
+          0.7097
+        ]
+      },
+      "smalltalk": {
+        "k": 4,
+        "n": 4,
+        "share": 1.0,
+        "ci95": [
+          0.5101,
+          1.0
+        ]
+      },
+      "vague": {
+        "k": 0,
+        "n": 7,
+        "share": 0.0,
+        "ci95": [
+          0.0,
+          0.3543
+        ]
+      }
+    },
+    "model": {
+      "clean": {
+        "k": 8,
+        "n": 8,
+        "share": 1.0,
+        "ci95": [
+          0.6756,
+          1.0
+        ]
+      },
+      "follow_up": {
+        "k": 5,
+        "n": 5,
+        "share": 1.0,
+        "ci95": [
+          0.5655,
+          1.0
+        ]
+      },
+      "informal": {
+        "k": 16,
+        "n": 18,
+        "share": 0.8889,
+        "ci95": [
+          0.672,
+          0.969
+        ]
+      },
+      "smalltalk": {
+        "k": 3,
+        "n": 4,
+        "share": 0.75,
+        "ci95": [
+          0.3006,
+          0.9544
+        ]
+      },
+      "vague": {
+        "k": 0,
+        "n": 7,
+        "share": 0.0,
+        "ci95": [
+          0.0,
+          0.3543
+        ]
+      }
+    }
+  },
+  "paired_model_vs_keywords": {
+    "only_model_right": 10,
+    "only_keywords_right": 1,
+    "p_value": 0.0117
+  },
+  "unneeded_clarifications": {
+    "k": 0,
+    "n": 35,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.0989
+    ]
+  },
+  "vague_messages_clarified": {
+    "k": 0,
+    "n": 7,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.3543
+    ]
+  },
+  "rewrite_keeps_names_and_numbers": {
+    "k": 6,
+    "n": 6,
+    "share": 1.0,
+    "ci95": [
+      0.6097,
+      1.0
+    ]
+  },
+  "model_unusable_answers": {
+    "k": 0,
+    "n": 42,
+    "share": 0.0,
+    "ci95": [
+      0.0,
+      0.0838
+    ]
+  },
+  "latency_seconds": {
+    "p50": 0.24,
+    "p95": 0.51
+  },
+  "misses": [
+    {
+      "text": "Can I carry over unused vacation days?",
+      "tag": "clean",
+      "expected": "knowledge",
+      "keyword": "subscription",
+      "model": "knowledge",
+      "rewritten": "Can I carry over unused vacation days?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "What does Datadog cost?",
+      "tag": "clean",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Datadog cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "wats our biggest cost",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is our biggest cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "any dupe charges on our tools",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Are there any duplicate charges on our tools?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "which softwares r we paying 4 but nobody uses",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Which software subscriptions are we paying for but nobody uses?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "how much do we pay for zoom per month",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "How much does Zoom cost per month?",
+      "model_correct": true,
+      "deployed_correct": false
+    },
+    {
+      "text": "how many ppl work here",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many people work here?",
+      "model_correct": false,
+      "deployed_correct": true
+    },
+    {
+      "text": "tasks that r stuck",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What tasks are stuck?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "wasted software money?",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Wasted software money?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "how much cash did we burn last month",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What was the cash burn last month?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what are we paying for jira",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What are we paying for Jira?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "and what about Notion?",
+      "tag": "follow_up",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Notion cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what is going on with the company?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is going on with the company?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "I need some information",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What information do you need?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "can you check something for me",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Can you check something for me?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "what should I look at today?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "What should I look at today?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "is everything ok?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Is everything okay?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "tell me about costs",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "Tell me about the costs",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "status?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is the current status?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "who are you?",
+      "tag": "smalltalk",
+      "expected": "smalltalk",
+      "keyword": "smalltalk",
+      "model": "knowledge",
+      "rewritten": "Who are you?",
+      "model_correct": false,
+      "deployed_correct": false
+    }
+  ],
+  "items": [
+    {
+      "text": "What is our biggest expense?",
+      "tag": "clean",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "What is our biggest expense?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "Which tools are unused?",
+      "tag": "clean",
+      "expected": "subscription",
+      "keyword": "subscription",
+      "model": "subscription",
+      "rewritten": "Which tools are unused?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "How many vacation days do full-time employees get?",
+      "tag": "clean",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many vacation days do full-time employees get?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "How many tasks are overdue?",
+      "tag": "clean",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "How many tasks are overdue?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "Which subscriptions can we cancel?",
+      "tag": "clean",
+      "expected": "subscription",
+      "keyword": "subscription",
+      "model": "subscription",
+      "rewritten": "Which subscriptions can we cancel?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "Can I carry over unused vacation days?",
+      "tag": "clean",
+      "expected": "knowledge",
+      "keyword": "subscription",
+      "model": "knowledge",
+      "rewritten": "Can I carry over unused vacation days?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "What was our income in March?",
+      "tag": "clean",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "What was our income in March?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "What does Datadog cost?",
+      "tag": "clean",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Datadog cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "wats our biggest cost",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is our biggest cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "any dupe charges on our tools",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Are there any duplicate charges on our tools?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "hw many vacation days do i get",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many vacation days do I get?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "who approves expnses over 100 euros",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Who approves expenses over 100 euros?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "monthly numbers pls",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "Give me the monthly numbers",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "which softwares r we paying 4 but nobody uses",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "Which software subscriptions are we paying for but nobody uses?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "how much do we pay for zoom per month",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "How much does Zoom cost per month?",
+      "model_correct": true,
+      "deployed_correct": false
+    },
+    {
+      "text": "is the office shut on christmas",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Is the office shut on Christmas?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "how many ppl work here",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many people work here?",
+      "model_correct": false,
+      "deployed_correct": true
+    },
+    {
+      "text": "sick leave certificate after how many days",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many days does it take to obtain a sick leave certificate?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "whats our profit this year",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "Give me the annual profit report",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "r there tools that overlap",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "subscription",
+      "model": "subscription",
+      "rewritten": "Are there any overlapping tools?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "can we push to prod on friday",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Can we push to prod on Friday?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "tasks that r stuck",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What tasks are stuck?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "wasted software money?",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Wasted software money?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "remote work rule please",
+      "tag": "informal",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "What is the remote work policy?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "how much cash did we burn last month",
+      "tag": "informal",
+      "expected": "report",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What was the cash burn last month?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what are we paying for jira",
+      "tag": "informal",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What are we paying for Jira?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "and what about Notion?",
+      "tag": "follow_up",
+      "expected": "subscription",
+      "keyword": "knowledge",
+      "model": "subscription",
+      "rewritten": "What does Notion cost?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "and part-time?",
+      "tag": "follow_up",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "How many vacation days do part-time employees get?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what about the whole year?",
+      "tag": "follow_up",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "What about the whole year?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "and overdue?",
+      "tag": "follow_up",
+      "expected": "report",
+      "keyword": "report",
+      "model": "report",
+      "rewritten": "How many overdue tasks are there?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what was it before?",
+      "tag": "follow_up",
+      "expected": "knowledge",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "What was the remote work policy before?",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "what is going on with the company?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is going on with the company?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "I need some information",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What information do you need?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "can you check something for me",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Can you check something for me?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "what should I look at today?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "What should I look at today?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "is everything ok?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "knowledge",
+      "rewritten": "Is everything okay?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "tell me about costs",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "Tell me about the costs",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "status?",
+      "tag": "vague",
+      "expected": "clarify",
+      "keyword": "knowledge",
+      "model": "report",
+      "rewritten": "What is the current status?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "hello there",
+      "tag": "smalltalk",
+      "expected": "smalltalk",
+      "keyword": "smalltalk",
+      "model": "smalltalk",
+      "rewritten": "Hello there",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "thanks, that helped",
+      "tag": "smalltalk",
+      "expected": "smalltalk",
+      "keyword": "smalltalk",
+      "model": "smalltalk",
+      "rewritten": "Thanks a lot!",
+      "model_correct": true,
+      "deployed_correct": true
+    },
+    {
+      "text": "who are you?",
+      "tag": "smalltalk",
+      "expected": "smalltalk",
+      "keyword": "smalltalk",
+      "model": "knowledge",
+      "rewritten": "Who are you?",
+      "model_correct": false,
+      "deployed_correct": false
+    },
+    {
+      "text": "good morning",
+      "tag": "smalltalk",
+      "expected": "smalltalk",
+      "keyword": "smalltalk",
+      "model": "smalltalk",
+      "rewritten": "Good morning!",
+      "model_correct": true,
+      "deployed_correct": true
+    }
+  ]
+}

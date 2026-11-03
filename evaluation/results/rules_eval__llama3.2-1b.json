@@ -1,0 +1,640 @@
+{
+  "run_at": "2026-11-03T10:53:17+00:00",
+  "model": "llama3.2:1b",
+  "runs": 1,
+  "settings": {
+    "temperature": 0.0,
+    "seed": 42,
+    "hybrid": true,
+    "reranker": true,
+    "min_retrieval_score": 0.35,
+    "top_k": 5
+  },
+  "system_a": {
+    "description": "Nexora: retrieval + strict prompt + refusal",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 11,
+        "accuracy": 0.733,
+        "answerable_accuracy": 0.75,
+        "citation_accuracy": 0.75,
+        "refusal_accuracy": 0.667,
+        "hallucinations": 1,
+        "wrong_or_missed_answerable": 3,
+        "latency_mean_seconds": 2.09,
+        "latency_median_seconds": 0.88
+      }
+    ]
+  },
+  "system_b": {
+    "description": "Baseline: same model, no documents",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 4,
+        "accuracy": 0.267,
+        "answerable_accuracy": 0.083,
+        "citation_accuracy": null,
+        "refusal_accuracy": 1.0,
+        "hallucinations": 0,
+        "wrong_or_missed_answerable": 11,
+        "latency_mean_seconds": 0.14,
+        "latency_median_seconds": 0.08
+      }
+    ]
+  },
+  "accuracy_across_runs": {
+    "A": {
+      "mean": 0.733,
+      "stdev": 0.0
+    },
+    "B": {
+      "mean": 0.267,
+      "stdev": 0.0
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "How many vacation days do full-time employees get?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "FULL-TIME EMPLOYEES GET 25 DAYS OF PAID VACATION PER YEAR. [Leave Policy: Vacation and Sick Leave, Vacation]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7398,
+          "latency_seconds": 14.58,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "How many unused vacation days can be carried over?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Vacation\nStatus: current, version 3, effective 2026-01-01\nText: Up to 5 unused vacation days can be carried over into the next year and must be used by 31 March. [Leave Policy: Vacation and Sick Leave, Vacation] \n\nSOURCE 2\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: Time spent at a conference or course agreed in advance counts as working time. [Expenses, Equipment and Training Budget, Training Budget] \n\nSOURCE 3\nTitle: New Parent Leave\nSection: Paid Time Off\nStatus: current, version 1, effective 2025-06-01\nText: Paid time off of any kind, including new parent leave, does not accrue additional paid time off in the form of vacation days, sick days or time towards a sabbatical. [New Parent Leave, Paid Time Off] \n\nSOURCE 4\nTitle: Public Holidays 2026\nSection: Company Closing Days\nStatus: current, version 1, effective 2026-01-01\nText: The office is closed on Christmas Eve (Thursday, 24 December) and New Year's Eve (Thursday, 31 December). These two days are paid and do not use vacation days. [Public Holidays 2026, Company Closing Days] \n\nSOURCE 5\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Sick Leave\nStatus: current, version 3, effective 2026-01-01\nText: Sick days do not reduce vacation days. [Leave Policy: Vacation and Sick Leave, Sick Leave]",
+          "cited_sources": [
+            "06-leave-policy.docx",
+            "09-expenses-equipment-training.docx",
+            "18-new-parent-leave.docx",
+            "17-public-holidays-2026.pdf"
+          ],
+          "top_score": 0.6772,
+          "latency_seconds": 2.72,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "How many days per week can I work remotely?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.8103,
+          "latency_seconds": 0.73,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": false,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "How many approvals does a pull request need?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Engineering Standards\nSection: Code Review\nStatus: current, version 3, effective 2026-01-15\nText: - Every pull request needs 2 approvals before merge.\n- Authors cannot approve their own pull request. At least one approver must be a developer who has not worked on the change.\n- The automated build and tests must pass before a merge is possible.\n- Reviewers aim to respond within one working day. Large changes should be split into pull requests that can be reviewed in under an hour.\n\nSOURCE 2\nTitle: Software Tool Purchase Approval\nSection: Steps\nStatus: current, version 2, effective 2026-02-15\nText: 1. Describe the need and the expected benefit in a short request to the Operations Manager.\n2. Check the subscription list: if an existing tool already does the job, use it or explain why a second tool is needed.\n3. Where possible, run a free trial with the people who will use the tool.\n4. Get the owner's approval.\n5. Register the tool in the subscription list with plan, number of seats, monthly cost, billing day and the person responsible.\n6. Only then buy the tool, using the company payment method. Do not use a personal card.\n\nSOURCE 3\nTitle: Expenses, Equipment and Training Budget\nSection: Expenses\nStatus: current, version 2, effective 2026-01-01\nText: - Expenses above 100 EUR need owner approval before you spend the money.\n- Expenses of 100 EUR or less can be approved by your manager.\n- Submit receipts within 30 days of the purchase. Expenses without a receipt are not reimbursed.\n- Approved expenses are reimbursed with the next payroll run.\n\nSOURCE 4\nTitle: Software Tool Purchase Approval\nSection: Rule\nStatus: current, version 2, effective 2026-02-15\nText: A new software tool needs owner approval and must be registered in the subscription list before purchase.\n\nSOURCE 5\nTitle: Software Tool Purchase Approval\nSection: Regular Review\nStatus: current, version 2, effective 2026-02-15\nText: - The Operations Manager reviews the subscription list every quarter.\n- Tools with no active users for 3 months in a row are cancelled unless the owner decides otherwise.\n- Price increases, duplicate charges and charges from tools that are not on the list are investigated.\n\nQuestion: How many approvals does a pull request need?\nAnswer: 2 approvals: at least one approver must be a developer who has not worked on the change.",
+          "cited_sources": [],
+          "top_score": 0.6114,
+          "latency_seconds": 3.87,
+          "passed": false,
+          "has_facts": true,
+          "cited_correct_document": false,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Can we deploy to production on a Friday afternoon?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Release and Deployment Rules\nSection: Deployment Windows\nStatus: current, version 2, effective 2026-02-01\nText: - Production deployments are allowed on Monday to Thursday during working hours.\n- On Fridays, deployments are allowed only before 14:00. No production deployments on Fridays after 14:00.\n- Deployments are also avoided on the working day before a public holiday, after 14:00.\n- The person who deploys stays available for at least two hours afterwards. [Release and Deployment Rules, Deployment Windows]",
+          "cited_sources": [
+            "02-release-and-deployment.pdf"
+          ],
+          "top_score": 0.7679,
+          "latency_seconds": 1.01,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What is the annual training budget per developer?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: - The training budget is 1,000 EUR per developer per year.\nAnswer: The annual training budget per developer is 1,000 EUR. [Expenses, Equipment and Training Budget, Training Budget]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.785,
+          "latency_seconds": 0.82,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Who must approve an expense above 100 EUR?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: Your manager [Manager's Name] must approve expenses above 100 EUR. [Expenses, Equipment and Training Budget, Training Budget] \n\nSOURCE 2\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: Your manager [Manager's Name] must approve expenses above 100 EUR. [Expenses, Equipment and Training Budget, Training Budget] \n\nSOURCE 3\nTitle: Payroll and Salary Payments\nSection: Related Payments\nStatus: current, version 2, effective 2025-09-01\nText: The next payroll run is required to pay approved expense claims. [Payroll and Salary Payments, Related Payments] \n\nSOURCE 4\nTitle: Engineering Standards\nSection: Code Review\nStatus: current, version 3, effective 2026-01-15\nText: Your manager [Manager's Name] must approve expenses above 100 EUR. [Engineering Standards, Code Review] \n\nSOURCE 5\nTitle: Software Tool Purchase Approval\nSection: Rule\nStatus: current, version 2, effective 2026-02-15\nText: The owner of the software tool must register it in the subscription list before purchase. [Software Tool Purchase Approval, Rule]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx",
+            "10-payroll.docx",
+            "01-engineering-standards.md",
+            "11-tool-purchase-approval.docx"
+          ],
+          "top_score": 0.6925,
+          "latency_seconds": 2.39,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What must happen before we buy a new software tool?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Software Tool Purchase Approval\nSection: Rule\nStatus: current, version 2, effective 2026-02-15\nText: A new software tool needs owner approval and must be registered in the subscription list before purchase. [Software Tool Purchase Approval, Rule]",
+          "cited_sources": [
+            "11-tool-purchase-approval.docx"
+          ],
+          "top_score": 0.5828,
+          "latency_seconds": 0.66,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "Before we can consider buying a new software tool, I need to check if we have a clear understanding of our current software landscape and requirements. Can you please provide me with some information about the current software tools we use, such as:\n\n* The number of users\n* The types of tasks we perform with the software\n* Any specific features or functionalities we need\n* The budget for the new software tool\n\nThis will help me provide a more informed answer about what we need to consider before making a purchase decision.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.71,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": false,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "question": "After how many days of sick leave is a medical certificate required?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Sick Leave\nStatus: current, version 3, effective 2026-01-01\nText: - Notify your manager before 09:30 on day one of sick leave by phone or chat.\n- A medical certificate is required after 3 consecutive days of sick leave and must be given to the Operations Manager.\n- Sick days do not reduce vacation days.\n- Please do not work while you are sick. If you are well enough to work from home, agree this with your manager first.\n\n[Leave Policy: Vacation and Sick Leave, Sick Leave]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7318,
+          "latency_seconds": 1.16,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Can I send customer data to my personal email?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.5841,
+          "latency_seconds": 0.27,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": false,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "I don't have that information. Our company has strict data protection policies in place, and we only share customer data with authorized third-party vendors and partners. Sending customer data to a personal email is not in line with our company's data protection policies.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.36,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Incident Response and On-Call\nSection: Severity Levels\nStatus: current, version 2, effective 2026-01-20\nText: - Sev-1: a client-facing production system is down or data is at risk. A Sev-1 incident must be acknowledged within 15 minutes. [Incident Response and On-Call, Sev-1]",
+          "cited_sources": [
+            "03-incident-response.pdf"
+          ],
+          "top_score": 0.7431,
+          "latency_seconds": 0.83,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "On which day of the month are payslips sent?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "SOURCE 1\nTitle: Payroll and Salary Payments\nSection: Payment Date\nStatus: current, version 2, effective 2025-09-01\nText: - Salaries are paid on the 28th of each month. If the 28th is not a working day, salaries are paid on the last working day before it.\nAnswer: The 28th of each month. [Payroll and Salary Payments, Payment Date]",
+          "cited_sources": [
+            "10-payroll.docx"
+          ],
+          "top_score": 0.7404,
+          "latency_seconds": 0.88,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": "What is the annual bonus structure?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.2999,
+          "latency_seconds": 0.21,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.07,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "Do we have a four-day work week policy?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "SOURCE 1\nTitle: Remote Work Policy\nSection: Remote Days\nStatus: current, version 2, effective 2026-03-01\nText: - Employees may work remotely up to 3 days per week.\n- The remaining days are worked at the office or at the client site when required.\n- Remote days are agreed with your manager at the start of each week so that the team knows who is where.\n\n[Remote Work Policy, Remote Days]",
+          "cited_sources": [
+            "07-remote-work-policy-v2.md"
+          ],
+          "top_score": 0.5829,
+          "latency_seconds": 0.98,
+          "passed": false,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": false,
+          "hallucination": true
+        }
+      ],
+      "b": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "question": "What is the office dress code?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.3023,
+          "latency_seconds": 0.29,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.07,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    }
+  ]
+}

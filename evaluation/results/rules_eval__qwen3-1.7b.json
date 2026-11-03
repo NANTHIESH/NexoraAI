@@ -1,0 +1,636 @@
+{
+  "run_at": "2026-11-03T11:07:48+00:00",
+  "model": "qwen3:1.7b",
+  "runs": 1,
+  "settings": {
+    "temperature": 0.0,
+    "seed": 42,
+    "hybrid": true,
+    "reranker": true,
+    "min_retrieval_score": 0.35,
+    "top_k": 5
+  },
+  "system_a": {
+    "description": "Nexora: retrieval + strict prompt + refusal",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 12,
+        "accuracy": 0.8,
+        "answerable_accuracy": 0.75,
+        "citation_accuracy": 0.75,
+        "refusal_accuracy": 1.0,
+        "hallucinations": 0,
+        "wrong_or_missed_answerable": 3,
+        "latency_mean_seconds": 1.92,
+        "latency_median_seconds": 0.51
+      }
+    ]
+  },
+  "system_b": {
+    "description": "Baseline: same model, no documents",
+    "runs": [
+      {
+        "questions": 15,
+        "passed": 3,
+        "accuracy": 0.2,
+        "answerable_accuracy": 0.0,
+        "citation_accuracy": null,
+        "refusal_accuracy": 1.0,
+        "hallucinations": 0,
+        "wrong_or_missed_answerable": 12,
+        "latency_mean_seconds": 0.21,
+        "latency_median_seconds": 0.1
+      }
+    ]
+  },
+  "accuracy_across_runs": {
+    "A": {
+      "mean": 0.8,
+      "stdev": 0.0
+    },
+    "B": {
+      "mean": 0.2,
+      "stdev": 0.0
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "How many vacation days do full-time employees get?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "Full-time employees get 25 days of paid vacation per year. [Leave Policy: Vacation and Sick Leave, Vacation]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7398,
+          "latency_seconds": 22.0,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 1,
+          "question": "How many vacation days do full-time employees get?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.1,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "How many unused vacation days can be carried over?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "The answer is: Up to 5 unused vacation days can be carried over into the next year. [Expenses, Equipment and Training Budget, Training Budget]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.6772,
+          "latency_seconds": 0.58,
+          "passed": false,
+          "has_facts": true,
+          "cited_correct_document": false,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 2,
+          "question": "How many unused vacation days can be carried over?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "How many days per week can I work remotely?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "The answer is not found in the provided sources. [Document title, Section]",
+          "cited_sources": [],
+          "top_score": 0.8103,
+          "latency_seconds": 0.46,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": false,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 3,
+          "question": "How many days per week can I work remotely?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.11,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "How many approvals does a pull request need?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "The pull request needs 2 approvals before merge. [Engineering Standards, Code Review]",
+          "cited_sources": [
+            "01-engineering-standards.md"
+          ],
+          "top_score": 0.6114,
+          "latency_seconds": 0.43,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 4,
+          "question": "How many approvals does a pull request need?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Can we deploy to production on a Friday afternoon?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "The deployment of production changes on Fridays after 14:00 is not allowed. [Release and Deployment Rules, Deployment Windows]",
+          "cited_sources": [
+            "02-release-and-deployment.pdf"
+          ],
+          "top_score": 0.7679,
+          "latency_seconds": 0.49,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 5,
+          "question": "Can we deploy to production on a Friday afternoon?",
+          "answerable": true,
+          "answer": "I don't have information about specific production deployment schedules or policies at Nexora Software Ltd. Please consult the company's official documentation or contact the IT department for accurate details.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.29,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "question": "What is the annual training budget per developer?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "The annual training budget per developer is 1,000 EUR. [Expenses, Equipment and Training Budget, Training Budget]",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.785,
+          "latency_seconds": 0.51,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 6,
+          "question": "What is the annual training budget per developer?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.1,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Who must approve an expense above 100 EUR?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "The person who must approve an expense above 100 EUR is the owner [Expenses, Equipment and Training Budget, Training Budget].",
+          "cited_sources": [
+            "09-expenses-equipment-training.docx"
+          ],
+          "top_score": 0.6925,
+          "latency_seconds": 0.59,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 7,
+          "question": "Who must approve an expense above 100 EUR?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.1,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "question": "What must happen before we buy a new software tool?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "Before purchasing a new software tool, the owner must approve the request and register the tool in the subscription list with plan, number of seats, monthly cost, billing day, and the person responsible. [Software Tool Purchase Approval, Steps]",
+          "cited_sources": [
+            "11-tool-purchase-approval.docx"
+          ],
+          "top_score": 0.5828,
+          "latency_seconds": 0.62,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 8,
+          "question": "What must happen before we buy a new software tool?",
+          "answerable": true,
+          "answer": "I don't have specific information about the company's rules regarding purchasing new software tools. However, generally, before buying a new software tool, the following steps might occur:\n\n1. **Requesting the Purchase**: An employee or manager would typically request the purchase of a new software tool.\n2. **Approval Process**: The request would go through an approval process, possibly involving management or a procurement team.\n3. **Evaluation**: The software tool would be evaluated based on its functionality, cost, compatibility, and other relevant factors.\n4. **Purchase Decision**: After evaluation, a purchase decision is made.\n5. **Implementation**: The software is then implemented, possibly with training and setup.\n\nIf you have specific company rules or policies in mind, please provide them, and I can give you a more accurate answer.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 1.11,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "question": "After how many days of sick leave is a medical certificate required?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "The medical certificate is required after 3 consecutive days of sick leave. [Leave Policy: Vacation and Sick Leave, Sick Leave]",
+          "cited_sources": [
+            "06-leave-policy.docx"
+          ],
+          "top_score": 0.7318,
+          "latency_seconds": 0.52,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 9,
+          "question": "After how many days of sick leave is a medical certificate required?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.12,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Can I send customer data to my personal email?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "Sending customer data to personal email is not allowed. [Employee Privacy and Email Use, Company Email and Internet]",
+          "cited_sources": [
+            "20-employee-privacy-and-email-use.md"
+          ],
+          "top_score": 0.5841,
+          "latency_seconds": 0.45,
+          "passed": false,
+          "has_facts": true,
+          "cited_correct_document": false,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 10,
+          "question": "Can I send customer data to my personal email?",
+          "answerable": true,
+          "answer": "I don't have specific company rules regarding the transmission of customer data to personal email accounts. However, it is generally considered a violation of company policies and data protection laws to send customer data to personal email addresses. You should always follow the company's guidelines and data protection policies when handling customer information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.43,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": false,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "The Sev-1 incident must be acknowledged within 15 minutes. [Incident Response and On-Call, Severity Levels]",
+          "cited_sources": [
+            "03-incident-response.pdf"
+          ],
+          "top_score": 0.7431,
+          "latency_seconds": 0.54,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 11,
+          "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "question": "On which day of the month are payslips sent?",
+      "answerable": true,
+      "a": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "Payslips are sent on the 28th of each month through the payroll portal. [Payroll and Salary Payments, Payment Date]",
+          "cited_sources": [
+            "10-payroll.docx"
+          ],
+          "top_score": 0.7404,
+          "latency_seconds": 0.52,
+          "passed": true,
+          "has_facts": true,
+          "cited_correct_document": true,
+          "refused": false,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 12,
+          "question": "On which day of the month are payslips sent?",
+          "answerable": true,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.09,
+          "passed": false,
+          "has_facts": false,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "question": "What is the annual bonus structure?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.2999,
+          "latency_seconds": 0.23,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 13,
+          "question": "What is the annual bonus structure?",
+          "answerable": false,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.07,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "question": "Do we have a four-day work week policy?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.5829,
+          "latency_seconds": 0.44,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 14,
+          "question": "Do we have a four-day work week policy?",
+          "answerable": false,
+          "answer": "I don't have that information. Please consult the company's official policy document or contact the human resources department for the most accurate and up-to-date details.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.25,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "question": "What is the office dress code?",
+      "answerable": false,
+      "a": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I could not find this in the company documents. Please ask your manager.",
+          "cited_sources": [],
+          "top_score": 0.3023,
+          "latency_seconds": 0.36,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ],
+      "b": [
+        {
+          "id": 15,
+          "question": "What is the office dress code?",
+          "answerable": false,
+          "answer": "I don't have that information.",
+          "cited_sources": [],
+          "top_score": 0.0,
+          "latency_seconds": 0.08,
+          "passed": true,
+          "has_facts": null,
+          "cited_correct_document": null,
+          "refused": true,
+          "hallucination": false
+        }
+      ]
+    }
+  ]
+}

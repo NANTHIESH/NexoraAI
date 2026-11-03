@@ -133,8 +133,206 @@ def render_satisfaction(results: Path) -> str:
             f"**{data['satisfaction']:.1%}** (target {data['target']:.0%}, {data['status']}).")
 
 
+def _ci(share: dict[str, Any]) -> str:
+    low, high = share["ci95"]
+    return f"{share['k']}/{share['n']} = {share['share']:.1%} ({low:.0%} to {high:.0%})"
+
+
+def render_statistics(results: Path) -> str:
+    """Confidence intervals and paired tests on the answer evaluation."""
+    data = _load(results, "statistics.json")
+    if data is None:
+        return NOT_RUN
+    names = {"nexora": "Nexora (hybrid + reranker)", "nexora_semantic_only": "Nexora, semantic-only retrieval",
+             "baseline_no_documents": "Baseline: same model, no documents"}
+    rows = [[names.get(k, k), _ci(v)] for k, v in data["answers"].items()]
+    paired = [[f"{names.get(p['a'], p['a'])} vs {names.get(p['b'], p['b'])}", str(p["only_a_right"]),
+               str(p["only_b_right"]), f"{p['p_value']:.3f}",
+               "yes" if p["conclusive"] else "**no**"] for p in data["paired"]]
+    check = data["target_check"]
+    lat = data["latency_seconds"]
+    verdict = "proven" if check["proven"] else "not proven"
+    text = (
+        "Accuracy on the 15 evaluation questions with a 95% Wilson interval "
+        "(the plausible range of the true score).\n\n"
+        + _table(["System", "Right / questions = accuracy (95% interval)"], rows)
+        + f"\n\nThe 90% target is **{verdict}**: the interval's lower end is {check['ci_lower_bound']:.0%}. "
+          "With 15 questions only a large gap can be shown.\n\n"
+        + "Paired comparison on the same questions (exact McNemar test; only questions where the two systems "
+          "disagree count):\n\n"
+        + _table(["Comparison", "Only first right", "Only second right", "p-value", "Conclusive (p < 0.05)"], paired)
+        + f"\n\nLatency of answers (Nexora, all runs): median {lat['p50']} s, 95th percentile {lat['p95']} s "
+          "(includes the slow first call that loads the models).")
+    if "detection_recall_all_seeds" in data:
+        text += "\n\nDetection recall over all seeds: " + _ci(data["detection_recall_all_seeds"]) + "."
+    return text
+
+
+def render_understanding(results: Path) -> str:
+    """Evaluation D: model-based understanding vs. keyword routing."""
+    data = _load(results, "understanding_eval.json")
+    if data is None:
+        return NOT_RUN
+    acc = data["intent_accuracy"]
+    rows = [["Keyword router (rules only)", _ci(acc["keywords"])], ["Model (llama)", _ci(acc["model"])],
+            ["Model as deployed (plus the exact-lookup rules)", _ci(acc["model_as_deployed"])]]
+    tags = sorted(data["by_tag"]["model"])
+    by_tag = [[t, _ci(data["by_tag"]["keywords"][t]), _ci(data["by_tag"]["model"][t])] for t in tags]
+    p = data["paired_model_vs_keywords"]
+    lat = data["latency_seconds"]
+    return (
+        f"Model `{data['model']}`, {data['n']} labelled messages (typos, slang, follow-ups, vague messages), run on "
+        f"{data['run_at'][:10]}. Labels are a judgement call by the team; the messages are not in the prompt's "
+        "few-shot examples.\n\n"
+        + _table(["Intent classification", "Right / messages = accuracy (95% interval)"], rows)
+        + f"\n\nPaired test, model vs keywords: the model alone was right on {p['only_model_right']} messages where "
+          f"the keywords were wrong and wrong on {p['only_keywords_right']} where they were right "
+          f"(p = {p['p_value']:.4f}).\n\n"
+        + _table(["Kind of message", "Keywords", "Model"], by_tag)
+        + f"\n\nClarifying questions asked on clear messages: {_ci(data['unneeded_clarifications'])} "
+          "(lower is better). "
+          f"Vague messages that got a clarifying question: {_ci(data['vague_messages_clarified'])}. "
+          f"Rewritten questions that kept every required name and number: "
+          f"{_ci(data['rewrite_keeps_names_and_numbers'])}. Model latency: median {lat['p50']} s, "
+          f"95th percentile {lat['p95']} s.")
+
+
+def render_data_answers(results: Path) -> str:
+    """Evaluation E: computed answers against an independent ground truth."""
+    data = _load(results, "data_answers_eval.json")
+    if data is None:
+        return NOT_RUN
+    rows = [[name.capitalize(), _ci(v)] for name, v in data["by_type"].items()]
+    nc = data["negative_control"]
+    return (f"Seeds {', '.join(map(str, data['seeds']))}; ground truth computed with plain pandas on the raw CSV "
+            "files, language model switched off. An answer is right only if it contains every expected number.\n\n"
+            + _table(["Question type", "Right / questions = accuracy (95% interval)"], rows)
+            + f"\n\nOverall: **{_ci(data['overall'])}**. Negative control: {nc['k']} of {nc['n']} answers also "
+              "satisfy the expectations of a different question (the check is not lenient).")
+
+
+def render_safety(results: Path) -> str:
+    """Evaluation F: attack success rate per group."""
+    data = _load(results, "safety_eval.json")
+    if data is None:
+        return NOT_RUN
+    rows = [[name, _ci(v)] for name, v in data["groups"].items()]
+    findings = [f"- **{a['group']}**: {a['attack']}" for a in data["successful_attacks"]
+                if "paraphrased to avoid" not in a["group"]]
+    paraphrased = sum(1 for a in data["successful_attacks"] if "paraphrased to avoid" in a["group"])
+    note = data["note"][:1].upper() + data["note"][1:]
+    text = ("Each row is the share of attacks that **succeeded** (0% is the goal). " + note + ".\n\n"
+            + _table(["Attack group", "Attacks that succeeded (95% interval)"], rows))
+    if findings or paraphrased:
+        text += "\n\nAttacks that got through (findings, not hidden):\n\n" + "\n".join(findings)
+        if paraphrased:
+            text += (f"\n- **{paraphrased} paraphrased injections** passed the document guard, which only knows "
+                     "listed phrases.")
+    return text
+
+
+def render_faithfulness(results: Path) -> str:
+    """Evaluation G: faithfulness, abstention and confidence of the document answers."""
+    data = _load(results, "faithfulness_eval.json")
+    if data is None:
+        return NOT_RUN
+    labels = {"refused_when_answerable": "Refused although the documents answer it (lower is better)",
+              "refused_when_unanswerable": "Refused when the documents do not answer it (higher is better)",
+              "answerable_answered_with_right_document": "Answerable questions answered, citing the right document",
+              "answers_with_figures_all_supported": "Answers whose figures all appear in the retrieved passages",
+              "cited_passage_contains_the_figures": "Answers whose cited passage contains their figures"}
+    rows = [[text, *(_ci(data[s][key]) if data[s][key]["n"] else "n/a" for s in ("evaluation_set",
+            "development_set", "all"))] for key, text in labels.items()]
+    bands = [[f"{b['score_from']:.2f} to {b['score_to']:.2f}", _ci(b["right"])]
+             for b in data["accuracy_by_retrieval_score"] if b["right"]["n"]]
+    unsupported = data["unsupported_figures"]
+    return (f"Model `{data['model']}`; {data['all']['questions']} questions answered by the real assistant. "
+            f"{data['note'].capitalize()}.\n\n"
+            + _table(["Measure", "Evaluation set (15)", "Development set (38)", "All"], rows)
+            + "\n\nDoes the retrieval score tell right answers from wrong ones? Share of answerable questions "
+              "answered with the right document, by score of the best passage:\n\n"
+            + _table(["Retrieval score", "Right / questions (95% interval)"], bands)
+            + ("\n\nFigures not found in the sources: none." if not unsupported else
+               "\n\nFigures not found in the sources: " + "; ".join(f"{u['figures']} in \"{u['answer'][:80]}...\""
+                                                                    for u in unsupported) + "."))
+
+
+def render_production(results: Path) -> str:
+    """Evaluation H: behaviour in real use, from the logs."""
+    data = _load(results, "production_metrics.json")
+    if data is None:
+        return NOT_RUN
+    rows = [["Answered", _ci(data["answered"])], ["No source found (refused)", _ci(data["refused_no_source_found"])],
+            ["Denied by role", _ci(data["denied_by_role"])],
+            ["Replies that were a clarifying question", _ci(data["clarifying_questions"])],
+            ["Answers in extractive mode (no model)", _ci(data["answers_in_extractive_mode"])],
+            ["Questions routed by keywords only", _ci(data["routed_by_keywords_only"])],
+            ["Failed logins", _ci(data["login_failures"])]]
+    fb = data["feedback"]
+    return (f"{data['questions_asked']} questions from {data['users']} users in {data['conversations']} "
+            f"conversations. {data['note'].capitalize()}.\n\n" + _table(["Measure", "Share (95% interval)"], rows)
+            + f"\n\nFeedback: {fb['thumbs_up']} thumbs up, {fb['thumbs_down']} thumbs down. "
+              f"Recommendations confirmed: {data['confirmed_recommendations']}. Registrations: "
+              f"{data['registrations']}. Latency is not logged yet.")
+
+
+def render_model_comparison(results: Path) -> str:
+    """Evaluation I: several language models on the same questions."""
+    data = _load(results, "model_comparison.json")
+    if data is None:
+        return NOT_RUN
+    models = list(data["models"])
+
+    def cell(share: dict[str, Any] | None) -> str:
+        return "n/a" if not share or not share["n"] else f"{share['k']}/{share['n']} ({share['share']:.0%})"
+
+    def get(model: str, *path: str) -> Any:
+        node: Any = data["models"][model]
+        for key in path:
+            node = node.get(key) if isinstance(node, dict) else None
+        return node
+
+    rows = [
+        ["Rules: questions passed (of 15)"] + [cell(get(m, "rules", "passed")) for m in models],
+        ["Rules: same model without documents"]
+        + [str(get(m, "rules", "baseline_no_documents_passed")) for m in models],
+        ["Documents: answerable questions wrongly refused"]
+        + [cell(get(m, "documents", "refused_when_answerable")) for m in models],
+        ["Documents: right document cited"] + [cell(get(m, "documents", "right_document")) for m in models],
+        ["Documents: unanswerable questions refused"]
+        + [cell(get(m, "documents", "refused_when_unanswerable")) for m in models],
+        ["Documents: figures not found in the sources"]
+        + [str(get(m, "documents", "unsupported_figures")) for m in models],
+        ["Understanding: accuracy as deployed (42 messages)"]
+        + [cell(get(m, "understanding", "intent_accuracy_as_deployed")) for m in models],
+        ["Understanding: needless clarifying questions"]
+        + [cell(get(m, "understanding", "needless_clarifications")) for m in models],
+        ["Understanding: vague messages that got a question"]
+        + [cell(get(m, "understanding", "vague_clarified")) for m in models],
+        ["Answer latency, median (s)"] + [str(get(m, "rules", "latency_median_seconds")) for m in models],
+        ["Understanding latency, median (s)"]
+        + [str(get(m, "understanding", "latency_median_seconds")) for m in models],
+    ]
+    task_names = {"rules": "Rules questions (15)", "documents": "Right document cited (40)",
+                  "answered": "Answerable question answered, not refused (40)",
+                  "understanding": "Understanding messages (42)"}
+    paired = [[p["model"], task_names.get(p["task"], p["task"]), str(p["only_model_right"]),
+               str(p["only_reference_right"]), f"{p['p_value']:.3f}",
+               "**real difference**" if p["conclusive"] else "not conclusive"]
+              for p in data["paired_vs_reference"]]
+    return (f"Reference model: `{data['reference']}`. {data['note'].capitalize()}. Run on {data['run_at'][:10]}.\n\n"
+            + _table(["Measure"] + [f"`{m}`" for m in models], rows)
+            + "\n\nPaired comparison with the reference model on the same questions (exact McNemar test; a gap "
+              "is only real if p < 0.05):\n\n"
+            + _table(["Model", "Task", "Only this model right", "Only reference right", "p-value", "Verdict"], paired))
+
+
 RENDERERS = {"rules": render_rules, "retrieval": render_retrieval, "detection": render_detection,
-             "time": render_time, "satisfaction": render_satisfaction}
+             "time": render_time, "satisfaction": render_satisfaction, "statistics": render_statistics,
+             "understanding": render_understanding, "data_answers": render_data_answers,
+             "safety": render_safety, "faithfulness": render_faithfulness,
+             "production": render_production,
+             "model_comparison": render_model_comparison}
 
 
 def fill(readme_text: str, results: Path) -> str:

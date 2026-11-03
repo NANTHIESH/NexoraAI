@@ -11,3 +11,6 @@ data/raw/*
 *.sqlite
 *.egg-info/
 .coverage
+
+# Office lock files
+~$*

@@ -1,0 +1,112 @@
+{
+  "run_at": "2026-11-03T10:10:16+00:00",
+  "target_accuracy": 0.9,
+  "answers": {
+    "nexora": {
+      "k": 14,
+      "n": 15,
+      "share": 0.9333,
+      "ci95": [
+        0.7018,
+        0.9881
+      ]
+    },
+    "baseline_no_documents": {
+      "k": 3,
+      "n": 15,
+      "share": 0.2,
+      "ci95": [
+        0.0705,
+        0.4519
+      ]
+    },
+    "nexora_semantic_only": {
+      "k": 13,
+      "n": 15,
+      "share": 0.8667,
+      "ci95": [
+        0.6212,
+        0.9626
+      ]
+    }
+  },
+  "target_check": {
+    "target": 0.9,
+    "ci_lower_bound": 0.7018,
+    "proven": false,
+    "note": "the target is proven only if the whole 95% interval is above it"
+  },
+  "paired": [
+    {
+      "a": "nexora",
+      "b": "baseline_no_documents",
+      "only_a_right": 11,
+      "only_b_right": 0,
+      "p_value": 0.001,
+      "conclusive": true
+    },
+    {
+      "a": "nexora",
+      "b": "nexora_semantic_only",
+      "only_a_right": 1,
+      "only_b_right": 0,
+      "p_value": 1.0,
+      "conclusive": false
+    }
+  ],
+  "latency_seconds": {
+    "n": 45,
+    "p50": 2.99,
+    "p95": 3.23,
+    "max": 15.03,
+    "note": "the first call after start-up loads the models, so p95/max include warm-up"
+  },
+  "retrieval_hit_at_1": {
+    "semantic": {
+      "k": 23,
+      "n": 28,
+      "share": 0.8214,
+      "ci95": [
+        0.6441,
+        0.9212
+      ]
+    },
+    "hybrid": {
+      "k": 22,
+      "n": 28,
+      "share": 0.7857,
+      "ci95": [
+        0.6046,
+        0.8979
+      ]
+    },
+    "semantic+rerank": {
+      "k": 25,
+      "n": 28,
+      "share": 0.8929,
+      "ci95": [
+        0.728,
+        0.9629
+      ]
+    },
+    "hybrid+rerank": {
+      "k": 25,
+      "n": 28,
+      "share": 0.8929,
+      "ci95": [
+        0.728,
+        0.9629
+      ]
+    }
+  },
+  "detection_recall_all_seeds": {
+    "k": 60,
+    "n": 60,
+    "share": 1.0,
+    "ci95": [
+      0.9398,
+      1.0
+    ]
+  },
+  "detection_note": "the three seeds are separate datasets, but the detectors were built on the same generator"
+}
