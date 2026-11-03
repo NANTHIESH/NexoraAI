@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import re
 import sqlite3
 import time
@@ -15,6 +16,7 @@ from nexora.agents.lookups import (
     REPORT_WORDS,
     answer_headcount,
     answer_income,
+    answer_inventory,
     answer_ranking,
     answer_tasks,
     answer_tool_facts,
@@ -26,7 +28,9 @@ from nexora.agents.report import build_report, project_view, template_project_su
 from nexora.agents.router import Route, keyword_route, route
 from nexora.agents.spending import answer_spending, is_spending_question
 from nexora.agents.subscription import analyze_subscriptions
+from nexora.agents.suggestions import follow_ups
 from nexora.agents.tools import format_eur, parse_period
+from nexora.agents.understanding import CLARIFY, Understanding, understand
 from nexora.config import Config, load_config
 from nexora.db.repositories import Frames, MissingDataError, frames_from_db
 from nexora.llm.ollama_client import OllamaClient
@@ -36,8 +40,12 @@ from nexora.security.auth import User
 from nexora.security.pii import redact
 from nexora.security.rbac import Permission, can
 
-SMALLTALK_REPLY = ("Hello! I can answer questions about Nexora's company rules (with sources), create "
+SMALLTALK_REPLY = ("I can answer questions about Nexora's company rules (with sources), create "
                    "weekly, monthly or yearly reports, and look for waste in software subscriptions.")
+THANKS = re.compile(r"\b(thanks?|thank you|cheers|bye|goodbye)\b", re.IGNORECASE)
+# saved with each answer so a reopened chat looks the same
+EXTRA_FIELDS = ("method", "refused", "denied", "mode", "citations", "sources", "warning", "notice", "report",
+                "analysis", "injection_flagged", "rewritten_question", "suggestions")
 MAX_LISTED_RECOMMENDATIONS = 8
 FRAMES_TTL_SECONDS = 30.0  # business tables change only when `make load` runs
 PERIOD_WORDS = re.compile(r"\b(weekly|monthly|yearly|annual|week|month|year)\b", re.IGNORECASE)
@@ -64,6 +72,7 @@ class ChatResult:
     analysis: dict[str, Any] | None = None
     injection_flagged: list[str] = field(default_factory=list)
     rewritten_question: str | None = None
+    suggestions: list[str] = field(default_factory=list)
     chat_id: int | None = None
 
 
@@ -100,35 +109,62 @@ class Orchestrator:
         ready = self.llm_ready()
         llm = self.llm if ready else None
         history = load_history(conn, user.employee_id, session_id, self.cfg.retrieval.history_turns)
-        effective = question
-        if keyword_route(question) != "smalltalk":  # greetings and thanks are never rewritten
-            effective = rewrite_question(question, history, llm)
-        chosen = route(effective, llm)
         frames = self._frames(conn)
+        smalltalk = keyword_route(question) == "smalltalk"  # greetings and thanks are never rewritten
+        understood = None if (smalltalk or llm is None) else understand(question, history, _describe(user), llm)
+        if understood and understood.intent == CLARIFY and (
+                lookup_kind(question, frames) or keyword_route(question) != "knowledge"):
+            understood = None  # the rules already know what this is: do not interrupt with a question
+        if understood and understood.intent == CLARIFY:
+            result = ChatResult("clarify", "llm", understood.clarification or "", suggestions=understood.options,
+                                mode="llm")
+            return self._record(conn, user, question, session_id, result)
+        if understood:
+            effective, chosen = self._trust_rules(question, understood, frames), Route(understood.intent, "llm")
+        else:
+            effective = question if smalltalk else rewrite_question(question, history, llm)
+            chosen = route(effective, llm)
+        kind = None
         if chosen.intent != "smalltalk":  # amounts, counts and facts are always looked up, never summarised
             kind = lookup_kind(effective, frames)
-            if kind == "tool_facts":
+            if kind in ("tool_facts", "inventory"):
                 chosen = Route("subscription", f"{chosen.method}+rule")
             elif kind or is_spending_question(effective):
                 chosen = Route("report", f"{chosen.method}+rule")
         result = self._dispatch(conn, user, effective, chosen.intent, include_superseded, frames)
         result.intent, result.method = chosen.intent, chosen.method
-        result.rewritten_question = effective if effective != question else None
+        result.rewritten_question = effective if _norm(effective) != _norm(question) else None
+        answered = not (result.denied or result.refused or result.text == CAPABILITIES)
+        result.suggestions = follow_ups(user.role, effective, intent=chosen.intent, kind=kind, answered=answered)
+        return self._record(conn, user, question, session_id, result)
+
+    def _record(self, conn: sqlite3.Connection, user: User, question: str, session_id: str,
+                result: ChatResult) -> ChatResult:
+        """Save the exchange (PII-redacted) and an audit record; sets ``result.chat_id``."""
         conn.execute("INSERT INTO chat_history (user_id, session_id, role, content, intent, created_at) "
                      "VALUES (?,?,?,?,?,?)",
-                     (user.employee_id, session_id, "user", redact(question), chosen.intent, _now()))
-        cur = conn.execute("INSERT INTO chat_history (user_id, session_id, role, content, intent, created_at) "
-                           "VALUES (?,?,?,?,?,?)",
+                     (user.employee_id, session_id, "user", redact(question), result.intent, _now()))
+        extras = json.dumps({k: getattr(result, k) for k in EXTRA_FIELDS}, default=str)
+        cur = conn.execute("INSERT INTO chat_history (user_id, session_id, role, content, intent, created_at, "
+                           "extra_json) VALUES (?,?,?,?,?,?,?)",
                            (user.employee_id, session_id, "assistant", redact(result.text),
-                            chosen.intent, _now()))
+                            result.intent, _now(), extras))
         conn.commit()
         result.chat_id = int(cur.lastrowid)
         action = "chat_denied" if result.denied else ("chat_refused" if result.refused else "chat")
-        audit.log_event(conn, user.employee_id, user.role, action, question=question, intent=chosen.intent,
+        audit.log_event(conn, user.employee_id, user.role, action, question=question, intent=result.intent,
                         sources=sorted({s["source"] for s in result.sources}),
-                        detail=f"method={chosen.method} mode={result.mode}"
+                        detail=f"method={result.method} mode={result.mode}"
                                + (f" rewritten={result.rewritten_question}" if result.rewritten_question else ""))
         return result
+
+    @staticmethod
+    def _trust_rules(question: str, understood: Understanding, frames: Frames | None) -> str:
+        """The model's clean wording, unless the original already matched a computed lookup and the model
+        lost that (the rules are exact, the model is not)."""
+        if lookup_kind(understood.question, frames) is None and lookup_kind(question, frames) is not None:
+            return question
+        return understood.question
 
     # ------------------------------------------------------------------ intents
     def _frames(self, conn: sqlite3.Connection) -> Frames | None:
@@ -145,7 +181,11 @@ class Orchestrator:
     def _dispatch(self, conn: sqlite3.Connection, user: User, question: str, intent: str,
                   include_superseded: bool | None, frames: Frames | None) -> ChatResult:
         if intent == "smalltalk":
-            return ChatResult(intent, "", SMALLTALK_REPLY)
+            first = user.name.split()[0] if user.name else ""
+            if THANKS.search(question):
+                return ChatResult(intent, "", f"You are welcome{', ' + first if first else ''}! "
+                                              "Ask me anything else about the company, its money or its tools.")
+            return ChatResult(intent, "", f"Hello{' ' + first if first else ''}! " + SMALLTALK_REPLY)
         if intent == "knowledge":
             return self._knowledge(question, include_superseded)
         if frames is None:
@@ -209,6 +249,9 @@ class Orchestrator:
         if not can(user.role, Permission.SUBSCRIPTIONS):
             return self._denied(user, "subscription and billing data")
         analysis = analyze_subscriptions(frames, self.cfg)
+        if lookup_kind(question, frames) == "inventory":
+            answer = answer_inventory(frames)
+            return ChatResult("subscription", "", answer.text, report=answer.data)
         if lookup_kind(question, frames) == "tool_facts":
             answer = answer_tool_facts(frames, self.cfg, question, analysis.flags)
             return ChatResult("subscription", "", answer.text, report=answer.data)
@@ -242,6 +285,15 @@ def analysis_to_dict(analysis) -> dict[str, Any]:  # noqa: ANN001 - Subscription
                              "requires_confirmation": r.requires_confirmation}
                             for r in analysis.recommendations],
     }
+
+
+def _describe(user: User) -> str:
+    return f"{user.name.split()[0] if user.name else 'an employee'}, {user.job_title} (role: {user.role})"
+
+
+def _norm(text: str) -> str:
+    """Comparison form: lower case, letters and digits only, so punctuation-only rewrites are not shown."""
+    return re.sub(r"[^a-z0-9]+", " ", text.lower()).strip()
 
 
 def _now() -> str:

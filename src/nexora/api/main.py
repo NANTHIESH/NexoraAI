@@ -6,6 +6,7 @@ Role checks (security/rbac.py) are enforced here, not only in the UI.
 """
 
 
+import json
 import logging
 import sqlite3
 import threading
@@ -16,7 +17,7 @@ from dataclasses import asdict
 from datetime import UTC, datetime
 from typing import Annotated, Any
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Query, Request, Response
+from fastapi import Depends, FastAPI, Header, HTTPException, Path, Query, Request, Response
 from fastapi.responses import JSONResponse
 
 from nexora.agents.orchestrator import Orchestrator, analysis_to_dict
@@ -41,6 +42,7 @@ from nexora.voice.stt import MAX_AUDIO_BYTES, transcribe
 from nexora.voice.tts import VoiceUnavailableError, synthesize
 
 log = logging.getLogger("nexora.api")
+MAX_SAVED_CHATS = 100
 FRAMES_TTL_SECONDS = 30.0  # business tables only change when `make load` runs, so reading them per request is waste
 
 
@@ -158,6 +160,34 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
     def chat(body: ChatRequest, conn: Conn, user: Me) -> dict[str, Any]:
         require(user.role, Permission.DOCUMENTS)
         return asdict(orch.chat(conn, user, body.question, body.session_id, body.include_superseded))
+
+    @app.get("/chats")
+    def list_chats(conn: Conn, user: Me) -> list[dict[str, Any]]:
+        """This user's saved conversations, newest first, titled by their first question."""
+        rows = conn.execute(
+            "SELECT session_id, MIN(id) AS first_id, MAX(id) AS last_id, MAX(created_at) AS updated_at "
+            "FROM chat_history WHERE user_id = ? GROUP BY session_id ORDER BY last_id DESC LIMIT ?",
+            (user.employee_id, MAX_SAVED_CHATS)).fetchall()
+        titles = {r["id"]: r["content"] for r in conn.execute(
+            f"SELECT id, content FROM chat_history WHERE id IN ({','.join('?' * len(rows))})",
+            [r["first_id"] for r in rows])} if rows else {}
+        return [{"session_id": r["session_id"], "updated_at": r["updated_at"],
+                 "title": " ".join(titles.get(r["first_id"], "New chat").split())[:60] or "New chat"} for r in rows]
+
+    @app.get("/chats/{session_id}")
+    def open_chat(session_id: Annotated[str, Path(max_length=64)], conn: Conn, user: Me) -> list[dict[str, Any]]:
+        """All messages of one of this user's conversations, in the shape the chat page displays."""
+        rows = conn.execute("SELECT id, role, content, intent, extra_json FROM chat_history "
+                            "WHERE user_id = ? AND session_id = ? ORDER BY id", (user.employee_id, session_id))
+        messages: list[dict[str, Any]] = []
+        for r in rows:
+            if r["role"] == "user":
+                messages.append({"role": "user", "text": r["content"]})
+            else:
+                extra = json.loads(r["extra_json"]) if r["extra_json"] else {}
+                messages.append({"role": "assistant", "text": r["content"], "intent": r["intent"] or "",
+                                 "chat_id": r["id"], **extra})
+        return messages
 
     @app.get("/report")
     def report(conn: Conn, user: Me, period: Period = "monthly", kind: str = "finance") -> dict[str, Any]:

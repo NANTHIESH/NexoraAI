@@ -76,6 +76,8 @@ class OllamaClient:
                    "options": {"temperature": self.temperature, "seed": self.seed}}
         if json_mode:
             payload["format"] = "json"
+        if self.model.startswith("qwen3"):
+            payload["think"] = False  # qwen3 reasons first by default (much slower); we compare plain answers
         try:
             resp = _http.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout)
         except (httpx.ConnectError, httpx.ConnectTimeout) as exc:

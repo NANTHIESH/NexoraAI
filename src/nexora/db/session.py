@@ -12,6 +12,15 @@ _initialised: set[str] = set()
 _lock = threading.Lock()
 
 
+def _migrate(conn: sqlite3.Connection) -> None:
+    """Bring databases created by older versions up to date (the schema script only creates missing tables)."""
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(chat_history)")}
+    if "extra_json" not in columns:
+        conn.execute("ALTER TABLE chat_history ADD COLUMN extra_json TEXT")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_chat_user_session ON chat_history(user_id, session_id, id)")
+    conn.commit()
+
+
 def connect(path: Path) -> sqlite3.Connection:
     """Open (and create if needed) the database at ``path`` with the schema applied.
 
@@ -28,6 +37,7 @@ def connect(path: Path) -> sqlite3.Connection:
     if key not in _initialised or not existed:
         with _lock:
             conn.executescript(_SCHEMA_SQL)
+            _migrate(conn)
             _initialised.add(key)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")

@@ -36,7 +36,13 @@ TOPICS = {"unused_subscription": r"\b(unused|not used|no users|nobody uses|idle)
           "price_increase": r"\b(price (increase|rise|hike)s?|more expensive|increased|raised)\b",
           "overlap": r"\b(overlap\w*|redundant|same job|two tools)\b",
           "unlisted_charge": r"\b(unlisted|not on the (subscription )?list|unknown (tools?|charges?))\b"}
-CAPABILITIES = ("I could not match that to something I can look up. I can answer:\n"
+INVENTORY = re.compile(
+    r"\bhow many (software |saas |paid )?(subscriptions?|tools|licen[cs]es|apps|products)\b"
+    r"|\b(list|show|name|what|which)\b.{0,25}\b(subscriptions?|tools|software|apps)\b.{0,25}"
+    r"\b(have|use|using|pay|paying|subscribed|own)\b"
+    r"|\b(total|all)\b.{0,15}\b(subscriptions?|software tools)\b"
+    r"|\b(list|show|name)\b( me)?( all)?( of)?( our| the| my)?( software| saas)? (subscriptions?|tools|licen[cs]es)\b", re.I)
+CAPABILITIES = ("I could not match that to something I can look up, but here is what I can help with:\n"
                 "- questions about company rules, with sources\n"
                 "- spending: \"How much did we spend on GitHub last month?\", \"What is our biggest expense?\"\n"
                 "- income and profit: \"What was our income in March?\"\n"
@@ -64,6 +70,8 @@ def lookup_kind(question: str, frames: Frames | None = None) -> str | None:
     if frames is not None and tool_in_question(question, frames) and FACT_WORDS.search(question) \
             and not SAVINGS_WORDS.search(question):
         return "tool_facts"
+    if INVENTORY.search(question) and not SAVINGS_WORDS.search(question) and not topic_of(question):
+        return "inventory"
     if HEADCOUNT.search(question):
         return "headcount"
     if RANKING_WORDS.search(question) and MONEY_WORDS.search(question):
@@ -206,6 +214,21 @@ def answer_tool_facts(frames: Frames, cfg: Config, question: str, flags: list[Fl
         text += "\nFlagged: " + "; ".join(f.detail for f in mine) + "."
     return LookupAnswer(text, {"tool": tool, "monthly_cost": float(sub["monthly_cost"]), "seats": int(sub["seats"]),
                                "active_users": int(latest_usage["active_users"]), "month": latest_usage["month"]})
+
+
+def answer_inventory(frames: Frames) -> LookupAnswer:
+    """How many subscriptions the company has, what they cost in total and the most expensive ones."""
+    subs = frames.subscriptions.sort_values("monthly_cost", ascending=False)
+    total = float(subs["monthly_cost"].sum())
+    top = subs.head(5)
+    lines = [f"- {r.tool} ({r.plan}): {eur(float(r.monthly_cost))}/month, {int(r.seats)} seats"
+             for r in top.itertuples()]
+    text = (f"We have {len(subs)} software subscriptions, costing {eur(total)} per month list price "
+            f"({eur(total * 12)} per year). The most expensive:\n" + "\n".join(lines)
+            + (f"\n(+{len(subs) - len(top)} more on the Dashboard)" if len(subs) > len(top) else ""))
+    return LookupAnswer(text, {"count": len(subs), "monthly_total": round(total, 2),
+                               "tools": [{"tool": r.tool, "monthly_cost": float(r.monthly_cost),
+                                          "seats": int(r.seats)} for r in subs.itertuples()]})
 
 
 def topic_of(question: str) -> str | None:

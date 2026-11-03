@@ -90,7 +90,8 @@ CREATE TABLE IF NOT EXISTS chat_history (
     role       TEXT NOT NULL,             -- user | assistant
     content    TEXT NOT NULL,             -- PII-redacted before storage
     intent     TEXT,
-    created_at TEXT NOT NULL
+    created_at TEXT NOT NULL,
+    extra_json TEXT                       -- assistant rows: sources, report data, warnings (to redisplay a saved chat)
 );
 
 CREATE TABLE IF NOT EXISTS feedback (

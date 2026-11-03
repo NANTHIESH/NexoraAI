@@ -290,3 +290,24 @@ def test_register_rejects_bad_input(client: TestClient) -> None:
     assert client.post("/register", json={**ok, "email": "x@example.com", "password": "short"}).status_code == 422
     sneaky = client.post("/register", json={**ok, "email": "r@example.com", "role": "owner"})
     assert sneaky.json()["user"]["role"] == "employee"
+
+
+def test_chats_are_saved_listed_and_reopened(client: TestClient) -> None:
+    def auth(role: str) -> dict[str, str]:
+        token = client.post("/login", json={"employee_id": USERS[role], "password": PASSWORD}).json()["token"]
+        return {"Authorization": f"Bearer {token}"}
+
+    owner, employee = auth("owner"), auth("employee")
+    client.post("/chat", json={"question": "Give me the monthly report", "session_id": "mem-a"}, headers=owner)
+    client.post("/chat", json={"question": "How many vacation days?", "session_id": "mem-b"}, headers=owner)
+    chats = client.get("/chats", headers=owner).json()
+    ids = [c["session_id"] for c in chats]
+    assert ids.index("mem-b") < ids.index("mem-a")  # newest first
+    assert next(c for c in chats if c["session_id"] == "mem-a")["title"] == "Give me the monthly report"
+    messages = client.get("/chats/mem-a", headers=owner).json()
+    assert [m["role"] for m in messages] == ["user", "assistant"]
+    assert messages[1]["report"] and messages[1]["chat_id"] > 0  # report cards come back with the text
+    # another user cannot see or open it
+    assert "mem-a" not in [c["session_id"] for c in client.get("/chats", headers=employee).json()]
+    assert client.get("/chats/mem-a", headers=employee).json() == []
+    assert client.get("/chats").status_code == 401
