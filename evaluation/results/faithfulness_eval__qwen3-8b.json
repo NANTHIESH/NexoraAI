@@ -1,9 +1,18 @@
 {
-  "run_at": "2026-11-03T11:12:39+00:00",
+  "run_at": "2026-11-03T11:41:31+00:00",
   "model": "qwen3:8b",
   "note": "development questions were used to choose thresholds: read the evaluation set as the independent one",
   "all": {
     "questions": 53,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 41,
+      "share": 0.0,
+      "ci95": [
+        0.0,
+        0.0857
+      ]
+    },
     "refused_when_answerable": {
       "k": 0,
       "n": 40,
@@ -52,6 +61,15 @@
   },
   "evaluation_set": {
     "questions": 15,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 13,
+      "share": 0.0,
+      "ci95": [
+        0.0,
+        0.2281
+      ]
+    },
     "refused_when_answerable": {
       "k": 0,
       "n": 12,
@@ -100,6 +118,15 @@
   },
   "development_set": {
     "questions": 38,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 28,
+      "share": 0.0,
+      "ci95": [
+        0.0,
+        0.1206
+      ]
+    },
     "refused_when_answerable": {
       "k": 0,
       "n": 28,
@@ -566,7 +593,7 @@
       "question": "Who must approve an expense above 100 EUR?",
       "refused": false,
       "top_score": 0.6925,
-      "answer": "The expenses above 100 EUR need owner approval before you spend the money. [Expenses, Expenses]"
+      "answer": "Expenses above 100 EUR need owner approval before you spend the money. [Expenses, Expenses]"
     },
     {
       "question": "Who signs off on purchases over a hundred euros?",

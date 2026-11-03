@@ -1,16 +1,25 @@
 {
-  "run_at": "2026-11-03T11:08:49+00:00",
+  "run_at": "2026-11-03T11:39:36+00:00",
   "model": "qwen3:1.7b",
   "note": "development questions were used to choose thresholds: read the evaluation set as the independent one",
   "all": {
     "questions": 53,
-    "refused_when_answerable": {
-      "k": 2,
-      "n": 40,
-      "share": 0.05,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 37,
+      "share": 0.0,
       "ci95": [
-        0.0138,
-        0.165
+        0.0,
+        0.0941
+      ]
+    },
+    "refused_when_answerable": {
+      "k": 3,
+      "n": 40,
+      "share": 0.075,
+      "ci95": [
+        0.0258,
+        0.1986
       ]
     },
     "refused_when_unanswerable": {
@@ -41,17 +50,26 @@
       ]
     },
     "cited_passage_contains_the_figures": {
-      "k": 22,
+      "k": 21,
       "n": 23,
-      "share": 0.9565,
+      "share": 0.913,
       "ci95": [
-        0.7901,
-        0.9923
+        0.732,
+        0.9758
       ]
     }
   },
   "evaluation_set": {
     "questions": 15,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 12,
+      "share": 0.0,
+      "ci95": [
+        0.0,
+        0.2425
+      ]
+    },
     "refused_when_answerable": {
       "k": 0,
       "n": 12,
@@ -80,33 +98,42 @@
       ]
     },
     "answers_with_figures_all_supported": {
-      "k": 9,
-      "n": 9,
+      "k": 10,
+      "n": 10,
       "share": 1.0,
       "ci95": [
-        0.7008,
+        0.7225,
         1.0
       ]
     },
     "cited_passage_contains_the_figures": {
       "k": 9,
-      "n": 9,
-      "share": 1.0,
+      "n": 10,
+      "share": 0.9,
       "ci95": [
-        0.7008,
-        1.0
+        0.5958,
+        0.9821
       ]
     }
   },
   "development_set": {
     "questions": 38,
-    "refused_when_answerable": {
-      "k": 2,
-      "n": 28,
-      "share": 0.0714,
+    "answers_that_repeat_the_source_block": {
+      "k": 0,
+      "n": 25,
+      "share": 0.0,
       "ci95": [
-        0.0198,
-        0.2265
+        0.0,
+        0.1332
+      ]
+    },
+    "refused_when_answerable": {
+      "k": 3,
+      "n": 28,
+      "share": 0.1071,
+      "ci95": [
+        0.0371,
+        0.272
       ]
     },
     "refused_when_unanswerable": {
@@ -128,21 +155,21 @@
       ]
     },
     "answers_with_figures_all_supported": {
-      "k": 14,
-      "n": 14,
+      "k": 13,
+      "n": 13,
       "share": 1.0,
       "ci95": [
-        0.7847,
+        0.7719,
         1.0
       ]
     },
     "cited_passage_contains_the_figures": {
-      "k": 13,
-      "n": 14,
-      "share": 0.9286,
+      "k": 12,
+      "n": 13,
+      "share": 0.9231,
       "ci95": [
-        0.6853,
-        0.9873
+        0.6669,
+        0.9863
       ]
     }
   },
@@ -200,14 +227,14 @@
       "question": "How many unused vacation days can be carried over?",
       "answerable": true,
       "refused": false,
-      "right_document": true
+      "right_document": false
     },
     {
       "set": "evaluation",
       "question": "How many days per week can I work remotely?",
       "answerable": true,
       "refused": false,
-      "right_document": false
+      "right_document": true
     },
     {
       "set": "evaluation",
@@ -297,7 +324,7 @@
       "set": "development",
       "question": "How much paid time off do permanent staff get each year?",
       "answerable": true,
-      "refused": false,
+      "refused": true,
       "right_document": false
     },
     {
@@ -563,10 +590,10 @@
   "unsupported_figures": [],
   "wrong_or_missed": [
     {
-      "question": "How many days per week can I work remotely?",
+      "question": "How many unused vacation days can be carried over?",
       "refused": false,
-      "top_score": 0.8103,
-      "answer": "The answer is not found in the provided sources. [Document title, Section]"
+      "top_score": 0.6772,
+      "answer": "The answer is: Up to 5 unused vacation days can be carried over into the next year. [Expenses, Equipment and Training Budget, Training Budget]"
     },
     {
       "question": "Can I send customer data to my personal email?",
@@ -576,9 +603,9 @@
     },
     {
       "question": "How much paid time off do permanent staff get each year?",
-      "refused": false,
+      "refused": true,
       "top_score": 0.5028,
-      "answer": "Permanent staff receive 12 weeks of paid time off each year, regardless of gender or sexual identity, after the birth or adoption of a child. [New Parent Leave, Overview]"
+      "answer": "I could not find this in the company documents. Please ask your manager."
     },
     {
       "question": "Who signs off on purchases over a hundred euros?",

@@ -85,6 +85,14 @@ Known limits: 15 questions is a small sample, one wrong answer moves the score b
 - **Comparison:** each model against the reference, question by question, with an exact McNemar test on four outcomes: rules questions passed (15), right document cited (40), answerable question answered instead of refused (40), understanding messages right as deployed (42). A gap is called real only if p < 0.05. Median latency per answer is reported next to accuracy.
 - **Limits:** few questions, so most gaps are not conclusive; the 15 evaluation questions and the 38 development questions are shared with the other evaluations; latency depends on this machine and on whether the model was already loaded; the first call after a model loads is slow and does not move the median.
 
+## J. Retrieval setups (`evaluation/compare_retrieval.py`)
+
+- **Question:** does a better embedding model, a reranker, or query expansion by the local Ollama model find the right passage more often?
+- **Held-out set:** `evaluation/retrieval_test_set.json`, 48 answerable questions in everyday wording (synonyms, slang) with the exact right passage `[file, section]`, and 8 unanswerable questions. It was written before any retrieval change was tried and is not used to choose settings. The 38 development questions (right document known) are used to choose settings, including the refusal threshold.
+- **Setups:** embedding model (MiniLM, `ollama:nomic-embed-text`, `ollama:bge-m3`) x reranker (on, off) x query expansion (off, 2 rewordings from the chat model); hybrid search is always on. Each embedding model has its own index in a temporary directory, so the real index is untouched. Rewordings are generated once per question and shared by all setups.
+- **Metrics:** hit@1, hit@3, hit@5 and MRR (passage level on the held-out set, document level on the development set), hit@1 with a 95 % interval, and how well the best similarity score separates answerable from unanswerable questions (AUC, plus accuracy at the threshold chosen on the development questions).
+- **Limits:** 48 questions give wide intervals (about 80 % to 97 % at 92 %), so differences of a few questions are not conclusive; the unanswerable set has 8 questions; search time does not include the 0.3 to 0.5 s the chat model needs to reword a question; the development and held-out results sometimes disagree for the no-reranker setups, which is another sign that those differences are noise.
+
 ## Regression gate (`evaluation/check_gate.py`)
 
 - `python -m evaluation.check_gate` (or `make gate`) compares the saved results with limits written in the script and exits with code 1 if any number got worse. The limits are the accepted current level; known weaknesses carry a `KNOWN` note, so they cannot get worse unnoticed but are not hidden. A missing result file is a failure, so the gate cannot pass by skipping an evaluation.

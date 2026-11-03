@@ -200,3 +200,24 @@ def test_inventory_is_blocked_for_roles_without_subscription_access(client: Test
     body = ask(client, "E005", "how many subscriptions do we have?", session="emp2")
     assert body["denied"] and "subscription" in body["text"]
 
+
+
+# ------------------------------------------------------------------ "cancel Notion": the assistant only recommends
+@pytest.mark.parametrize("message", [
+    "I want you to cancel the Notion subscription from this month", "Please cancel Zoom for me", "cancel Datadog now",
+    "can you unsubscribe from Slack?"])
+def test_an_order_to_cancel_gets_a_plain_answer_with_the_facts(client: TestClient, message: str) -> None:
+    body = ask(client, "E001", message, session="order")
+    assert body["intent"] == "subscription"
+    assert "can't cancel" in body["text"] and "Confirm on the Dashboard" in body["text"]
+    assert body["report"]["tool"] in message.title() or body["report"]["tool"].lower() in message.lower()
+
+
+@pytest.mark.parametrize("message", ["Should we cancel Zoom?", "Which subscriptions can we cancel?",
+                                     "What does Notion cost?"])
+def test_advice_and_fact_questions_are_not_treated_as_orders(client: TestClient, message: str) -> None:
+    assert "can't cancel" not in ask(client, "E001", message, session="advice")["text"]
+
+
+def test_employees_cannot_even_ask_about_a_cancellation(client: TestClient) -> None:
+    assert ask(client, "E005", "please cancel Notion", session="emp-cancel")["denied"]

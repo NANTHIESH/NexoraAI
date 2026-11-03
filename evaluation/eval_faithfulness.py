@@ -33,12 +33,17 @@ DEV_PATH = PROJECT_ROOT / "tests" / "fixtures" / "dev_questions.json"
 NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
 CITATION = re.compile(r"\[[^\[\]]*\]")
 SOURCE_MENTION = re.compile(r"\bSOURCES?\s*\d+\b", re.IGNORECASE)  # "According to SOURCE 1" is not a claim
+# A weak model sometimes copies the prompt's source header ("SOURCE 1 / Title / Section / Status: ... effective
+# 2026-01-01") into its answer. Those lines are prompt scaffolding, not claims, so their numbers are not checked;
+# the copying itself is reported separately as "answers that repeat the source block".
+SOURCE_HEADER = re.compile(r"^\s*(?:SOURCE\s*\d+|Title:.*|Section:.*|Status:.*)$", re.IGNORECASE | re.MULTILINE)
 BANDS = ((0.0, 0.5), (0.5, 0.65), (0.65, 1.01))
 
 
 def numbers(text: str) -> set[str]:
-    """Figures in ``text`` (citations removed), normalised so 1,000 and 1000 are the same."""
-    return {n.replace(",", "") for n in NUMBER.findall(SOURCE_MENTION.sub(" ", CITATION.sub(" ", text)))}
+    """Figures in ``text`` (citations and prompt headers removed), so 1,000 and 1000 are the same."""
+    cleaned = SOURCE_MENTION.sub(" ", CITATION.sub(" ", SOURCE_HEADER.sub(" ", text)))
+    return {n.replace(",", "") for n in NUMBER.findall(cleaned)}
 
 
 def _share(k: int, n: int) -> dict[str, Any]:
@@ -53,6 +58,7 @@ def score(answer: Answer, gold_sources: list[str] | None) -> dict[str, Any]:
     cited = [h for h in answer.sources if h.chunk.source in answer.cited_sources]
     in_cited = set().union(*(numbers(h.chunk.text) for h in cited)) if cited else set()
     return {"refused": answer.refused, "top_score": answer.top_score, "figures": sorted(claimed),
+            "echoes_sources": not answer.refused and answer.text.lstrip().upper().startswith("SOURCE "),
             "figures_supported": claimed <= in_sources if claimed else None,
             "cited_supports_figures": (claimed <= in_cited) if claimed and cited else None,
             "right_document": (not answer.refused and bool(set(answer.cited_sources) & set(gold_sources)))
@@ -88,8 +94,10 @@ def summarise(rows: list[dict[str, Any]], model: str) -> dict[str, Any]:
         unanswerable = [r for r in subset if not r["gold"]]
         answered = [r for r in subset if not r["refused"] and r["figures_supported"] is not None]
         cited = [r for r in answered if r["cited_supports_figures"] is not None]
+        given = [r for r in subset if not r["refused"]]
         return {
             "questions": len(subset),
+            "answers_that_repeat_the_source_block": _share(sum(bool(r["echoes_sources"]) for r in given), len(given)),
             "refused_when_answerable": _share(sum(r["refused"] for r in answerable), len(answerable)),
             "refused_when_unanswerable": _share(sum(r["refused"] for r in unanswerable), len(unanswerable)),
             "answerable_answered_with_right_document": _share(sum(bool(r["right_document"]) for r in answerable),

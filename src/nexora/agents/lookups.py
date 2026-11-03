@@ -92,6 +92,26 @@ def tool_in_question(question: str, frames: Frames) -> str | None:
     return max(hits, key=len) if hits else None
 
 
+ACTION_VERBS = re.compile(r"\b(cancel|unsubscribe|terminate|end|remove|delete|downgrade|upgrade|renew|buy|purchase|"
+                          r"stop paying for|get rid of)\b", re.I)
+REQUEST_FORM = re.compile(r"^\s*(please\s+)?(cancel|unsubscribe|terminate|end|remove|delete|stop|downgrade|upgrade|renew|"
+                          r"buy|purchase)\b|\b(i want you to|i need you to|please|go ahead and|can you|could you|"
+                          r"would you|just)\b", re.I)
+ADVICE_FORM = re.compile(r"^\s*(should|which|what|why|how|is|are|does|do|would it)\b", re.I)
+
+
+def action_request_tool(question: str, frames: Frames | None) -> str | None:
+    """The listed tool when the user orders the assistant to do something to it ("cancel Notion").
+
+    The assistant never changes subscriptions, so such a message must be answered with that fact, not with the
+    generic savings list. Advice questions ("Should we cancel Zoom?") are not orders and return ``None``.
+    """
+    if frames is None or not ACTION_VERBS.search(question) or ADVICE_FORM.search(question) \
+            or not REQUEST_FORM.search(question):
+        return None
+    return tool_in_question(question, frames)
+
+
 def _months(frames: Frames) -> list[str]:
     return sorted(frames.transactions["month"].unique())
 

@@ -1,0 +1,549 @@
+{
+  "run_at": "2026-11-03T12:16:33+00:00",
+  "expansion_queries": 2,
+  "expansion_model": "llama3.2:3b",
+  "setups": {
+    "MiniLM (current) | rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.982,
+        "threshold_chosen_on_development": 0.348,
+        "heldout_answerable_kept": 0.979,
+        "heldout_unanswerable_refused": 0.75
+      },
+      "seconds_per_query": 0.227
+    },
+    "MiniLM (current) | rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.982,
+        "threshold_chosen_on_development": 0.348,
+        "heldout_answerable_kept": 0.979,
+        "heldout_unanswerable_refused": 0.75
+      },
+      "seconds_per_query": 0.251
+    },
+    "MiniLM (current) | no rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.786,
+        "hit@1_ci95": [
+          0.605,
+          0.898
+        ],
+        "hit@3": 0.964,
+        "hit@5": 1.0,
+        "mrr": 0.882
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.812,
+        "hit@1_ci95": [
+          0.681,
+          0.898
+        ],
+        "hit@3": 0.938,
+        "hit@5": 0.958,
+        "mrr": 0.87
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.833,
+        "hit@1_ci95": [
+          0.704,
+          0.913
+        ],
+        "hit@3": 0.938,
+        "hit@5": 1.0,
+        "mrr": 0.89
+      },
+      "refusal": {
+        "auc_development": 0.971,
+        "auc_heldout": 0.984,
+        "threshold_chosen_on_development": 0.414,
+        "heldout_answerable_kept": 0.917,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.013
+    },
+    "MiniLM (current) | no rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.857,
+        "hit@1_ci95": [
+          0.685,
+          0.943
+        ],
+        "hit@3": 0.929,
+        "hit@5": 0.964,
+        "mrr": 0.902
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.875,
+        "hit@1_ci95": [
+          0.753,
+          0.941
+        ],
+        "hit@3": 0.958,
+        "hit@5": 0.979,
+        "mrr": 0.922
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.938,
+        "hit@1_ci95": [
+          0.832,
+          0.979
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.958
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.982,
+        "threshold_chosen_on_development": 0.349,
+        "heldout_answerable_kept": 0.958,
+        "heldout_unanswerable_refused": 0.75
+      },
+      "seconds_per_query": 0.027
+    },
+    "nomic-embed-text | rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.974,
+        "threshold_chosen_on_development": 0.665,
+        "heldout_answerable_kept": 0.875,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.285
+    },
+    "nomic-embed-text | rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.974,
+        "threshold_chosen_on_development": 0.665,
+        "heldout_answerable_kept": 0.875,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.405
+    },
+    "nomic-embed-text | no rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.821,
+        "hit@1_ci95": [
+          0.644,
+          0.921
+        ],
+        "hit@3": 0.964,
+        "hit@5": 1.0,
+        "mrr": 0.896
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.833,
+        "hit@1_ci95": [
+          0.704,
+          0.913
+        ],
+        "hit@3": 0.917,
+        "hit@5": 0.958,
+        "mrr": 0.882
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.833,
+        "hit@1_ci95": [
+          0.704,
+          0.913
+        ],
+        "hit@3": 0.938,
+        "hit@5": 0.979,
+        "mrr": 0.889
+      },
+      "refusal": {
+        "auc_development": 0.975,
+        "auc_heldout": 0.971,
+        "threshold_chosen_on_development": 0.665,
+        "heldout_answerable_kept": 0.875,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.02
+    },
+    "nomic-embed-text | no rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 0.893,
+        "hit@5": 0.929,
+        "mrr": 0.902
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.958,
+        "hit@5": 0.979,
+        "mrr": 0.939
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.938,
+        "hit@1_ci95": [
+          0.832,
+          0.979
+        ],
+        "hit@3": 0.958,
+        "hit@5": 0.979,
+        "mrr": 0.953
+      },
+      "refusal": {
+        "auc_development": 0.989,
+        "auc_heldout": 0.971,
+        "threshold_chosen_on_development": 0.665,
+        "heldout_answerable_kept": 0.875,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.055
+    },
+    "bge-m3 | rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.979,
+        "auc_heldout": 0.979,
+        "threshold_chosen_on_development": 0.544,
+        "heldout_answerable_kept": 0.938,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.3
+    },
+    "bge-m3 | rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.893,
+        "hit@1_ci95": [
+          0.728,
+          0.963
+        ],
+        "hit@3": 1.0,
+        "hit@5": 1.0,
+        "mrr": 0.94
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.979,
+        "hit@5": 0.979,
+        "mrr": 0.948
+      },
+      "refusal": {
+        "auc_development": 0.979,
+        "auc_heldout": 0.979,
+        "threshold_chosen_on_development": 0.544,
+        "heldout_answerable_kept": 0.938,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.431
+    },
+    "bge-m3 | no rerank | no expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.857,
+        "hit@1_ci95": [
+          0.685,
+          0.943
+        ],
+        "hit@3": 0.964,
+        "hit@5": 1.0,
+        "mrr": 0.914
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.812,
+        "hit@1_ci95": [
+          0.681,
+          0.898
+        ],
+        "hit@3": 0.938,
+        "hit@5": 0.958,
+        "mrr": 0.873
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.812,
+        "hit@1_ci95": [
+          0.681,
+          0.898
+        ],
+        "hit@3": 0.938,
+        "hit@5": 1.0,
+        "mrr": 0.884
+      },
+      "refusal": {
+        "auc_development": 0.961,
+        "auc_heldout": 0.979,
+        "threshold_chosen_on_development": 0.593,
+        "heldout_answerable_kept": 0.812,
+        "heldout_unanswerable_refused": 1.0
+      },
+      "seconds_per_query": 0.028
+    },
+    "bge-m3 | no rerank | expansion": {
+      "development_document": {
+        "n": 28,
+        "hit@1": 0.786,
+        "hit@1_ci95": [
+          0.605,
+          0.898
+        ],
+        "hit@3": 0.964,
+        "hit@5": 0.964,
+        "mrr": 0.863
+      },
+      "heldout_passage": {
+        "n": 48,
+        "hit@1": 0.875,
+        "hit@1_ci95": [
+          0.753,
+          0.941
+        ],
+        "hit@3": 0.938,
+        "hit@5": 1.0,
+        "mrr": 0.92
+      },
+      "heldout_document": {
+        "n": 48,
+        "hit@1": 0.917,
+        "hit@1_ci95": [
+          0.804,
+          0.967
+        ],
+        "hit@3": 0.958,
+        "hit@5": 1.0,
+        "mrr": 0.946
+      },
+      "refusal": {
+        "auc_development": 0.979,
+        "auc_heldout": 0.979,
+        "threshold_chosen_on_development": 0.544,
+        "heldout_answerable_kept": 0.938,
+        "heldout_unanswerable_refused": 0.875
+      },
+      "seconds_per_query": 0.074
+    }
+  },
+  "example_expansions": {
+    "How much paid time off do permanent staff get each year?": [
+      "annual leave entitlement permanent staff",
+      "paid time off policy permanent employees"
+    ],
+    "Who signs off on purchases over a hundred euros?": [
+      "purchases exceeding euro threshold approval",
+      "expenses over 100 euro approval process"
+    ],
+    "When do we receive our salary slips?": [
+      "payroll schedule",
+      "salary statement frequency"
+    ],
+    "How quickly must someone react when the production service is down?": [
+      "production downtime incident response time",
+      "service outage response procedure"
+    ],
+    "Which open source licences are not allowed in client products?": [
+      "permitted open source licenses for client products",
+      "disallowed open source licenses for client products"
+    ],
+    "How do I request time off?": [
+      "time off request procedure",
+      "leave request process"
+    ]
+  }
+}

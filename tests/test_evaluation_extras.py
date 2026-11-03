@@ -27,6 +27,17 @@ def test_numbers_ignore_citations_and_source_mentions() -> None:
     assert numbers("The budget is 1,000 EUR") == {"1000"}
 
 
+def test_a_copied_source_header_is_not_counted_as_claimed_figures() -> None:
+    """A weak model that pastes the prompt's header (version, dates) into its answer is not inventing figures."""
+    pasted = ("SOURCE 1\nTitle: Leave Policy\nSection: Vacation\n"
+              "Status: current, version 3, effective 2026-01-01\nText: 25 days")
+    assert numbers(pasted) == {"25"}
+    hit = _hit("Full-time employees get 25 days of vacation.")
+    echo = Answer(pasted, False, "llm", [], [], [hit], 0.4)
+    result = score(echo, ["leave.md"])
+    assert result["figures_supported"] is True and result["echoes_sources"] is True
+
+
 def test_a_figure_that_is_in_no_passage_is_flagged() -> None:
     hit = _hit("Full-time employees get 25 days of vacation.")
     cite = ["[Leave Policy, Vacation]"]

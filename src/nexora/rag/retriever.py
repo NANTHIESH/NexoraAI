@@ -1,16 +1,20 @@
 """Retriever: semantic search, optional hybrid BM25 fusion, optional cross-encoder reranking.
 
 Modes (config.yaml): ``retrieval.hybrid`` adds BM25 keyword search and fuses both rankings
-with reciprocal rank fusion; ``reranker.enabled`` re-orders the candidate pool with a
-cross-encoder. ``Hit.score`` is always the embedding cosine similarity, so the refusal
-threshold means the same in every mode. Superseded documents are excluded unless the
-question asks about earlier rules.
+with reciprocal rank fusion; ``retrieval.query_expansion`` (N > 0) also searches N rewordings of the
+question written by the local Ollama model and fuses those rankings too; ``reranker.enabled``
+re-orders the candidate pool with a cross-encoder. ``Hit.score`` is always the embedding cosine
+similarity to the ORIGINAL question, so the refusal threshold means the same in every mode.
+Superseded documents are excluded unless the question asks about earlier rules.
 """
 
 from __future__ import annotations
 
+import json
+import logging
 import re
 from dataclasses import dataclass, replace
+from typing import Protocol
 
 import numpy as np
 from rank_bm25 import BM25Okapi
@@ -19,7 +23,21 @@ from nexora.config import Config, load_config
 from nexora.rag.chunking import Chunk
 from nexora.rag.embeddings import embed
 from nexora.rag.reranker import Reranker
-from nexora.rag.vectorstore import Hit, VectorStore
+from nexora.rag.vectorstore import Hit, VectorStore, collection_name
+
+log = logging.getLogger("nexora.retriever")
+MAX_EXPANSION_CHARS = 160
+EXPANSION_PROMPT = """You help search a small company's policy documents (leave, expenses, security, deployment, payroll...).
+Rewrite the employee's question as {n} different short search queries that use other words: synonyms, formal policy wording, the likely title of the policy. Keep names, numbers and tools exactly. Do not answer the question.
+Example question: "How early do I have to ask for time off?"
+Example output: {{"queries": ["vacation request notice period in advance", "leave tool request approval manager"]}}
+Output JSON only: {{"queries": [...]}}"""
+
+
+class SupportsChat(Protocol):
+    """Anything with the OllamaClient.chat signature."""
+
+    def chat(self, system: str, user: str, json_mode: bool = False) -> str: ...
 
 HISTORY_WORDS = re.compile(
     r"\b(previous|previously|earlier|old|older|former|formerly|history|historical|original|"
@@ -69,11 +87,34 @@ class Retriever:
     """Top-k search over the indexed company documents."""
 
     def __init__(self, cfg: Config | None = None, store: VectorStore | None = None,
-                 reranker: Reranker | None = None) -> None:
+                 reranker: Reranker | None = None, llm: SupportsChat | None = None) -> None:
         self.cfg = cfg or load_config()
-        self.store = store or VectorStore(self.cfg.path("chroma"), self.cfg.retrieval.collection)
+        self.store = store or VectorStore(self.cfg.path("chroma"), collection_name(self.cfg))
         self.reranker = reranker or (Reranker(self.cfg.reranker.model) if self.cfg.reranker.enabled else None)
+        self.llm = llm  # only used for query expansion (retrieval.query_expansion > 0)
         self._bm25: tuple[int, list[Chunk], BM25Okapi] | None = None
+        self._expansions: dict[str, list[str]] = {}
+
+    # ------------------------------------------------------------------ query expansion
+    def _expand(self, question: str) -> list[str]:
+        """Alternative phrasings of ``question`` from the local model (synonyms, formal policy wording).
+
+        Employees ask "time off" where the policy says "vacation"; searching with a few rewordings as well finds
+        the passage either way. Returns ``[]`` when expansion is off, no model is available or the model fails.
+        """
+        wanted = int(self.cfg.retrieval.get("query_expansion", 0) or 0)
+        if wanted <= 0 or (self.llm is None and question not in self._expansions):
+            return []
+        if question not in self._expansions:
+            try:
+                data = json.loads(self.llm.chat(EXPANSION_PROMPT.format(n=wanted), question, json_mode=True))
+                queries = data.get("queries", []) if isinstance(data, dict) else []
+            except Exception as exc:  # noqa: BLE001 - model missing, timeout, invalid JSON: search without expansion
+                log.info("Query expansion skipped (%s)", type(exc).__name__)
+                queries = []
+            clean = [" ".join(q.split()) for q in queries if isinstance(q, str) and 3 <= len(q.strip()) <= MAX_EXPANSION_CHARS]
+            self._expansions[question] = [q for q in clean if q.lower() != question.lower()][:wanted]
+        return self._expansions[question]
 
     # ------------------------------------------------------------------ keyword index
     def _keyword_index(self) -> tuple[list[Chunk], BM25Okapi]:
@@ -98,19 +139,28 @@ class Retriever:
         if include_superseded is None:
             include_superseded = asks_for_history(question)
         r = self.cfg.retrieval
-        vector = embed([question], self.cfg.embeddings.model)[0]
-        pooled = r.candidates if (r.hybrid or self.reranker) else r.top_k
+        model = self.cfg.embeddings.model
+        vector = embed([question], model, "query")[0]
+        pooled = r.candidates if (r.hybrid or self.reranker or r.get("query_expansion")) else r.top_k
         semantic = self.store.search(vector, pooled, include_superseded)
         by_id = {h.chunk.chunk_id: h for h in semantic}
-        order = [h.chunk.chunk_id for h in semantic]
-        if r.hybrid:
-            keyword = self._keyword_ranking(question, include_superseded, r.candidates)
-            missing = [c for c in keyword if c.chunk_id not in by_id]
-            vectors = self.store.embeddings_for([c.chunk_id for c in missing])
-            for chunk in missing:
-                cosine = float(np.dot(vector, vectors[chunk.chunk_id]))
-                by_id[chunk.chunk_id] = Hit(chunk, round(cosine, 4))
-            order = reciprocal_rank_fusion([order, [c.chunk_id for c in keyword]], r.rrf_k)
+        rankings = [[h.chunk.chunk_id for h in semantic]]
+        extra: dict[str, Chunk] = {}  # candidates found only by the other searches
+        alternatives = self._expand(question)
+        for alt in alternatives:  # the same question in other words, searched by meaning
+            found = self.store.search(embed([alt], model, "query")[0], pooled, include_superseded)
+            rankings.append([h.chunk.chunk_id for h in found])
+            extra.update({h.chunk.chunk_id: h.chunk for h in found})
+        if r.hybrid:  # keywords of the question and its rewordings
+            keyword = self._keyword_ranking(" ".join([question, *alternatives]), include_superseded, r.candidates)
+            rankings.append([c.chunk_id for c in keyword])
+            extra.update({c.chunk_id: c for c in keyword})
+        missing = [c for cid, c in extra.items() if cid not in by_id]
+        vectors = self.store.embeddings_for([c.chunk_id for c in missing])
+        for chunk in missing:  # Hit.score is always the cosine to the ORIGINAL question
+            cosine = float(np.dot(vector, vectors[chunk.chunk_id]))
+            by_id[chunk.chunk_id] = Hit(chunk, round(cosine, 4))
+        order = reciprocal_rank_fusion(rankings, r.rrf_k) if len(rankings) > 1 else rankings[0]
         order = order[: r.candidates if self.reranker else r.top_k]
         hits = [by_id[i] for i in order]
         if self.reranker and hits:

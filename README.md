@@ -146,6 +146,7 @@ Every number below is produced by a script and written to `evaluation/results/*.
 | G. Document answers: faithfulness and refusals | `python -m evaluation.eval_faithfulness` | figures supported by the sources, refusals on answerable / unanswerable questions, retrieval score as confidence (needs Ollama) |
 | H. Production metrics | `python -m evaluation.eval_production` | refusal, denial, clarification, fallback and feedback rates from the real logs |
 | I. Model comparison | `python -m evaluation.compare_models` | llama3.2 1b and 3b, qwen3 1.7b and 8b on the same questions with paired tests and latency (needs Ollama and the models pulled) |
+| J. Retrieval setups | `python -m evaluation.compare_retrieval` | 3 embedding models x reranker x query expansion on 48 held-out questions with the exact right passage known (needs Ollama) |
 | Regression gate | `python -m evaluation.check_gate` | fails if a key number got worse (`make gate`) |
 | Statistics | `python -m evaluation.eval_statistics` | confidence intervals, paired tests and latency percentiles on the saved results (no model run) |
 | Retrieval modes | `python -m evaluation.eval_retrieval` | semantic vs. hybrid vs. reranker on development questions |
@@ -330,10 +331,11 @@ Reference model: `llama3.2:3b`. Same questions, prompts, retrieval, temperature 
 |---|---|---|---|---|
 | Rules: questions passed (of 15) | 14/15 (93%) | 11/15 (73%) | 12/15 (80%) | 13/15 (87%) |
 | Rules: same model without documents | 3 | 4 | 3 | 3 |
-| Documents: answerable questions wrongly refused | 6/40 (15%) | 12/40 (30%) | 2/40 (5%) | 0/40 (0%) |
-| Documents: right document cited | 33/40 (82%) | 22/40 (55%) | 30/40 (75%) | 36/40 (90%) |
+| Documents: answerable questions wrongly refused | 6/40 (15%) | 12/40 (30%) | 3/40 (8%) | 0/40 (0%) |
+| Documents: right document cited | 33/40 (82%) | 20/40 (50%) | 30/40 (75%) | 36/40 (90%) |
 | Documents: unanswerable questions refused | 13/13 (100%) | 11/13 (85%) | 13/13 (100%) | 12/13 (92%) |
-| Documents: figures not found in the sources | 0 | 26 | 0 | 0 |
+| Documents: figures not found in the sources | 0 | 0 | 0 | 0 |
+| Documents: answers that paste the source text instead of answering | 0/34 (0%) | 25/30 (83%) | 0/37 (0%) | 0/41 (0%) |
 | Understanding: accuracy as deployed (42 messages) | 37/42 (88%) | 27/42 (64%) | 32/42 (76%) | 39/42 (93%) |
 | Understanding: needless clarifying questions | 0/35 (0%) | 0/35 (0%) | 0/35 (0%) | 1/35 (3%) |
 | Understanding: vague messages that got a question | 3/7 (43%) | 0/7 (0%) | 0/7 (0%) | 6/7 (86%) |
@@ -345,18 +347,54 @@ Paired comparison with the reference model on the same questions (exact McNemar 
 | Model | Task | Only this model right | Only reference right | p-value | Verdict |
 |---|---|---|---|---|---|
 | llama3.2:1b | Rules questions (15) | 0 | 3 | 0.250 | not conclusive |
-| llama3.2:1b | Right document cited (40) | 1 | 12 | 0.003 | **real difference** |
+| llama3.2:1b | Right document cited (40) | 1 | 14 | 0.001 | **real difference** |
 | llama3.2:1b | Answerable question answered, not refused (40) | 2 | 8 | 0.109 | not conclusive |
 | llama3.2:1b | Understanding messages (42) | 0 | 10 | 0.002 | **real difference** |
 | qwen3:1.7b | Rules questions (15) | 0 | 2 | 0.500 | not conclusive |
 | qwen3:1.7b | Right document cited (40) | 2 | 5 | 0.453 | not conclusive |
-| qwen3:1.7b | Answerable question answered, not refused (40) | 5 | 1 | 0.219 | not conclusive |
+| qwen3:1.7b | Answerable question answered, not refused (40) | 5 | 2 | 0.453 | not conclusive |
 | qwen3:1.7b | Understanding messages (42) | 0 | 5 | 0.062 | not conclusive |
 | qwen3:8b | Rules questions (15) | 1 | 2 | 1.000 | not conclusive |
 | qwen3:8b | Right document cited (40) | 6 | 3 | 0.508 | not conclusive |
 | qwen3:8b | Answerable question answered, not refused (40) | 6 | 0 | 0.031 | **real difference** |
 | qwen3:8b | Understanding messages (42) | 3 | 1 | 0.625 | not conclusive |
 <!-- END:model_comparison -->
+
+### J. Which retrieval setup is best?
+
+<!-- BEGIN:retrieval_comparison -->
+Held-out questions: 48 answerable ones with the exact right passage known, written before any change was tried and never used to choose settings. Development questions (right document known) were used to choose settings. Query expansion = 2 rewordings per question from `llama3.2:3b` (its time, about 0.3 to 0.5 s per question, is not in the last column).
+
+| Setup | Held-out: right passage first (95% interval) | In top 3 | MRR | Development: right document first | Answerable vs unanswerable (AUC) | Refusal threshold (from development) | Search time (ms) |
+|---|---|---|---|---|---|---|---|
+| MiniLM (current) | rerank | no expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.98 | 0.35 | 227 |
+| MiniLM (current) | rerank | expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.98 | 0.35 | 251 |
+| MiniLM (current) | no rerank | no expansion | 81% (68% to 90%) | 94% | 0.87 | 79% | 0.98 | 0.41 | 13 |
+| MiniLM (current) | no rerank | expansion | 88% (75% to 94%) | 96% | 0.92 | 86% | 0.98 | 0.35 | 27 |
+| nomic-embed-text | rerank | no expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.97 | 0.67 | 285 |
+| nomic-embed-text | rerank | expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.97 | 0.67 | 405 |
+| nomic-embed-text | no rerank | no expansion | 83% (70% to 91%) | 92% | 0.88 | 82% | 0.97 | 0.67 | 20 |
+| nomic-embed-text | no rerank | expansion | 92% (80% to 97%) | 96% | 0.94 | 89% | 0.97 | 0.67 | 55 |
+| bge-m3 | rerank | no expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.98 | 0.54 | 300 |
+| bge-m3 | rerank | expansion | 92% (80% to 97%) | 98% | 0.95 | 89% | 0.98 | 0.54 | 431 |
+| bge-m3 | no rerank | no expansion | 81% (68% to 90%) | 94% | 0.87 | 86% | 0.98 | 0.59 | 28 |
+| bge-m3 | no rerank | expansion | 88% (75% to 94%) | 94% | 0.92 | 79% | 0.98 | 0.54 | 74 |
+<!-- END:retrieval_comparison -->
+
+**Reading it.** With the cross-encoder reranker on, every embedding model (the default MiniLM, or `bge-m3` and `nomic-embed-text` served by Ollama) finds the right passage first on 92% of the held-out questions and in the top 3 on 98%, and query expansion adds nothing: retrieval is already close to its ceiling. Without the reranker, accuracy drops about 10 points, and query expansion by the local Ollama model wins most of that back (for example `nomic-embed-text`, no reranker, expansion: 92%). The intervals are wide (about 80% to 97% on 48 questions), so differences of a few questions are not conclusive. The default setup is unchanged.
+
+**Retrieval on Ollama models only** (no sentence-transformers model at search time) is supported. Put this in `config.yaml`, run `python -m scripts.build_index` (a new index is built automatically), and restart the API:
+
+```yaml
+embeddings:
+  model: ollama:nomic-embed-text
+reranker:
+  enabled: false
+retrieval:
+  query_expansion: 2
+  min_retrieval_score: 0.67   # cosine scores of this model run higher than MiniLM's 0.35
+```
+Query expansion costs one extra small-model call per question (about 0.3 to 0.5 s), which is slower than the reranker it replaces.
 
 ### Retrieval modes (development questions)
 

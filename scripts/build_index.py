@@ -17,7 +17,7 @@ from nexora.db.session import connect
 from nexora.rag.chunking import chunk_document
 from nexora.rag.embeddings import embed
 from nexora.rag.loaders import SUPPORTED, load_document
-from nexora.rag.vectorstore import VectorStore
+from nexora.rag.vectorstore import VectorStore, collection_name
 
 
 def sha256_of(path: Path) -> str:
@@ -33,7 +33,8 @@ def build_index(cfg: Config | None = None, rebuild: bool = False,
     files = sorted(p for p in folder.glob("*") if p.suffix in SUPPORTED) if folder.exists() else []
     if not files:
         raise FileNotFoundError(f"No documents found in {folder}. Run `make docs` first.")
-    store = store or VectorStore(cfg.path("chroma"), cfg.retrieval.collection)
+    store = store or VectorStore(cfg.path("chroma"), collection_name(cfg))
+    rebuild = rebuild or store.count() == 0  # a new embedding model has a new, empty collection
     db = connect(cfg.path("sqlite"))
     known = {r["path"]: r["sha256"] for r in db.execute("SELECT path, sha256 FROM documents")}
     counts = {"indexed": 0, "skipped": 0, "removed": 0}
@@ -46,7 +47,7 @@ def build_index(cfg: Config | None = None, rebuild: bool = False,
         doc = load_document(path)
         chunks = chunk_document(doc, ch.chunk_tokens_min, ch.chunk_tokens_max, ch.chunk_overlap_tokens)
         store.delete_source(path.name)
-        store.add(chunks, embed([c.embedding_text for c in chunks], cfg.embeddings.model))
+        store.add(chunks, embed([c.embedding_text for c in chunks], cfg.embeddings.model, "document"))
         db.execute("INSERT OR REPLACE INTO documents VALUES (?,?,?,?,?,?,?,?,?)",
                    (path.name, digest, doc.title, doc.version, doc.effective_date, doc.status,
                     doc.owner, len(chunks), datetime.now(UTC).isoformat(timespec="seconds")))

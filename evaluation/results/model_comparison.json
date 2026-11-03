@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-03T11:13:13+00:00",
+  "run_at": "2026-11-03T11:41:37+00:00",
   "reference": "llama3.2:3b",
   "models": {
     "llama3.2:3b": {
@@ -48,7 +48,16 @@
             1.0
           ]
         },
-        "unsupported_figures": 0
+        "unsupported_figures": 0,
+        "repeats_source_block": {
+          "k": 0,
+          "n": 34,
+          "share": 0.0,
+          "ci95": [
+            0.0,
+            0.1015
+          ]
+        }
       },
       "understanding": {
         "intent_accuracy_as_deployed": {
@@ -128,12 +137,12 @@
           ]
         },
         "right_document": {
-          "k": 22,
+          "k": 20,
           "n": 40,
-          "share": 0.55,
+          "share": 0.5,
           "ci95": [
-            0.3983,
-            0.6929
+            0.352,
+            0.648
           ]
         },
         "refused_when_unanswerable": {
@@ -145,7 +154,16 @@
             0.9567
           ]
         },
-        "unsupported_figures": 26
+        "unsupported_figures": 0,
+        "repeats_source_block": {
+          "k": 25,
+          "n": 30,
+          "share": 0.8333,
+          "ci95": [
+            0.6644,
+            0.9266
+          ]
+        }
       },
       "understanding": {
         "intent_accuracy_as_deployed": {
@@ -216,12 +234,12 @@
       },
       "documents": {
         "refused_when_answerable": {
-          "k": 2,
+          "k": 3,
           "n": 40,
-          "share": 0.05,
+          "share": 0.075,
           "ci95": [
-            0.0138,
-            0.165
+            0.0258,
+            0.1986
           ]
         },
         "right_document": {
@@ -242,7 +260,16 @@
             1.0
           ]
         },
-        "unsupported_figures": 0
+        "unsupported_figures": 0,
+        "repeats_source_block": {
+          "k": 0,
+          "n": 37,
+          "share": 0.0,
+          "ci95": [
+            0.0,
+            0.0941
+          ]
+        }
       },
       "understanding": {
         "intent_accuracy_as_deployed": {
@@ -339,7 +366,16 @@
             0.9863
           ]
         },
-        "unsupported_figures": 0
+        "unsupported_figures": 0,
+        "repeats_source_block": {
+          "k": 0,
+          "n": 41,
+          "share": 0.0,
+          "ci95": [
+            0.0,
+            0.0857
+          ]
+        }
       },
       "understanding": {
         "intent_accuracy_as_deployed": {
@@ -406,8 +442,8 @@
       "reference": "llama3.2:3b",
       "task": "documents",
       "only_model_right": 1,
-      "only_reference_right": 12,
-      "p_value": 0.0034,
+      "only_reference_right": 14,
+      "p_value": 0.001,
       "conclusive": true
     },
     {
@@ -451,8 +487,8 @@
       "reference": "llama3.2:3b",
       "task": "answered",
       "only_model_right": 5,
-      "only_reference_right": 1,
-      "p_value": 0.2188,
+      "only_reference_right": 2,
+      "p_value": 0.4531,
       "conclusive": false
     },
     {

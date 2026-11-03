@@ -2,12 +2,28 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
 import chromadb
 
+from nexora.config import Config
 from nexora.rag.chunking import Chunk
+
+DEFAULT_EMBEDDING = "sentence-transformers/all-MiniLM-L6-v2"
+
+
+def collection_name(cfg: Config) -> str:
+    """Chroma collection of the configured embedding model.
+
+    Vectors of different models cannot be mixed, so each model gets its own collection; the default model keeps
+    the plain ``retrieval.collection`` name (existing indexes stay valid).
+    """
+    base, model = cfg.retrieval.collection, cfg.embeddings.model
+    if model == DEFAULT_EMBEDDING:
+        return base
+    return f"{base}__{re.sub(r'[^a-z0-9]+', '-', model.lower()).strip('-')}"
 
 
 class EmptyIndexError(RuntimeError):

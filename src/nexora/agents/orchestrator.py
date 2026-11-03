@@ -14,6 +14,7 @@ from nexora.agents.knowledge import KnowledgeAgent
 from nexora.agents.lookups import (
     CAPABILITIES,
     REPORT_WORDS,
+    action_request_tool,
     answer_headcount,
     answer_income,
     answer_inventory,
@@ -249,6 +250,14 @@ class Orchestrator:
         if not can(user.role, Permission.SUBSCRIPTIONS):
             return self._denied(user, "subscription and billing data")
         analysis = analyze_subscriptions(frames, self.cfg)
+        tool = action_request_tool(question, frames)
+        if tool:  # "cancel Notion": say plainly that the assistant only recommends, then give the facts
+            facts = answer_tool_facts(frames, self.cfg, f"What does {tool} cost?", analysis.flags)
+            text = ("I can't cancel or change subscriptions myself: I only recommend, and a person makes the change "
+                    f"in the vendor's billing page. Here is what I know about {tool}:\n{facts.text}\n\n"
+                    "If you decide to cancel it, use Confirm on the Dashboard so the decision is recorded for "
+                    "whoever manages billing.")
+            return ChatResult("subscription", "", text, report=facts.data)
         if lookup_kind(question, frames) == "inventory":
             answer = answer_inventory(frames)
             return ChatResult("subscription", "", answer.text, report=answer.data)

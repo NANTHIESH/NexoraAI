@@ -86,6 +86,8 @@ class Assistant:
         self.cfg = cfg or load_config()
         self.retriever = retriever or Retriever(self.cfg)
         self.llm = llm or OllamaClient(self.cfg)
+        if self.retriever.llm is None:
+            self.retriever.llm = self.llm  # lets the retriever reword questions when query expansion is on
 
     def _refusal(self, mode: str, hits: list[Hit], top: float, warning: str | None) -> Answer:
         return Answer(self.cfg.refusal_text, True, mode, sources=hits, top_score=top, warning=warning)

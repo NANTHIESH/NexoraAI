@@ -303,6 +303,8 @@ def render_model_comparison(results: Path) -> str:
         + [cell(get(m, "documents", "refused_when_unanswerable")) for m in models],
         ["Documents: figures not found in the sources"]
         + [str(get(m, "documents", "unsupported_figures")) for m in models],
+        ["Documents: answers that paste the source text instead of answering"]
+        + [cell(get(m, "documents", "repeats_source_block")) for m in models],
         ["Understanding: accuracy as deployed (42 messages)"]
         + [cell(get(m, "understanding", "intent_accuracy_as_deployed")) for m in models],
         ["Understanding: needless clarifying questions"]
@@ -327,12 +329,35 @@ def render_model_comparison(results: Path) -> str:
             + _table(["Model", "Task", "Only this model right", "Only reference right", "p-value", "Verdict"], paired))
 
 
+def render_retrieval_comparison(results: Path) -> str:
+    """Evaluation J: embedding model, reranker and query expansion compared on held-out questions."""
+    data = _load(results, "retrieval_comparison.json")
+    if data is None:
+        return NOT_RUN
+    rows = []
+    for name, v in data["setups"].items():
+        tp, dv, r = v["heldout_passage"], v["development_document"], v["refusal"]
+        low, high = tp["hit@1_ci95"]
+        rows.append([name, f"{tp['hit@1']:.0%} ({low:.0%} to {high:.0%})", f"{tp['hit@3']:.0%}", f"{tp['mrr']:.2f}",
+                     f"{dv['hit@1']:.0%}", f"{r['auc_heldout']:.2f}", f"{r['threshold_chosen_on_development']:.2f}",
+                     f"{v['seconds_per_query'] * 1000:.0f}"])
+    held_out = next(iter(data["setups"].values()))["heldout_passage"]["n"]
+    return (f"Held-out questions: {held_out} answerable ones with the "
+            "exact right passage known, written before any change was tried and never used to choose settings. "
+            "Development questions (right document known) were used to choose settings. "
+            f"Query expansion = {data['expansion_queries']} rewordings per question from `{data['expansion_model']}` "
+            "(its time, about 0.3 to 0.5 s per question, is not in the last column).\n\n"
+            + _table(["Setup", "Held-out: right passage first (95% interval)", "In top 3", "MRR", "Development: right "
+                      "document first", "Answerable vs unanswerable (AUC)", "Refusal threshold (from development)",
+                      "Search time (ms)"], rows))
+
+
 RENDERERS = {"rules": render_rules, "retrieval": render_retrieval, "detection": render_detection,
              "time": render_time, "satisfaction": render_satisfaction, "statistics": render_statistics,
              "understanding": render_understanding, "data_answers": render_data_answers,
              "safety": render_safety, "faithfulness": render_faithfulness,
              "production": render_production,
-             "model_comparison": render_model_comparison}
+             "model_comparison": render_model_comparison, "retrieval_comparison": render_retrieval_comparison}
 
 
 def fill(readme_text: str, results: Path) -> str:

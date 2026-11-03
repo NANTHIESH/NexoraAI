@@ -81,7 +81,8 @@ def summarise_model(results: Path, model: str) -> dict[str, Any]:
             "refused_when_answerable": every["refused_when_answerable"],
             "right_document": every["answerable_answered_with_right_document"],
             "refused_when_unanswerable": every["refused_when_unanswerable"],
-            "unsupported_figures": len(faith["unsupported_figures"])}
+            "unsupported_figures": len(faith["unsupported_figures"]),
+            "repeats_source_block": every.get("answers_that_repeat_the_source_block")}
         out["per_question"]["documents"] = {q["question"]: bool(q["right_document"]) for q in faith["questions"]
                                             if q["answerable"]}
         out["per_question"]["answered"] = {q["question"]: not q["refused"] for q in faith["questions"]
@@ -132,6 +133,7 @@ def print_table(result: dict[str, Any]) -> None:
             ("Documents: right document cited", lambda s: _cell(s.get("documents", {}).get("right_document"))),
             ("Documents: unanswerable refused", lambda s: _cell(s.get("documents", {}).get("refused_when_unanswerable"))),
             ("Documents: figures not in sources", lambda s: str(s.get("documents", {}).get("unsupported_figures", "n/a"))),
+            ("Documents: pasted the source text", lambda s: _cell(s.get("documents", {}).get("repeats_source_block"))),
             ("Understanding: accuracy as deployed",
              lambda s: _cell(s.get("understanding", {}).get("intent_accuracy_as_deployed"))),
             ("Understanding: needless questions", lambda s: _cell(s.get("understanding", {}).get("needless_clarifications"))),

@@ -1,9 +1,18 @@
 {
-  "run_at": "2026-11-03T11:07:11+00:00",
+  "run_at": "2026-11-03T11:38:49+00:00",
   "model": "llama3.2:1b",
   "note": "development questions were used to choose thresholds: read the evaluation set as the independent one",
   "all": {
     "questions": 53,
+    "answers_that_repeat_the_source_block": {
+      "k": 25,
+      "n": 30,
+      "share": 0.8333,
+      "ci95": [
+        0.6644,
+        0.9266
+      ]
+    },
     "refused_when_answerable": {
       "k": 12,
       "n": 40,
@@ -23,35 +32,44 @@
       ]
     },
     "answerable_answered_with_right_document": {
-      "k": 22,
+      "k": 20,
       "n": 40,
-      "share": 0.55,
+      "share": 0.5,
       "ci95": [
-        0.3983,
-        0.6929
+        0.352,
+        0.648
       ]
     },
     "answers_with_figures_all_supported": {
-      "k": 2,
-      "n": 28,
-      "share": 0.0714,
+      "k": 19,
+      "n": 19,
+      "share": 1.0,
       "ci95": [
-        0.0198,
-        0.2265
+        0.8318,
+        1.0
       ]
     },
     "cited_passage_contains_the_figures": {
-      "k": 2,
-      "n": 22,
-      "share": 0.0909,
+      "k": 15,
+      "n": 15,
+      "share": 1.0,
       "ci95": [
-        0.0253,
-        0.2782
+        0.7961,
+        1.0
       ]
     }
   },
   "evaluation_set": {
     "questions": 15,
+    "answers_that_repeat_the_source_block": {
+      "k": 9,
+      "n": 11,
+      "share": 0.8182,
+      "ci95": [
+        0.523,
+        0.9486
+      ]
+    },
     "refused_when_answerable": {
       "k": 2,
       "n": 12,
@@ -71,35 +89,44 @@
       ]
     },
     "answerable_answered_with_right_document": {
-      "k": 10,
+      "k": 8,
       "n": 12,
-      "share": 0.8333,
+      "share": 0.6667,
       "ci95": [
-        0.552,
-        0.953
+        0.3906,
+        0.8619
       ]
     },
     "answers_with_figures_all_supported": {
-      "k": 1,
-      "n": 11,
-      "share": 0.0909,
+      "k": 9,
+      "n": 9,
+      "share": 1.0,
       "ci95": [
-        0.0162,
-        0.3774
+        0.7008,
+        1.0
       ]
     },
     "cited_passage_contains_the_figures": {
-      "k": 1,
-      "n": 11,
-      "share": 0.0909,
+      "k": 8,
+      "n": 8,
+      "share": 1.0,
       "ci95": [
-        0.0162,
-        0.3774
+        0.6756,
+        1.0
       ]
     }
   },
   "development_set": {
     "questions": 38,
+    "answers_that_repeat_the_source_block": {
+      "k": 16,
+      "n": 19,
+      "share": 0.8421,
+      "ci95": [
+        0.6243,
+        0.9448
+      ]
+    },
     "refused_when_answerable": {
       "k": 10,
       "n": 28,
@@ -128,21 +155,21 @@
       ]
     },
     "answers_with_figures_all_supported": {
-      "k": 1,
-      "n": 17,
-      "share": 0.0588,
+      "k": 10,
+      "n": 10,
+      "share": 1.0,
       "ci95": [
-        0.0105,
-        0.2698
+        0.7225,
+        1.0
       ]
     },
     "cited_passage_contains_the_figures": {
-      "k": 1,
-      "n": 11,
-      "share": 0.0909,
+      "k": 7,
+      "n": 7,
+      "share": 1.0,
       "ci95": [
-        0.0162,
-        0.3774
+        0.6457,
+        1.0
       ]
     }
   },
@@ -164,12 +191,12 @@
       "score_from": 0.5,
       "score_to": 0.65,
       "right": {
-        "k": 9,
+        "k": 8,
         "n": 16,
-        "share": 0.5625,
+        "share": 0.5,
         "ci95": [
-          0.3318,
-          0.769
+          0.28,
+          0.72
         ]
       }
     },
@@ -177,12 +204,12 @@
       "score_from": 0.65,
       "score_to": 1.0,
       "right": {
-        "k": 11,
+        "k": 10,
         "n": 17,
-        "share": 0.6471,
+        "share": 0.5882,
         "ci95": [
-          0.413,
-          0.8269
+          0.3601,
+          0.7839
         ]
       }
     }
@@ -200,7 +227,7 @@
       "question": "How many unused vacation days can be carried over?",
       "answerable": true,
       "refused": false,
-      "right_document": true
+      "right_document": false
     },
     {
       "set": "evaluation",
@@ -214,7 +241,7 @@
       "question": "How many approvals does a pull request need?",
       "answerable": true,
       "refused": false,
-      "right_document": true
+      "right_document": false
     },
     {
       "set": "evaluation",
@@ -560,340 +587,25 @@
       "right_document": null
     }
   ],
-  "unsupported_figures": [
+  "unsupported_figures": [],
+  "wrong_or_missed": [
     {
       "question": "How many unused vacation days can be carried over?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "2",
-        "2025",
-        "2026",
-        "24",
-        "3",
-        "31",
-        "5"
-      ],
-      "answer": "SOURCE 1\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Vacation\nStatus: current, version 3, effective 2026-01-01\nText: Up to 5 unused vacation days can be carried over into the next year and m"
+      "refused": false,
+      "top_score": 0.6772,
+      "answer": "NOT FOUND [Expenses, Equipment and Training Budget, Training Budget]"
     },
-    {
-      "question": "How many approvals does a pull request need?",
-      "figures": [
-        "01",
-        "02",
-        "1",
-        "100",
-        "15",
-        "2",
-        "2026",
-        "3",
-        "30",
-        "4",
-        "5",
-        "6"
-      ],
-      "answer": "SOURCE 1\nTitle: Engineering Standards\nSection: Code Review\nStatus: current, version 3, effective 2026-01-15\nText: - Every pull request needs 2 approvals before merge.\n- Authors cannot approve their ow"
-    },
-    {
-      "question": "Can we deploy to production on a Friday afternoon?",
-      "figures": [
-        "00",
-        "01",
-        "02",
-        "14",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Release and Deployment Rules\nSection: Deployment Windows\nStatus: current, version 2, effective 2026-02-01\nText: - Production deployments are allowed on Monday to Thursday during workin"
-    },
-    {
-      "question": "What is the annual training budget per developer?",
-      "figures": [
-        "01",
-        "1000",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: - The training budget is 1,000 EUR per developer per year.\nAnswe"
-    },
-    {
-      "question": "Who must approve an expense above 100 EUR?",
-      "figures": [
-        "01",
-        "02",
-        "09",
-        "100",
-        "15",
-        "2",
-        "2025",
-        "2026",
-        "3"
-      ],
-      "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Training Budget\nStatus: current, version 2, effective 2026-01-01\nText: Your manager [Manager's Name] must approve expenses above 100 EU"
-    },
-    {
-      "question": "What must happen before we buy a new software tool?",
-      "figures": [
-        "02",
-        "15",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Software Tool Purchase Approval\nSection: Rule\nStatus: current, version 2, effective 2026-02-15\nText: A new software tool needs owner approval and must be registered in the subscription"
-    },
-    {
-      "question": "After how many days of sick leave is a medical certificate required?",
-      "figures": [
-        "01",
-        "09",
-        "2026",
-        "3",
-        "30"
-      ],
-      "answer": "SOURCE 1\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Sick Leave\nStatus: current, version 3, effective 2026-01-01\nText: - Notify your manager before 09:30 on day one of sick leave by phone or"
-    },
-    {
-      "question": "Within how many minutes must a Sev-1 incident be acknowledged?",
-      "figures": [
-        "01",
-        "1",
-        "15",
-        "2",
-        "20",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Incident Response and On-Call\nSection: Severity Levels\nStatus: current, version 2, effective 2026-01-20\nText: - Sev-1: a client-facing production system is down or data is at risk. A S"
-    },
-    {
-      "question": "On which day of the month are payslips sent?",
-      "figures": [
-        "01",
-        "09",
-        "2",
-        "2025",
-        "28"
-      ],
-      "answer": "SOURCE 1\nTitle: Payroll and Salary Payments\nSection: Payment Date\nStatus: current, version 2, effective 2025-09-01\nText: - Salaries are paid on the 28th of each month. If the 28th is not a working day"
-    },
-    {
-      "question": "Do we have a four-day work week policy?",
-      "figures": [
-        "01",
-        "03",
-        "2",
-        "2026",
-        "3"
-      ],
-      "answer": "SOURCE 1\nTitle: Remote Work Policy\nSection: Remote Days\nStatus: current, version 2, effective 2026-03-01\nText: - Employees may work remotely up to 3 days per week.\n- The remaining days are worked at t"
-    },
-    {
-      "question": "How much paid time off do permanent staff get each year?",
-      "figures": [
-        "01",
-        "2026",
-        "25",
-        "3"
-      ],
-      "answer": "SOURCE 1\nTitle: Leave Policy: Vacation and Sick Leave\nSection: Vacation\nStatus: current, version 3, effective 2026-01-01\nText: Permanent staff get 25 days of paid vacation per year. [Leave Policy: Vac"
-    },
-    {
-      "question": "Who signs off on purchases over a hundred euros?",
-      "figures": [
-        "01",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Expenses\nStatus: current, version 2, effective 2026-01-01\nText: Your manager. [Expenses, Expenses, Owner Approval]"
-    },
-    {
-      "question": "How do I request time off?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "2025",
-        "2026",
-        "25",
-        "3"
-      ],
-      "answer": "SOURCE 1\nTitle: Other Protected Absences\nSection: Bereavement Leave\nStatus: current, version 1, effective 2025-06-01\nText: Employees who need time off after the death of an immediate family member sho"
-    },
-    {
-      "question": "Is two-factor authentication required for company accounts?",
-      "figures": [
-        "01",
-        "11",
-        "2",
-        "2025"
-      ],
-      "answer": "SOURCE 1\nTitle: Information Security: Access, Passwords, Devices and Secrets\nSection: Passwords and Two-Factor Authentication\nStatus: current, version 2, effective 2025-11-01\nText: No, two-factor auth"
-    },
-    {
-      "question": "What are the support hours for clients?",
-      "figures": [
-        "00",
-        "03",
-        "09",
-        "10",
-        "17",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Client Onboarding, Invoicing and Support SLA\nSection: Support Hours and Response Times\nStatus: current, version 2, effective 2026-03-10\nText: Support hours are Monday to Friday, 09:00 "
-    },
-    {
-      "question": "Is the office closed at Christmas?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "14",
-        "2025",
-        "2026",
-        "24",
-        "25",
-        "26",
-        "3",
-        "31",
-        "6"
-      ],
-      "answer": "SOURCE 1\nTitle: Public Holidays 2026\nSection: Company Closing Days\nStatus: current, version 1, effective 2026-01-01\nText: The office is closed on Christmas Eve (Thursday, 24 December) and New Year's E"
-    },
-    {
-      "question": "How long do we keep project data after a contract ends?",
-      "figures": [
-        "01",
-        "04",
-        "12",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Data Protection, Retention, NDA and IP\nSection: Data Retention\nStatus: current, version 2, effective 2026-04-01\nText: - Project data is deleted or returned to the client 12 months afte"
-    },
-    {
-      "question": "What is the rule for working from home each week?",
-      "figures": [
-        "01",
-        "03",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Remote Work Policy\nSection: Remote Days\nStatus: current, version 2, effective 2026-03-01\nText: Remote days are agreed with your manager at the start of each week so that the team knows"
-    },
-    {
-      "question": "What must a pull request pass before it can be merged?",
-      "figures": [
-        "01",
-        "02",
-        "1",
-        "15",
-        "2",
-        "2026",
-        "3",
-        "4",
-        "5"
-      ],
-      "answer": "SOURCE 1\nTitle: Engineering Standards\nSection: Code Review\nStatus: current, version 3, effective 2026-01-15\nText: - Every pull request needs 2 approvals before merge.\n- Authors cannot approve their ow"
-    },
-    {
-      "question": "How many weeks of paid leave after a child is born?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "12",
-        "2025",
-        "2026",
-        "25",
-        "3",
-        "4",
-        "5"
-      ],
-      "answer": "SOURCE 1\nTitle: New Parent Leave\nSection: Overview\nStatus: current, version 1, effective 2025-06-01\nText: Nexora offers 12 weeks of paid leave for all full-time employees, regardless of gender or sexu"
-    },
-    {
-      "question": "How often are old laptops replaced?",
-      "figures": [
-        "01",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Expenses, Equipment and Training Budget\nSection: Equipment\nStatus: current, version 2, effective 2026-01-01\nText: Laptops are renewed after about three years. [Expenses, Equipment and "
-    },
-    {
-      "question": "Do I get paid time off for jury duty?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "2025"
-      ],
-      "answer": "SOURCE 1\nTitle: Other Protected Absences\nSection: Jury Duty or Witness Summons\nStatus: current, version 1, effective 2025-06-01\nText: Employees receive paid time to serve on a jury or as a witness, fo"
-    },
-    {
-      "question": "What are the rollback rules after a release?",
-      "figures": [
-        "01",
-        "02",
-        "2",
-        "2026"
-      ],
-      "answer": "SOURCE 1\nTitle: Release and Deployment Rules\nSection: Rollback\nStatus: current, version 2, effective 2026-02-01\nText: - Every release has a rollback plan written in the release checklist.\n- If the err"
-    },
-    {
-      "question": "How fast do we answer a client whose feature is broken?",
-      "figures": [
-        "00",
-        "01",
-        "03",
-        "04",
-        "09",
-        "1",
-        "10",
-        "15",
-        "17",
-        "2",
-        "20",
-        "2026",
-        "3",
-        "30",
-        "4",
-        "7",
-        "72"
-      ],
-      "answer": "SOURCE 1\nTitle: Incident Response and On-Call\nSection: Severity Levels\nStatus: current, version 2, effective 2026-01-20\nText: - Sev-1: a client-facing production system is down or data is at risk. A S"
-    },
-    {
-      "question": "By when must changes to my bank details reach payroll?",
-      "figures": [
-        "01",
-        "09",
-        "2",
-        "20",
-        "2025"
-      ],
-      "answer": "SOURCE 1\nTitle: Payroll and Salary Payments\nSection: Changes and Corrections\nStatus: current, version 2, effective 2025-09-01\nText: Changes to bank details or tax information must be sent to the Opera"
-    },
-    {
-      "question": "What is the wifi password?",
-      "figures": [
-        "01",
-        "06",
-        "1",
-        "11",
-        "2",
-        "2025"
-      ],
-      "answer": "SOURCE 1\nTitle: Information Security: Access, Passwords, Devices and Secrets\nSection: Passwords and Two-Factor Authentication\nStatus: current, version 2, effective 2025-11-01\nText: [No answer]\nSOURCE "
-    }
-  ],
-  "wrong_or_missed": [
     {
       "question": "How many days per week can I work remotely?",
       "refused": true,
       "top_score": 0.8103,
       "answer": "I could not find this in the company documents. Please ask your manager."
+    },
+    {
+      "question": "How many approvals does a pull request need?",
+      "refused": false,
+      "top_score": 0.6114,
+      "answer": "SOURCE 1\nTitle: Engineering Standards\nSection: Code Review\nStatus: current, version 3, effective 2026-01-15\nText: - Every pull request needs 2 approvals before merge.\n- Authors cannot approve their ow"
     },
     {
       "question": "Can I send customer data to my personal email?",
