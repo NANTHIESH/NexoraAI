@@ -40,3 +40,6 @@ demo: data docs load index test
 
 smoke:   ## python -m scripts.smoke_test (API must be running)
 	$(PY) -m scripts.smoke_test
+
+web:     ## React front end: cd web && npm install && npm run dev  (http://localhost:5173, API must run)
+	cd web && npm run dev

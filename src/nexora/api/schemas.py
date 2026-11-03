@@ -12,7 +12,15 @@ MAX_QUESTION_CHARS = 2000
 class LoginRequest(BaseModel):
     """Login with an employee id and password."""
 
-    employee_id: str = Field(min_length=1, max_length=20)
+    employee_id: str = Field(min_length=1, max_length=200)  # employee id or email
+    password: str = Field(min_length=1, max_length=200)
+
+
+class RegisterRequest(BaseModel):
+    """Create an account. The role is never chosen by the client: new accounts are ``employee``."""
+
+    name: str = Field(min_length=1, max_length=100)
+    email: str = Field(min_length=3, max_length=200)
     password: str = Field(min_length=1, max_length=200)
 
 

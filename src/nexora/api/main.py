@@ -6,8 +6,12 @@ Role checks (security/rbac.py) are enforced here, not only in the UI.
 """
 
 
+import logging
 import sqlite3
-from collections.abc import Iterator
+import threading
+import time
+from collections.abc import AsyncIterator, Iterator
+from contextlib import asynccontextmanager
 from dataclasses import asdict
 from datetime import UTC, datetime
 from typing import Annotated, Any
@@ -18,16 +22,40 @@ from fastapi.responses import JSONResponse
 from nexora.agents.orchestrator import Orchestrator, analysis_to_dict
 from nexora.agents.report import build_report, compute_report, project_view, template_project_summary
 from nexora.agents.subscription import analyze_subscriptions
-from nexora.api.schemas import ActionConfirmation, ChatRequest, FeedbackRequest, LoginRequest, TTSRequest
+from nexora.api.schemas import (
+    ActionConfirmation,
+    ChatRequest,
+    FeedbackRequest,
+    LoginRequest,
+    RegisterRequest,
+    TTSRequest,
+)
 from nexora.config import Config, load_config
-from nexora.db.repositories import MissingDataError, frames_from_db
+from nexora.db.repositories import Frames, MissingDataError, frames_from_db
 from nexora.db.session import connect
 from nexora.rag.vectorstore import EmptyIndexError
 from nexora.security import audit
-from nexora.security.auth import AuthError, User, get_user, login, read_token
+from nexora.security.auth import AuthError, RegistrationError, User, get_user, login, read_token, register
 from nexora.security.rbac import Permission, PermissionDenied, can, require
 from nexora.voice.stt import MAX_AUDIO_BYTES, transcribe
 from nexora.voice.tts import VoiceUnavailableError, synthesize
+
+log = logging.getLogger("nexora.api")
+FRAMES_TTL_SECONDS = 30.0  # business tables only change when `make load` runs, so reading them per request is waste
+
+
+def _warm_up(orch: Orchestrator, cfg: Config) -> None:
+    """Load the embedding model, reranker and vector index in the background so the first chat is fast."""
+    try:
+        from nexora.rag.embeddings import embed
+        embed(["warm up"], cfg.embeddings.model)
+        if cfg.reranker.enabled:
+            from nexora.rag.reranker import _model as reranker_model
+            reranker_model(cfg.reranker.model)
+        orch.llm_ready()
+    except Exception:  # noqa: BLE001 - warm-up is best effort; real requests report real errors
+        log.warning("Model warm-up skipped", exc_info=True)
+
 
 Period = Annotated[str, Query(pattern="^(weekly|monthly|yearly)$")]
 
@@ -36,7 +64,24 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
     """Build the API. ``orchestrator`` can be injected (tests use fakes)."""
     cfg = cfg or load_config()
     orch = orchestrator or Orchestrator(cfg)
-    app = FastAPI(title="Nexora AI", version="0.1.0")
+
+    @asynccontextmanager
+    async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+        if orchestrator is None:  # injected (test) orchestrators are fakes: nothing to warm up
+            threading.Thread(target=_warm_up, args=(orch, cfg), daemon=True).start()
+        yield
+
+    app = FastAPI(title="Nexora AI", version="0.1.0", lifespan=lifespan)
+    frames_cache: dict[str, tuple[float, Frames]] = {}
+
+    def cached_frames(conn: sqlite3.Connection) -> Frames:
+        """Business data as frames, reloaded at most every FRAMES_TTL_SECONDS."""
+        hit = frames_cache.get("frames")
+        if hit and time.monotonic() - hit[0] < FRAMES_TTL_SECONDS:
+            return hit[1]
+        frames = frames_from_db(conn)
+        frames_cache["frames"] = (time.monotonic(), frames)
+        return frames
 
     def get_conn() -> Iterator[sqlite3.Connection]:
         conn = connect(cfg.path("sqlite"))
@@ -61,6 +106,11 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
     @app.exception_handler(AuthError)
     async def _unauthorized(_: Request, exc: AuthError) -> JSONResponse:
         return JSONResponse({"detail": str(exc)}, status_code=401)
+
+    @app.exception_handler(RegistrationError)
+    async def _bad_registration(_: Request, exc: RegistrationError) -> JSONResponse:
+        status = 409 if "already exists" in str(exc) else 422
+        return JSONResponse({"detail": str(exc)}, status_code=status)
 
     @app.exception_handler(MissingDataError)
     async def _no_data(_: Request, exc: MissingDataError) -> JSONResponse:
@@ -96,6 +146,13 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
         audit.log_event(conn, user.employee_id, user.role, "login")
         return {"token": token, "user": asdict(user)}
 
+    @app.post("/register", status_code=201)
+    def do_register(body: RegisterRequest, conn: Conn) -> dict[str, Any]:
+        """Create an ``employee`` account and log it in (the role cannot be chosen by the caller)."""
+        user, token = register(conn, body.name, body.email, body.password, cfg)
+        audit.log_event(conn, user.employee_id, user.role, "register")
+        return {"token": token, "user": asdict(user)}
+
     # ------------------------------------------------------------------ authenticated
     @app.post("/chat")
     def chat(body: ChatRequest, conn: Conn, user: Me) -> dict[str, Any]:
@@ -106,11 +163,11 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
     def report(conn: Conn, user: Me, period: Period = "monthly", kind: str = "finance") -> dict[str, Any]:
         if kind == "finance":
             require(user.role, Permission.FINANCE)
-            result = build_report(frames_from_db(conn), period, llm=orch.llm if orch.llm_ready() else None)
+            result = build_report(cached_frames(conn), period, llm=orch.llm if orch.llm_ready() else None)
             data, summary, source = result.data, result.summary, result.summary_source
         elif kind == "project":
             require(user.role, Permission.PROJECT_REPORTS)
-            data = project_view(compute_report(frames_from_db(conn), period))
+            data = project_view(compute_report(cached_frames(conn), period))
             summary, source = template_project_summary(data), "template"
         else:
             raise HTTPException(422, "kind must be 'finance' or 'project'")
@@ -121,7 +178,7 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
     @app.get("/subscriptions/analysis")
     def subscription_analysis(conn: Conn, user: Me) -> dict[str, Any]:
         require(user.role, Permission.SUBSCRIPTIONS)
-        analysis = analyze_subscriptions(frames_from_db(conn), cfg)
+        analysis = analyze_subscriptions(cached_frames(conn), cfg)
         audit.log_event(conn, user.employee_id, user.role, "subscription_analysis",
                         intent="subscription", detail=f"flags={len(analysis.flags)}")
         return {**analysis_to_dict(analysis),
@@ -155,7 +212,7 @@ def create_app(cfg: Config | None = None, orchestrator: Orchestrator | None = No
 
     @app.get("/dashboard")
     def dashboard(conn: Conn, user: Me) -> dict[str, Any]:
-        frames = frames_from_db(conn)
+        frames = cached_frames(conn)
         out: dict[str, Any] = {"finance": None, "subscriptions": None, "tasks": None}
         if can(user.role, Permission.FINANCE):
             tx = frames.transactions

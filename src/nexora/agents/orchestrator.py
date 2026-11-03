@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import sqlite3
+import time
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
@@ -38,6 +39,7 @@ from nexora.security.rbac import Permission, can
 SMALLTALK_REPLY = ("Hello! I can answer questions about Nexora's company rules (with sources), create "
                    "weekly, monthly or yearly reports, and look for waste in software subscriptions.")
 MAX_LISTED_RECOMMENDATIONS = 8
+FRAMES_TTL_SECONDS = 30.0  # business tables change only when `make load` runs
 PERIOD_WORDS = re.compile(r"\b(weekly|monthly|yearly|annual|week|month|year)\b", re.IGNORECASE)
 TOPIC_LABELS = {"unused_subscription": "unused subscriptions", "duplicate_charge": "duplicate charges",
                 "price_increase": "unexplained price increases", "overlap": "overlapping tools",
@@ -79,6 +81,7 @@ class Orchestrator:
         self.cfg = cfg or load_config()
         self.llm = llm or OllamaClient(self.cfg)
         self._assistant = assistant
+        self._frames_cache: tuple[float, Frames] | None = None
 
     @property
     def knowledge(self) -> KnowledgeAgent:
@@ -128,13 +131,16 @@ class Orchestrator:
         return result
 
     # ------------------------------------------------------------------ intents
-    @staticmethod
-    def _frames(conn: sqlite3.Connection) -> Frames | None:
-        """All business data, or ``None`` when the database has not been loaded (documents still work)."""
+    def _frames(self, conn: sqlite3.Connection) -> Frames | None:
+        """All business data (cached briefly), or ``None`` when the database has not been loaded."""
+        if self._frames_cache and time.monotonic() - self._frames_cache[0] < FRAMES_TTL_SECONDS:
+            return self._frames_cache[1]
         try:
-            return frames_from_db(conn)
+            frames = frames_from_db(conn)
         except MissingDataError:
             return None
+        self._frames_cache = (time.monotonic(), frames)
+        return frames
 
     def _dispatch(self, conn: sqlite3.Connection, user: User, question: str, intent: str,
                   include_superseded: bool | None, frames: Frames | None) -> ChatResult:

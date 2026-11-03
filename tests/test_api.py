@@ -266,3 +266,27 @@ def test_action_confirmation_is_logged_and_role_checked(client: TestClient, cfg:
     row = connect(cfg.path("sqlite")).execute(
         "SELECT user_id, detail FROM audit_log WHERE action = 'action_confirmed'").fetchone()
     assert row["user_id"] == "E002" and "cancel Datadog" in row["detail"]
+
+
+def test_register_creates_employee_and_logs_in(client: TestClient) -> None:
+    body = {"name": "New Person", "email": "New.Person@Example.com", "password": "longenough1"}
+    resp = client.post("/register", json=body)
+    assert resp.status_code == 201
+    assert resp.json()["user"]["role"] == "employee"  # a role in the body is ignored
+    token = resp.json()["token"]
+    assert client.get("/tasks", headers={"Authorization": f"Bearer {token}"}).status_code == 200
+    # log in with the email (any case) and with the generated id
+    by_email = {"employee_id": "new.person@example.com", "password": "longenough1"}
+    assert client.post("/login", json=by_email).status_code == 200
+    assert client.post("/login", json={"employee_id": resp.json()["user"]["employee_id"],
+                                       "password": "longenough1"}).status_code == 200
+
+
+def test_register_rejects_bad_input(client: TestClient) -> None:
+    ok = {"name": "Dup", "email": "dup@example.com", "password": "longenough1"}
+    assert client.post("/register", json=ok).status_code == 201
+    assert client.post("/register", json=ok).status_code == 409
+    assert client.post("/register", json={**ok, "email": "nope"}).status_code == 422
+    assert client.post("/register", json={**ok, "email": "x@example.com", "password": "short"}).status_code == 422
+    sneaky = client.post("/register", json={**ok, "email": "r@example.com", "role": "owner"})
+    assert sneaky.json()["user"]["role"] == "employee"

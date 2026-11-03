@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import time
+
 import httpx
 
 from nexora.config import Config, load_config
@@ -24,6 +26,11 @@ class ModelNotPulledError(RuntimeError):
                          f"Run `ollama pull {model}` (or `make setup`).")
 
 
+READY_CACHE_SECONDS = 10.0
+KEEP_ALIVE = "30m"  # keep the model in memory between questions (Ollama default is 5 minutes)
+_http = httpx.Client(limits=httpx.Limits(max_keepalive_connections=4))  # reuse connections
+
+
 class OllamaClient:
     """Chat with a local Ollama model (temperature 0 and a fixed seed by default)."""
 
@@ -34,18 +41,27 @@ class OllamaClient:
         self.temperature: float = cfg.llm.temperature
         self.timeout: float = cfg.llm.timeout_seconds
         self.seed: int = cfg.seed
+        self._ready: tuple[float, bool] | None = None
 
     def installed_models(self) -> set[str]:
         """Names of pulled models; raises :class:`OllamaUnavailableError` if not reachable."""
         try:
-            resp = httpx.get(f"{self.base_url}/api/tags", timeout=3)
+            resp = _http.get(f"{self.base_url}/api/tags", timeout=3)
             resp.raise_for_status()
         except (httpx.HTTPError, OSError) as exc:
             raise OllamaUnavailableError(self.base_url) from exc
         return {m["name"] for m in resp.json().get("models", [])}
 
     def is_ready(self) -> bool:
-        """True if Ollama runs and the configured model is pulled."""
+        """True if Ollama runs and the configured model is pulled (result cached for a few seconds)."""
+        now = time.monotonic()
+        if self._ready and now - self._ready[0] < READY_CACHE_SECONDS:
+            return self._ready[1]
+        ready = self._check_ready()
+        self._ready = (now, ready)
+        return ready
+
+    def _check_ready(self) -> bool:
         try:
             installed = self.installed_models()
         except OllamaUnavailableError:
@@ -54,14 +70,14 @@ class OllamaClient:
 
     def chat(self, system: str, user: str, json_mode: bool = False) -> str:
         """Single-turn chat; returns the assistant text (valid JSON when ``json_mode``)."""
-        payload = {"model": self.model, "stream": False,
+        payload = {"model": self.model, "stream": False, "keep_alive": KEEP_ALIVE,
                    "messages": [{"role": "system", "content": system},
                                 {"role": "user", "content": user}],
                    "options": {"temperature": self.temperature, "seed": self.seed}}
         if json_mode:
             payload["format"] = "json"
         try:
-            resp = httpx.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout)
+            resp = _http.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout)
         except (httpx.ConnectError, httpx.ConnectTimeout) as exc:
             raise OllamaUnavailableError(self.base_url) from exc
         if resp.status_code == 404:

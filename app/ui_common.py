@@ -22,13 +22,19 @@ class ApiError(Exception):
         self.status, self.detail = status, detail
 
 
+@st.cache_resource
+def _client() -> httpx.Client:
+    """One pooled HTTP client for the whole Streamlit process (no new connection per call)."""
+    return httpx.Client(timeout=TIMEOUT_SECONDS)
+
+
 def api(method: str, path: str, headers: dict[str, str] | None = None, **kwargs: Any) -> httpx.Response:
     """Call the Nexora API with the logged-in user's token; raises :class:`ApiError` on failure."""
     headers = dict(headers or {})
     if token := st.session_state.get("token"):
         headers["Authorization"] = f"Bearer {token}"
     try:
-        resp = httpx.request(method, f"{API_URL}{path}", headers=headers, timeout=TIMEOUT_SECONDS, **kwargs)
+        resp = _client().request(method, f"{API_URL}{path}", headers=headers, **kwargs)
     except httpx.ConnectError as exc:
         raise ApiError(0, f"The Nexora API is not running at {API_URL}. Start it with `make api` "
                           "(python -m uvicorn nexora.api.main:app --port 8000).") from exc
@@ -93,52 +99,96 @@ def apply_chat_style() -> None:
     st.markdown(CHAT_CSS, unsafe_allow_html=True)
 
 
+@st.cache_data(ttl=15, show_spinner=False)
+def _health() -> dict[str, Any] | str:
+    """API health, cached for 15 s so normal clicks do not ping the API (and Ollama) every rerun."""
+    try:
+        return api("GET", "/health").json()
+    except ApiError as exc:
+        return exc.detail
+
+
 def show_health_banner() -> None:
     """Warn when the language model is unavailable (extractive mode)."""
-    try:
-        health = api("GET", "/health").json()
-    except ApiError as exc:
-        st.error(exc.detail)
+    health = _health()
+    if isinstance(health, str):
+        _health.clear()  # do not cache an outage
+        st.error(health)
         st.stop()
     if not health["llm_ready"]:
         st.warning(f"**Extractive mode.** {health['notice']} Install and start Ollama from "
                    "https://ollama.com, then run `make setup`.")
 
 
+AUTH_CSS = """
+<style>
+[data-testid="stSidebar"], [data-testid="stSidebarCollapsedControl"] {display: none;}
+.auth-title {text-align: center; font-size: 2rem; font-weight: 600; letter-spacing: -.01em; margin: 8vh 0 .25rem;}
+.auth-sub {text-align: center; color: #6b6b6b; margin-bottom: 1.5rem;}
+</style>
+"""
+
+
+def _start_session(body: dict[str, Any]) -> None:
+    st.session_state.update(token=body["token"], user=body["user"], messages=[])
+    st.rerun()
+
+
+def auth_page() -> None:
+    """Full-page login / register screen (shown until someone is logged in)."""
+    st.markdown(AUTH_CSS, unsafe_allow_html=True)
+    st.markdown('<div class="auth-title">Nexora AI</div>'
+                '<div class="auth-sub">Log in or create an account to continue.</div>', unsafe_allow_html=True)
+    login_tab, register_tab = st.tabs(["Log in", "Register"])
+    with login_tab, st.form("login_form"):
+        who = st.text_input("Email or employee ID", autocomplete="username")
+        password = st.text_input("Password", type="password", autocomplete="current-password")
+        if st.form_submit_button("Log in", type="primary", use_container_width=True):
+            if not who.strip() or not password:
+                st.error("Please enter your email (or employee ID) and password.")
+            else:
+                try:
+                    _start_session(api("POST", "/login", json={"employee_id": who.strip(), "password": password}).json())
+                except ApiError as exc:
+                    st.error(exc.detail)
+        st.caption(f"Demo accounts: employee ID E001 to E0xx, password `{load_config().auth.demo_password}`.")
+    with register_tab, st.form("register_form"):
+        name = st.text_input("Full name", autocomplete="name")
+        email = st.text_input("Email", autocomplete="email")
+        password = st.text_input("Password (at least 8 characters)", type="password", autocomplete="new-password")
+        confirm = st.text_input("Repeat password", type="password", autocomplete="new-password")
+        if st.form_submit_button("Create account", type="primary", use_container_width=True):
+            if not name.strip() or not email.strip() or not password:
+                st.error("Please fill in all fields.")
+            elif password != confirm:
+                st.error("The passwords do not match.")
+            else:
+                try:
+                    _start_session(api("POST", "/register",
+                                       json={"name": name, "email": email, "password": password}).json())
+                except ApiError as exc:
+                    st.error(exc.detail)
+        st.caption("New accounts get the Employee role (company documents and your own tasks).")
+
+
 def require_login() -> dict[str, Any]:
-    """Render the login sidebar; stop the page until someone is logged in. Returns the user."""
+    """Show the login/register page until someone is logged in; then the sidebar. Returns the user."""
     apply_chat_style()
+    if "user" not in st.session_state:
+        auth_page()
+        st.stop()
     show_health_banner()
     with st.sidebar:
         st.subheader("Nexora AI")
-        if "user" in st.session_state:
-            user = st.session_state["user"]
-            if st.button("New chat", icon=":material/edit_square:", key="new_chat"):
-                for key in ("messages", "session_id", "pending", "last_audio_id"):
-                    st.session_state.pop(key, None)
-                st.session_state["messages"] = []
-                st.rerun()
-            st.caption(f"{user['name']} - {user['job_title']} ({user['role']})")
-            if st.button("Log out", icon=":material/logout:"):
-                for key in ("token", "user", "messages", "session_id", "last_audio_id", "rated", "pending"):
-                    st.session_state.pop(key, None)
-                st.rerun()
-        else:
-            users = api("GET", "/users").json()
-            labels = {f"{u['name']} - {u['job_title']} ({u['role']})": u["employee_id"] for u in users}
-            choice = st.selectbox("Who are you?", list(labels))
-            password = st.text_input("Password", type="password",
-                                     help=f"Demo password: {load_config().auth.demo_password}")
-            if st.button("Log in", type="primary"):
-                try:
-                    body = api("POST", "/login", json={"employee_id": labels[choice], "password": password}).json()
-                except ApiError as exc:
-                    st.error(exc.detail)
-                else:
-                    st.session_state.update(token=body["token"], user=body["user"], messages=[])
-                    st.rerun()
-    if "user" not in st.session_state:
-        st.info("Choose a user in the sidebar and log in. All data in this demo is synthetic.")
-        st.stop()
+        user = st.session_state["user"]
+        if st.button("New chat", icon=":material/edit_square:", key="new_chat"):
+            for key in ("messages", "session_id", "pending", "last_audio_id"):
+                st.session_state.pop(key, None)
+            st.session_state["messages"] = []
+            st.rerun()
+        st.caption(f"{user['name']} - {user['job_title']} ({user['role']})")
+        if st.button("Log out", icon=":material/logout:"):
+            for key in ("token", "user", "messages", "session_id", "last_audio_id", "rated", "pending"):
+                st.session_state.pop(key, None)
+            st.rerun()
     return st.session_state["user"]
-
