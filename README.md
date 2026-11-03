@@ -30,7 +30,7 @@ Full canvas (problem, value, technique, risks): [docs/scoping-canvas.md](docs/sc
 
 ```mermaid
 flowchart LR
-  UI[Streamlit UI: chat + dashboard] -->|HTTP + token| API[FastAPI + RBAC]
+  UI[React web app: login, chat, dashboard, voice<br/>or the Streamlit UI] -->|HTTP + token| API[FastAPI + RBAC]
   API --> ORCH[Orchestrator: memory + router]
   ORCH -->|knowledge| K[Knowledge agent: hybrid search + reranker]
   ORCH -->|report| R[Report agent]
@@ -67,13 +67,21 @@ python -m scripts.setup_models
 
 Optional voice: `pip install -r requirements-voice.txt` (offline text-to-speech and speech-to-text).
 
+**React web app (recommended front end).** Requires [Node.js](https://nodejs.org) 20 or newer. Its dependencies are in `web/package.json`, not in `requirements.txt`:
+```
+cd web
+npm install
+```
+
 ## Quick start
 
 ```
 make data docs load index   # synthetic data, documents, SQLite, vector index
 make api                    # terminal 1: http://localhost:8000
-make ui                     # terminal 2: http://localhost:8501
+make web                    # terminal 2: React app at http://localhost:5173
+make ui                     # alternative to `make web`: Streamlit at http://localhost:8501
 ```
+Use either front end; both talk to the same API. Without `make`, run `cd web && npm run dev` for the React app.
 `make demo` does all of this, runs the tests and starts both servers. `make` is not installed on Windows by default; use the plain commands:
 
 | Make target | Plain command |
@@ -84,13 +92,18 @@ make ui                     # terminal 2: http://localhost:8501
 | `make load` | `python -m scripts.load_db` |
 | `make index` | `python -m scripts.build_index` (re-indexes only changed files) |
 | `make api` | `python -m uvicorn nexora.api.main:app --port 8000` |
-| `make ui` | `python -m streamlit run app/Home.py` |
+| `make web` | `cd web && npm run dev` (React app; run `npm install` once first) |
+| `make ui` | `python -m streamlit run app/Home.py` (Streamlit app) |
 | `make test` | `python -m pytest` |
 | `make eval` | the evaluation scripts below |
 | `make smoke` | `python -m scripts.smoke_test` (API must be running) |
 | ask from the terminal | `python -m nexora.rag.generator "How many vacation days do I get?"` (add `--no-docs` for the baseline) |
 
-Log in by choosing a person in the sidebar. All synthetic users share the demo password in `config.yaml` (`auth.demo_password`, stored bcrypt-hashed). The Owner and the Operations Manager see everything; the Project Manager sees documents, tasks and project reports but no money data; employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
+**Logging in and registering.** The React app has separate `/login` and `/register` pages. Log in with an email or an employee ID (for example `E001`). All synthetic users share the demo password in `config.yaml` (`auth.demo_password`, stored bcrypt-hashed). Anyone can also create an account with `POST /register` (name, email, password of at least 8 characters); new accounts always get the least-privileged `employee` role, and the role cannot be chosen in the request. Registered accounts live in the same tables as the synthetic employees, so `make load` removes them. Tokens are signed with a secret generated at API start, so restarting the API logs everyone out; set `NEXORA_SECRET` in `.env` to keep sessions across restarts. In the Streamlit app, use the Log in / Register tabs on its start page.
+
+**React app features.** Chat with citations, feedback, typing animation and the extractive-mode banner; read-aloud and voice input (needs `requirements-voice.txt` and microphone permission in the browser); a dashboard with spending, net-result, subscription cost-versus-usage and task charts, data tables, anomalies and confirmable recommendations. The dev server forwards `/api` to the backend at `http://localhost:8000`; to use another backend run `NEXORA_API_URL=http://host:port npm run dev`. A production deployment needs the API and the built app (`npm run build`, output in `web/dist`) behind one reverse proxy, or CORS enabled on the API.
+
+Roles: the Owner and the Operations Manager see everything; the Project Manager sees documents, tasks and project reports but no money data; employees see documents and their own tasks. Access is enforced in the API (HTTP 403), not only in the UI.
 
 Security: role-based access, PII redaction (emails, IBANs, phone numbers) before anything is stored, an audit log of every question, intent, source and action, and a prompt-injection guard that removes instruction-like sentences from retrieved documents. Subscription recommendations are never executed; the "Confirm" button only records a decision in the audit log.
 
