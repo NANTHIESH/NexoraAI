@@ -148,3 +148,64 @@ th { text-align: left; color: var(--muted); font-weight: 500; position: sticky; 
 .banner { margin: .8rem 1rem 0; padding: .7rem 1rem; border-radius: .8rem; background: rgba(245,184,75,.1); border: 1px solid rgba(245,184,75,.4); color: var(--warn); font-size: .88rem; }
 .banner code { background: var(--panel-2); padding: .05rem .35rem; border-radius: .3rem; }
 .card .collapsible { margin-top: .8rem; }
+
+/* ---------------- ChatGPT-like theme for the app pages (login keeps the colourful look) ---------------- */
+.chat-shell {
+  --bg: #212121; --panel: #171717; --panel-2: #2f2f2f; --line: #363636; --text: #ececec; --muted: #9b9b9b;
+  background: var(--bg); color: var(--text);
+}
+.chat-shell .sidebar { background: var(--panel); border-right: 0; padding: .8rem; gap: .35rem; min-height: 0; }
+.chat-shell .brand { padding: .3rem .5rem .6rem; font-size: 1rem; }
+.chat-shell .logo { background: #fff; color: #111; box-shadow: none; }
+.chat-shell .new-chat { background: transparent; border: 0; border-radius: .7rem; padding: .6rem .7rem; font-size: .92rem; }
+.chat-shell .new-chat:hover, .chat-shell .nav-link:hover { background: var(--panel-2); }
+.chat-shell .nav-link { border: 0; padding: .6rem .7rem; }
+.chat-shell .nav-link.active { background: var(--panel-2); }
+.recents-label { font-size: .75rem; color: var(--muted); padding: .9rem .7rem .3rem; }
+.recents { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 2px; }
+.recents-empty { padding: .3rem .7rem; }
+.chat-item { background: none; border: 0; text-align: left; padding: .55rem .7rem; border-radius: .6rem; color: var(--text); font-size: .9rem;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+.chat-item:hover { background: #212121; } .chat-item.active { background: var(--panel-2); }
+.chat-shell .me { padding: .6rem .4rem 0; border-top: 1px solid var(--line); margin-top: .4rem; }
+.chat-shell .avatar { background: #3b6fd4; }
+.chat-shell .ghost.wide { border: 0; text-align: left; }
+
+.chat-shell .topbar { border-bottom: 0; font-weight: 500; color: var(--muted); }
+.chat-shell .stream { padding-top: 1rem; }
+.chat-shell .welcome h2 { font-size: 1.9rem; font-weight: 600; }
+.chat-shell .suggestions button { background: transparent; border: 1px solid var(--line); }
+.chat-shell .suggestions button:hover { background: var(--panel-2); border-color: var(--line); }
+
+/* assistant: plain text on the page; user: soft grey bubble on the right */
+.chat-shell .bubble.user { background: var(--panel-2); color: var(--text); border-radius: 1.4rem; }
+.chat-shell .bubble.bot { background: transparent; border: 0; padding: .2rem 0; line-height: 1.7; font-size: 1rem; }
+.chat-shell .bubble.bot.denied { background: rgba(255,107,107,.1); border: 1px solid rgba(255,107,107,.35); padding: .7rem 1rem; }
+.chat-shell .bubble.bot.refused { background: var(--panel-2); border: 0; padding: .7rem 1rem; }
+.chat-shell .row.bot .logo { background: transparent; border: 1px solid var(--line); color: var(--text); }
+.chat-shell .chip, .chat-shell .source, .chat-shell .metrics div, .chat-shell .collapsible-body { background: transparent; border-color: var(--line); }
+.chat-shell .card, .chat-shell .kpis div { background: var(--panel); }
+
+.chat-shell .composer { padding-top: 0; }
+.chat-shell .input-pill { background: var(--panel-2); border: 0; box-shadow: none; padding: .55rem .55rem .55rem 1.3rem; }
+.chat-shell .input-pill:focus-within { box-shadow: none; }
+.chat-shell .send { background: #fff; color: #111; }
+.chat-shell .send:disabled { background: #fff; opacity: .25; }
+.chat-shell .mic { background: transparent; border: 0; }
+.chat-shell .mic:hover:not(:disabled) { background: #3a3a3a; }
+.chat-shell .primary, .chat-shell .kpis b { background-image: none; }
+.chat-shell .kpis b { color: var(--text); -webkit-text-fill-color: var(--text); }
+.chat-shell ::-webkit-scrollbar-thumb { background: #3c3c3c; }
+.chat-item { flex: none; }
+
+/* App pages: the page itself never scrolls, only the message area / dashboard / chat list do */
+body:has(.chat-shell) { background: #212121; overflow: hidden; }
+.chat-shell { height: 100vh; height: 100dvh; overflow: hidden; grid-template-rows: minmax(0, 1fr); }
+.chat-shell .chat-main { min-height: 0; overflow: hidden; }
+.chat-shell .sidebar { height: 100%; overflow: hidden; }
+
+/* suggested follow-up questions */
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .2rem; }
+.suggest { background: transparent; border: 1px solid var(--line); border-radius: 2rem; padding: .45rem .9rem; font-size: .88rem; color: var(--text); transition: background .15s; }
+.suggest:hover:not(:disabled) { background: var(--panel-2); }
+.suggest:disabled { opacity: .5; cursor: default; }

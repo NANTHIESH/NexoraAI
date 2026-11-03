@@ -17,7 +17,16 @@ export const loadSession = () => {
   }
 };
 export const saveSession = (s) => sessionStorage.setItem(KEY, JSON.stringify(s));
-export const clearSession = () => sessionStorage.removeItem(KEY);
+export const clearSession = () => {
+  sessionStorage.removeItem(KEY);
+  sessionStorage.removeItem(ACTIVE);
+};
+
+// The conversation that is open. It survives a page reload; the messages themselves live on the server.
+const ACTIVE = "nexora.activeChat";
+export const newSessionId = () => crypto.randomUUID().replace(/-/g, "");
+export const getActiveChat = () => sessionStorage.getItem(ACTIVE);
+export const setActiveChat = (id) => sessionStorage.setItem(ACTIVE, id);
 
 async function request(method, path, { json, body, contentType } = {}) {
   const headers = {};

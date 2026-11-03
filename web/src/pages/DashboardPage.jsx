@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { api } from "../api";
+import { useNavigate } from "react-router-dom";
+import { api, newSessionId, setActiveChat } from "../api";
 import { ColumnChart, HBarChart, LineChart, ScatterChart } from "../components/Charts";
 import { Collapsible, DataTable } from "../components/Collapsible";
 import Sidebar from "../components/Sidebar";
@@ -40,6 +41,8 @@ export default function DashboardPage() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
+  const openChat = (id) => { setActiveChat(id); navigate("/"); };
 
   useEffect(() => {
     api("GET", "/dashboard").then(setData).catch((e) => setError(e.message));
@@ -53,7 +56,7 @@ export default function DashboardPage() {
 
   return (
     <div className={`chat-shell ${menu ? "menu-open" : ""}`}>
-      <Sidebar onNavigate={() => setMenu(false)} />
+      <Sidebar onNavigate={() => setMenu(false)} onNewChat={() => openChat(newSessionId())} onOpenChat={openChat} />
       <main className="chat-main">
         <header className="topbar">
           <button className="ghost burger" onClick={() => setMenu(!menu)} aria-label="Menu">☰</button>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { api } from "../api";
+import { api, getActiveChat, newSessionId, setActiveChat } from "../api";
 import { useAuth } from "../auth";
 import Logo from "../components/Logo";
 import Message from "../components/Message";
@@ -10,20 +10,40 @@ const DOCS = ["How many vacation days do full-time employees get?", "Can we depl
 const FINANCE = ["Give me the monthly report", "Which subscriptions can we cancel?", "How much did we spend on GitHub last month?"];
 const TASKS = ["How many tasks are blocked?", "Which tasks are overdue?"];
 const suggestionsFor = (role) => (["owner", "ops_manager"].includes(role) ? [DOCS[0], ...FINANCE] : [...DOCS, ...TASKS]);
-const newSession = () => crypto.randomUUID().replace(/-/g, "");
 
 export default function ChatPage() {
   const { user } = useAuth();
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [busy, setBusy] = useState(false);
-  const [session, setSession] = useState(newSession);
+  const [session, setSession] = useState(() => getActiveChat() || newSessionId());
+  const sessionRef = useRef(session);
+  const [refreshKey, setRefreshKey] = useState(0); // tells the sidebar to reload the saved-chat list
+  const [loading, setLoading] = useState(true);
   const [health, setHealth] = useState(null);
   const [menu, setMenu] = useState(false);
   const bottom = useRef(null);
   const recorder = useRef(null);
   const [mic, setMic] = useState("idle"); // idle | recording | transcribing
   const [micError, setMicError] = useState("");
+
+  // Show a saved conversation: on first load (the one open before a reload) and when one is picked in the sidebar.
+  async function openChat(id) {
+    sessionRef.current = id;
+    setActiveChat(id);
+    setSession(id);
+    setLoading(true);
+    setMenu(false);
+    try {
+      const saved = await api("GET", `/chats/${id}`);
+      if (sessionRef.current === id) setMessages(saved);
+    } catch {
+      if (sessionRef.current === id) setMessages([]);
+    } finally {
+      if (sessionRef.current === id) setLoading(false);
+    }
+  }
+  useEffect(() => { openChat(session); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => { api("GET", "/health").then(setHealth).catch(() => {}); }, []);
   useEffect(() => { bottom.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, busy]);
@@ -34,13 +54,15 @@ export default function ChatPage() {
     setText("");
     setMessages((m) => [...m, { role: "user", text: q }]);
     setBusy(true);
+    const sid = session;
     try {
-      const answer = await api("POST", "/chat", { question: q, session_id: session });
-      setMessages((m) => [...m, { role: "assistant", animate: true, ...answer }]);
+      const answer = await api("POST", "/chat", { question: q, session_id: sid });
+      if (sessionRef.current === sid) setMessages((m) => [...m, { role: "assistant", animate: true, ...answer }]);
     } catch (err) {
-      setMessages((m) => [...m, { role: "assistant", text: err.message, denied: true, error: true }]);
+      if (sessionRef.current === sid) setMessages((m) => [...m, { role: "assistant", text: err.message, denied: true, error: true }]);
     } finally {
       setBusy(false);
+      setRefreshKey((k) => k + 1);
     }
   }
 
@@ -70,12 +92,20 @@ export default function ChatPage() {
   }
   useEffect(() => () => recorder.current?.cancel(), []);
 
-  const reset = () => { setMessages([]); setSession(newSession()); setMenu(false); };
+  const reset = () => {
+    const id = newSessionId();
+    sessionRef.current = id;
+    setActiveChat(id);
+    setSession(id);
+    setMessages([]);
+    setLoading(false);
+    setMenu(false);
+  };
   const onKey = (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); ask(text); } };
 
   return (
     <div className={`chat-shell ${menu ? "menu-open" : ""}`}>
-      <Sidebar onNewChat={reset} onNavigate={() => setMenu(false)} />
+      <Sidebar activeId={session} refreshKey={refreshKey} onNewChat={reset} onOpenChat={openChat} onNavigate={() => setMenu(false)} />
 
       <main className="chat-main">
         <header className="topbar">
@@ -91,7 +121,7 @@ export default function ChatPage() {
         )}
 
         <div className="stream">
-          {messages.length === 0 && (
+          {!loading && messages.length === 0 && (
             <div className="welcome">
               <Logo size={64} />
               <h2>Hi {user.name.split(" ")[0]}, what can I help with?</h2>
@@ -101,7 +131,9 @@ export default function ChatPage() {
               </div>
             </div>
           )}
-          {messages.map((m, i) => <Message key={i} msg={m} />)}
+          {messages.map((m, i) => (
+            <Message key={i} msg={m} isLast={i === messages.length - 1 && !busy} canAsk={!busy} onAsk={ask} />
+          ))}
           {busy && (
             <div className="row bot"><Logo size={30} /><div className="bubble bot"><span className="dots"><i /><i /><i /></span></div></div>
           )}

@@ -59,7 +59,7 @@ function Feedback({ chatId, text }) {
   );
 }
 
-export default function Message({ msg }) {
+export default function Message({ msg, isLast = false, canAsk = false, onAsk }) {
   const [typing, setTyping] = useState(Boolean(msg.animate));
   if (msg.role === "user") return <div className="row user"><div className="bubble user">{msg.text}</div></div>;
   if (msg.denied) {
@@ -99,7 +99,14 @@ export default function Message({ msg }) {
             <Sources sources={msg.sources} />
             {msg.rewritten_question && <div className="muted small">Understood as: {msg.rewritten_question}</div>}
             {!msg.error && <Feedback chatId={msg.chat_id} text={msg.text} />}
-            {!msg.error && <div className="muted small">{msg.intent} ({msg.method})</div>}
+            {!msg.error && msg.intent && <div className="muted small">{msg.intent}{msg.method ? ` (${msg.method})` : ""}</div>}
+            {isLast && msg.suggestions?.length > 0 && (
+              <div className="chips" aria-label="Suggested questions">
+                {msg.suggestions.map((q) => (
+                  <button key={q} className="suggest" disabled={!canAsk} onClick={() => onAsk(q)}>{q}</button>
+                ))}
+              </div>
+            )}
           </>
         )}
       </div>
