@@ -473,7 +473,7 @@ Target: 50% less time. Values are entered by the team with `python -m evaluation
 
 ## Team
 
-Nanthiesh Mohanavel, Dhaval Patel, Ameni Jemai.
+Nanthiesh Mohanavel, Dhavalkumar Patel, Ameni Jemai.
 
 ## License
 
