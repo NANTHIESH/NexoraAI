@@ -1,0 +1,110 @@
+[
+  {
+    "request": "What is our company's annual leave policy?",
+    "seconds": 17.2,
+    "plan": [
+      {
+        "tool": "search_company_knowledge",
+        "args": {
+          "query": "What is our company's annual leave policy?"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "Our company's annual leave policy is as follows:\n\n* Full-time employees get 25 days of paid vacation per year.\n* Part-time employees get a proportional number of days.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"search_company_knowledge\", \"args\": {\"query\": \"What is our company's annual leave policy?\"}}]",
+      "ran search_company_knowledge in 14.1s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "How much money did we spend this month?",
+    "seconds": 0.8,
+    "plan": [
+      {
+        "tool": "get_financial_summary",
+        "args": {
+          "period": "monthly"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "The company spent \u20ac123,408.65 this month.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_financial_summary\", \"args\": {\"period\": \"monthly\"}}]",
+      "ran get_financial_summary in 0.3s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Find unused subscriptions, analyse their costs and recommend which ones we should cancel.",
+    "seconds": 1.6,
+    "plan": [
+      {
+        "tool": "get_subscription_usage",
+        "args": {
+          "time_period": "monthly",
+          "unused_only": true
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "**Unused Subscriptions Analysis**\n\nThe tool results show that there are 4 unused subscriptions:\n\n* Postman: \u20ac98.00/month\n* Sentry: \u20ac26.00/month\n* Datadog: \u20ac120.00/month\n* Zoom: \u20ac97.93/month\n\nThe total cost of these unused subscriptions is \u20ac341.93 per month.\n\n**Recommendation**\n\nBased on the analysis, it is recommended to cancel these 4 unused subscriptions to save \u20ac341.93 per month.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_subscription_usage\", \"args\": {\"time_period\": \"monthly\", \"unused_only\": true}}]",
+      "ran get_subscription_usage in 0.2s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Prepare a monthly business performance report using our financial data and project updates.",
+    "seconds": 3.8,
+    "plan": [
+      {
+        "tool": "get_financial_summary",
+        "args": {
+          "period": "monthly"
+        }
+      },
+      {
+        "tool": "get_project_tasks",
+        "args": {
+          "status": "all"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "**Monthly Business Performance Report**\n\n**Financial Summary:**\n\n* Period: October 2026\n* Income (EUR): 95,000.00\n* Expenses (EUR): 123,408.65\n* Net (EUR): -28,408.65\n* Top Expense Categories:\n\t+ Payroll: 58,208.00 EUR\n\t+ Taxes: 22,500.00 EUR\n\t+ Payroll Taxes: 17,120.00 EUR\n\t+ Contractors: 10,500.00 EUR\n\t+ Rent: 3,800.00 EUR\n\n**Biggest Cost Increases:**\n\n* Taxes: 22,500.00 EUR (from 0.00 EUR in previous period)\n* Contractors: 4,800.00 EUR (from 5,700.00 EUR in previous period)\n* Training: 750.00 EUR (from 0.00 EUR in previous period)\n\n**Project Tasks:**\n\n* Total Tasks: 250\n* Tasks Completed: 167\n* Tasks Blocked: 29\n* Tasks Overdue: 73\n* Tasks by Project:\n\t+ ShopFlow Web: 92\n\t+ FitTrack Mobile: 69\n\t+ LogiDash: 50\n\t+ Internal Tools: 39\n* Tasks by Status:\n\t+ Done: 167\n\t+ Todo: 31\n\t+ Blocked: 29\n\t+ In Progress: 23",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_financial_summary\", \"args\": {\"period\": \"monthly\"}}, {\"tool\": \"get_project_tasks\", \"args\": {\"status\": \"all\"}}]",
+      "ran get_financial_summary in 0.0s",
+      "ran get_project_tasks in 0.0s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Check our project updates, identify delayed tasks and suggest what we should do next.",
+    "seconds": 4.5,
+    "plan": [
+      {
+        "tool": "get_project_tasks",
+        "args": {
+          "status": "overdue"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "**Delayed Tasks:**\n\n1. **NX-173** (FitTrack Mobile): \"Fix missing validation in workout tracker\" (due: 2026-01-31, days late: 273)\n2. **NX-032** (ShopFlow Web): \"Fix timeout in checkout\" (due: 2026-06-18, days late: 135)\n3. **NX-146** (ShopFlow Web): \"Add email digest to order API\" (due: 2026-09-25, days late: 36)\n4. **NX-192** (FitTrack Mobile): \"Add bulk edit to sync service\" (due: 2025-11-24, days late: 341)\n5. **NX-164** (LogiDash): \"Add export to CSV to route map\" (due: 2025-12-07, days late: 328)\n6. **NX-056** (FitTrack Mobile): \"Fix layout glitch in push notifications\" (due: 2025-12-12, days late: 323)\n7. **NX-227** (FitTrack Mobile): \"Add audit trail to push notifications\" (due: 2025-12-15, days late: 320)\n8. **NX-124** (ShopFlow Web): \"Add dark mode to admin panel\" (due: 2025-12-16, days late: 319)\n9. **NX-163** (FitTrack Mobile): \"Add export to CSV to profile\" (due: 2025-12-20, days late: 315)\n\n**Next Steps:**\n\n1. Review and prioritize the delayed tasks.\n2. Identify the dependencies and blockers for each task.\n3. Create a plan to complete the delayed tasks and mitigate the impact on the project timeline.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_project_tasks\", \"args\": {\"status\": \"overdue\"}}]",
+      "ran get_project_tasks in 0.0s",
+      "number check passed"
+    ]
+  }
+]

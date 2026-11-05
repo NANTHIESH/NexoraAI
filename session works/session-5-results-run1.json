@@ -1,0 +1,110 @@
+[
+  {
+    "request": "What is our company's annual leave policy?",
+    "seconds": 41.7,
+    "plan": [
+      {
+        "tool": "search_company_knowledge",
+        "args": {
+          "query": "Annual leave policy"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "Our company's annual leave policy could not be found in the search results. The tool output indicates that the information is not available in the company documents. You may need to ask your manager for more information or check other sources.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"search_company_knowledge\", \"args\": {\"query\": \"Annual leave policy\"}}]",
+      "ran search_company_knowledge in 38.7s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "How much money did we spend this month?",
+    "seconds": 0.9,
+    "plan": [
+      {
+        "tool": "get_financial_summary",
+        "args": {
+          "period": "monthly"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "According to the financial summary, the total expenses for this month are \u20ac123,408.65.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_financial_summary\", \"args\": {\"period\": \"monthly\"}}]",
+      "ran get_financial_summary in 0.3s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Find unused subscriptions, analyse their costs and recommend which ones we should cancel.",
+    "seconds": 1.9,
+    "plan": [
+      {
+        "tool": "get_subscription_usage",
+        "args": {
+          "time_period": "monthly",
+          "unused_only": true
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "Based on the tool results, there are 4 unused subscriptions:\n\n1. Postman (cost: 98.0 EUR, 7 seats)\n2. Sentry (cost: 26.0 EUR, 7 seats)\n3. Datadog (cost: 120.0 EUR, 5 seats)\n4. Zoom (cost: 97.93 EUR, 7 seats)\n\nThe total cost of these unused subscriptions is 341.93 EUR per month. Canceling any of these subscriptions would result in a monthly saving of 341.93 EUR.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_subscription_usage\", \"args\": {\"time_period\": \"monthly\", \"unused_only\": true}}]",
+      "ran get_subscription_usage in 0.3s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Prepare a monthly business performance report using our financial data and project updates.",
+    "seconds": 3.8,
+    "plan": [
+      {
+        "tool": "get_financial_summary",
+        "args": {
+          "period": "monthly"
+        }
+      },
+      {
+        "tool": "get_project_tasks",
+        "args": {
+          "status": "all"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "Here is a monthly business performance report based on the provided financial data and project updates:\n\n**Financial Summary:**\n\n* Period: October 2026\n* Income (EUR): 95,000.00\n* Expenses (EUR): 123,408.65\n* Net (EUR): -28,408.65\n* Top expense categories:\n\t+ Payroll: 58,208.00\n\t+ Taxes: 22,500.00\n\t+ Payroll Taxes: 17,120.00\n\t+ Contractors: 10,500.00\n\t+ Rent: 3,800.00\n\n**Biggest Cost Increases:**\n\n* Taxes: 22,500.00 (from 0.00)\n* Contractors: 4,800.00 (from 5,700.00)\n* Training: 750.00 (from 0.00)\n\n**Project Tasks:**\n\n* Total tasks: 250\n* Tasks by project:\n\t+ ShopFlow Web: 92\n\t+ FitTrack Mobile: 69\n\t+ LogiDash: 50\n\t+ Internal Tools: 39\n* Tasks with status:\n\t+ Done: 92\n\t+ Todo: 17\n\t+ In Progress: 10\n\t+ Blocked: 29\n\t+ Overdue: 73\n\nPlease note that a person must approve any changes to the subscription before making any adjustments.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_financial_summary\", \"args\": {\"period\": \"monthly\"}}, {\"tool\": \"get_project_tasks\", \"args\": {\"status\": \"all\"}}]",
+      "ran get_financial_summary in 0.0s",
+      "ran get_project_tasks in 0.0s",
+      "number check passed"
+    ]
+  },
+  {
+    "request": "Check our project updates, identify delayed tasks and suggest what we should do next.",
+    "seconds": 2.1,
+    "plan": [
+      {
+        "tool": "get_project_tasks",
+        "args": {
+          "status": "overdue"
+        }
+      }
+    ],
+    "plan_source": "llm",
+    "answer": "Based on the tool results, there are 73 overdue tasks across 4 projects. The tasks with the most overdue days are:\n\n- NX-173 (FitTrack Mobile): 273 days late\n- NX-192 (FitTrack Mobile): 341 days late\n- NX-164 (LogiDash): 328 days late\n- NX-056 (FitTrack Mobile): 323 days late\n- NX-227 (FitTrack Mobile): 320 days late\n\nTo proceed, we should prioritize these tasks and allocate resources to complete them as soon as possible. Additionally, we should investigate the reasons for the tasks being blocked (NX-056, NX-227, NX-124, and NX-163) and work with the teams to resolve the dependencies.",
+    "answer_source": "llm",
+    "trace": [
+      "plan (llm): [{\"tool\": \"get_project_tasks\", \"args\": {\"status\": \"overdue\"}}]",
+      "ran get_project_tasks in 0.0s",
+      "number check passed"
+    ]
+  }
+]
